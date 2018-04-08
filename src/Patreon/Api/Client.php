@@ -31,7 +31,7 @@ class Client
      *
      * @return void
      */
-    public function __construct(HttpClient $http = null)
+    public function __construct(?HttpClient $http = null)
     {
         $this->http = $http ?: HttpClientDiscovery::find();
     }
@@ -43,7 +43,7 @@ class Client
      *
      * @return void
      */
-    public function setAccessToken($accessToken): void
+    public function setAccessToken(string $accessToken): void
     {
         $this->accessToken = $accessToken;
     }
@@ -55,7 +55,7 @@ class Client
      *
      * @return \GuzzleHttp\Psr7\Response
      */
-    public function get($path): Response
+    public function get(string $path): Response
     {
         return $this->http->sendRequest(
             $this->makeRequest('GET', $path)
@@ -70,7 +70,7 @@ class Client
      *
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function makeRequest($method, $path): Request
+    protected function makeRequest(string $method, string $path): Request
     {
         $messageFactory = MessageFactoryDiscovery::find();
 

@@ -23,7 +23,7 @@ class Patreon
      *
      * @return void
      */
-    public function __construct($accessToken, Client $client = null)
+    public function __construct(string $accessToken, ?Client $client = null)
     {
         $this->client = $client ?: new Client;
         $this->client->setAccessToken($accessToken);
