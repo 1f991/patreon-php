@@ -3,7 +3,7 @@
 namespace Squid\Patreon\Tests\Unit\Api;
 
 use Http\Mock\Client as MockHttpClient;
-use PHPUnit\Framework\TestCase;
+use Squid\Patreon\Tests\Unit\TestCase;
 use Squid\Patreon\Api\Client;
 
 class ClientTest extends TestCase

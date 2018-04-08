@@ -2,9 +2,9 @@
 
 namespace Squid\Patreon\Tests\Unit\Api;
 
-use PHPUnit\Framework\TestCase;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Patreon;
+use Squid\Patreon\Tests\Unit\TestCase;
 
 class PatreonTest extends TestCase
 {
