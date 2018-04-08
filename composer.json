@@ -17,7 +17,8 @@
         "guzzlehttp/psr7": "^1.4",
         "php-http/message": "^1.6",
         "php-http/httplug": "^1.1",
-        "php-http/discovery": "^1.4"
+        "php-http/discovery": "^1.4",
+        "woohoolabs/yang": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",

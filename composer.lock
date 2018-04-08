@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc8d13b00e71d7093daee6a151302443",
+    "content-hash": "0d8564d797c02e5d54d13feb42e0a118",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -637,6 +637,59 @@
                 "options"
             ],
             "time": "2018-01-18T22:19:33+00:00"
+        },
+        {
+            "name": "woohoolabs/yang",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/woohoolabs/yang.git",
+                "reference": "e2af383bd23fe9d92480fc17f73cce0b03678830"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/woohoolabs/yang/zipball/e2af383bd23fe9d92480fc17f73cce0b03678830",
+                "reference": "e2af383bd23fe9d92480fc17f73cce0b03678830",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.0",
+                "php-http/client-implementation": "^1.0.0",
+                "php-http/httplug": "^1.0.0",
+                "psr/http-message-implementation": "^1.0.0"
+            },
+            "require-dev": {
+                "php-http/guzzle6-adapter": "^1.1.0",
+                "phpunit/phpunit": "^6.0.0",
+                "squizlabs/php_codesniffer": "^2.8.0"
+            },
+            "suggest": {
+                "php-http/guzzle6-adapter": "Allows to use Guzzle 6 as the HTTP client implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WoohooLabs\\Yang\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Máté Kocsis",
+                    "email": "kocsismate@woohoolabs.com"
+                }
+            ],
+            "description": "Woohoo Labs. Yang",
+            "keywords": [
+                "Woohoo Labs.",
+                "Yang",
+                "json api",
+                "psr-7"
+            ],
+            "time": "2017-12-24T09:25:14+00:00"
         }
     ],
     "packages-dev": [

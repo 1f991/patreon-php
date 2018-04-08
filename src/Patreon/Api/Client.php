@@ -2,11 +2,12 @@
 
 namespace Squid\Patreon\Api;
 
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use WoohooLabs\Yang\JsonApi\Client\JsonApiClient;
 
 class Client
 {
@@ -33,7 +34,9 @@ class Client
      */
     public function __construct(?HttpClient $http = null)
     {
-        $this->http = $http ?: HttpClientDiscovery::find();
+        $this->jsonApi = new JsonApiClient(
+            $http ?: HttpClientDiscovery::find()
+        );
     }
 
     /**
@@ -53,11 +56,11 @@ class Client
      *
      * @param string $path API request path
      *
-     * @return \GuzzleHttp\Psr7\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get(string $path): Response
+    public function get(string $path): ResponseInterface
     {
-        return $this->http->sendRequest(
+        return $this->jsonApi->sendRequest(
             $this->makeRequest('GET', $path)
         );
     }
@@ -68,9 +71,9 @@ class Client
      * @param string $method API request method
      * @param string $path   API request path
      *
-     * @return \GuzzleHttp\Psr7\Request
+     * @return \Psr\Http\Message\RequestInterface
      */
-    protected function makeRequest(string $method, string $path): Request
+    protected function makeRequest(string $method, string $path): RequestInterface
     {
         $messageFactory = MessageFactoryDiscovery::find();
 
