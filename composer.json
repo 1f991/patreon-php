@@ -37,8 +37,8 @@
     },
     "scripts" : {
         "style": ["@style-src", "@style-tests"],
-        "style-src": "phpcs src/ -p --colors --standard=PSR1,PSR2,PEAR --exclude=PEAR.Commenting.FileComment,PEAR.Commenting.ClassComment",
-        "style-tests": "phpcs tests/ -p --colors --standard=PSR1,PSR2,PEAR --exclude=PEAR.Commenting.FunctionComment,PEAR.Commenting.FileComment,PEAR.Commenting.ClassComment",
+        "style-src": "phpcs src/ -p --colors --standard=PSR2,PEAR --exclude=PEAR.Commenting.FileComment,PEAR.Commenting.ClassComment",
+        "style-tests": "phpcs tests/ -p --colors --standard=PSR2,PEAR --exclude=PEAR.Commenting.FunctionComment,PEAR.Commenting.FileComment,PEAR.Commenting.ClassComment,PSR1.Classes.ClassDeclaration",
         "style-fix": "phpcbf src/ tests/",
         "test": "phpunit --colors=always",
         "check": ["@style", "@test"]

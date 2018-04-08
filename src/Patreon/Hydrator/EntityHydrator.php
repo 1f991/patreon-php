@@ -5,10 +5,18 @@ namespace Squid\Patreon\Hydrator;
 use UnexpectedValueException;
 use Squid\Patreon\Entities\Entity;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
+use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
 
 class EntityHydrator
 {
+    /**
+     * Document from which to source the entities.
+     *
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Document
+     */
+    protected $document;
+
     /**
      * Map of resource type to Entity.
      *
@@ -17,83 +25,108 @@ class EntityHydrator
     protected $resourceEntityMap;
 
     /**
+     * Collection of hydrated Resources.
+     *
+     * @var array
+     */
+    protected $resourceCollection;
+
+    /**
      * Constructs a new Entity Hydrator.
      *
-     * @param array $resourceEntityMap Map resources to entities.
+     * @param Document $document          Document from which to source the entities.
+     * @param array    $resourceEntityMap Map resources to entities.
      *
      * @return void
      */
-    public function __construct(array $resourceEntityMap)
+    public function __construct(Document $document, array $resourceEntityMap)
     {
+        $this->document = $document;
         $this->resourceEntityMap = $resourceEntityMap;
     }
 
     /**
      * Hydrates a Document's primary Entity with attributes and relationships.
      *
-     * @param Document $document JSON API Document
-     *
      * @return \Squid\Patreon\Entities\Entity
      */
-    public function hydrate(Document $document): Entity
+    public function hydrate(): Entity
     {
-        $resourceMap = [];
-
         return $this->hydrateResource(
-            $document->primaryResource(),
-            $document,
-            $resourceMap
+            $this->document->primaryResource()
         );
     }
 
     /**
      * Hydrates an Entity from a ResourceObject.
      *
-     * @param ResourceObject $resource    Resource to be hydrated
-     * @param Document       $document    Document that the Resource belongs to
-     * @param array          $resourceMap Resources that have already been hydrated
+     * @param ResourceObject $resource Resource to be hydrated
      *
      * @return \Squid\Patreon\Entities\Entity
      */
-    protected function hydrateResource(
-        ResourceObject $resource,
-        Document $document,
-        array &$resourceMap
-    ): Entity {
-        $entity = $this->newEntityOfType($resource->type());
+    protected function hydrateResource(ResourceObject $resource): Entity
+    {
+        $parent = $this->newEntityOfType($resource->type());
 
-        foreach (get_object_vars($entity) as $attribute => $default) {
-            $entity->{$attribute} = $resource->attribute($attribute);
+        foreach (get_object_vars($parent) as $attribute => $default) {
+            $parent->{$attribute} = $resource->attribute($attribute);
         }
 
-        $this->saveEntityToMap($entity, $resourceMap);
+        $this->saveEntityToCollection($parent);
 
         foreach ($resource->relationships() as $name => $relationship) {
             foreach ($relationship->resourceLinks() as $link) {
-                $related = $this->getEntityFromMap($link['type'], $link['id'], $resourceMap);
-
-                if ($related === null && $document->hasIncludedResource($link['type'], $link['id'])) {
-                    $relatedResource = $document->resource($link['type'], $link['id']);
-                    $related = $this->hydrateResource($relatedResource, $document, $resourceMap);
-                }
-
-                if ($related === null) {
-                    continue;
-                }
-
-                if ($relationship->isToOneRelationship()) {
-                    $entity->{$name} = $related;
-                } else {
-                    $entity->{$name}[] = $related;
-                }
+                $parent = $this->attachRelatedEntity(
+                    $parent,
+                    $link['type'],
+                    $link['id'],
+                    $relationship
+                );
             }
         }
 
-        return $entity;
+        return $parent;
     }
 
     /**
-     * Creates a new Entity for the resource.
+     * Attach a related Entity.
+     *
+     * @param Entity       $parent       Entity to attach to
+     * @param string       $type         Type of Resource
+     * @param string       $id           ID of the Resource
+     * @param Relationship $relationship Relationship
+     *
+     * @return \Squid\Patreon\Entities\Entity
+     */
+    protected function attachRelatedEntity(
+        Entity $parent,
+        string $type,
+        string $id,
+        Relationship $relationship
+    ): ?Entity {
+        $entity = $this->getEntityFromCollection($type, $id);
+
+        if ($entity === null && $this->document->hasIncludedResource($type, $id)) {
+            $entity = $this->hydrateResource(
+                $this->document->resource($type, $id)
+            );
+        }
+
+        if ($entity === null) {
+            return null;
+        }
+
+        if ($relationship->isToOneRelationship()) {
+            $parent->{$relationship->name()} = $entity;
+        } else {
+            $parent->{$relationship->name()}[] = $entity;
+        }
+
+        return $parent;
+    }
+
+    /**
+     * Creates a new Entity for the Resource.
      *
      * @param string $type Type of Entity to create
      *
@@ -102,39 +135,36 @@ class EntityHydrator
     protected function newEntityOfType(string $type): Entity
     {
         if (! array_key_exists($type, $this->resourceEntityMap)) {
-            throw new UnexpectedValueException("Entity class has not been specified for {$type} resources.");
+            throw new UnexpectedValueException(
+                "Missing Entity class for {$type} resources."
+            );
         }
 
         return new $this->resourceEntityMap[$type];
     }
 
     /**
-     * Gets Entity by key from the resource map if it exists.
+     * Gets Entity by key from the Resource collection.
      *
-     * @param string  $type        Type of Entity
-     * @param integer $id          ID of Entity
-     * @param array   $resourceMap Map to look for the Entity in
+     * @param string  $type Type of Resource
+     * @param integer $id   ID of Resource
      *
      * @return \Squid\Patreon\Entities\Entity|null
      */
-    protected function getEntityFromMap(
-        string $type,
-        string $id,
-        array $resourceMap
-    ): ?Entity {
-        return $resourceMap["{$type}-{$id}"] ?? null;
+    protected function getEntityFromCollection(string $type, string $id): ?Entity
+    {
+        return $this->resourceCollection["{$type}-{$id}"] ?? null;
     }
 
     /**
-     * Saves Entity to the resource map.
+     * Saves Entity to the Resource collection.
      *
-     * @param Entity $entity      Entity to save
-     * @param array  $resourceMap Map to save the Entity to
+     * @param Entity $entity Entity to save
      *
      * @return void
      */
-    protected function saveEntityToMap(Entity $entity, array &$resourceMap): void
+    protected function saveEntityToCollection(Entity $entity): void
     {
-        $resourceMap[$entity->getEntityKey()] = $entity;
+        $this->resourceCollection[$entity->getEntityKey()] = $entity;
     }
 }
