@@ -32,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Squid\\Patreon\\Tests\\": "tests/"
+            "Squid\\Patreon\\Tests\\": "tests/Patreon"
         }
     },
     "scripts" : {
