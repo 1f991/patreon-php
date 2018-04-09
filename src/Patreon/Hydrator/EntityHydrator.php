@@ -4,6 +4,7 @@ namespace Squid\Patreon\Hydrator;
 
 use UnexpectedValueException;
 use Squid\Patreon\Entities\Entity;
+use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
@@ -46,15 +47,20 @@ class EntityHydrator
     }
 
     /**
-     * Hydrates a Document's primary Entity with attributes and relationships.
+     * Returns a Collection of Entities hydrated from all of the Resources
+     * in the document, with all related resources hydrated.
      *
-     * @return \Squid\Patreon\Entities\Entity
+     * @return \Tightenco\Collect\Support\Collection
      */
-    public function hydrate(): Entity
+    public function hydrate(): Collection
     {
-        return $this->hydrateResource(
-            $this->document->primaryResource()
-        );
+        $entities = new Collection;
+
+        foreach ($this->document->primaryResources() as $resource) {
+            $entities->push($this->hydrateResource($resource));
+        }
+
+        return $entities;
     }
 
     /**

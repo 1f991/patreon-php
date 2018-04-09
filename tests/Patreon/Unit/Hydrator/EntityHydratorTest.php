@@ -5,11 +5,37 @@ namespace Squid\Patreon\Tests\Unit\Hydrator;
 use Squid\Patreon\Tests\Unit\TestCase;
 use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Hydrator\EntityHydrator;
+use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use UnexpectedValueException;
 
 class EntityHydratorTest extends TestCase
 {
+    public function testDocumentHydratorReturnsCollectionOfEntities(): void
+    {
+        $document = Document::createFromArray(
+            json_decode($this->fixture('jsonapi/articles.json'), true)
+        );
+
+        $hydrator = new EntityHydrator(
+            $document,
+            [
+            'article' => ArticleEntity::class,
+            'people' => PersonEntity::class
+            ]
+        );
+
+        $entities = $hydrator->hydrate();
+
+        $this->assertInstanceOf(Collection::class, $entities);
+        $this->assertCount(2, $entities);
+
+        $entities->each(
+            function ($entity) {
+                $this->assertInstanceOf(Entity::class, $entity);
+            }
+        );
+    }
 
     public function testEntityIsHydratedWithRelationshipsFromJsonApiDocument(): void
     {
@@ -20,12 +46,12 @@ class EntityHydratorTest extends TestCase
         $hydrator = new EntityHydrator(
             $document,
             [
-            'articles' => ArticleEntity::class,
+            'article' => ArticleEntity::class,
             'people' => PersonEntity::class
             ]
         );
 
-        $article = $hydrator->hydrate();
+        $article = $hydrator->hydrate()->first();
 
         $this->assertEquals('JSON API paints my bikeshed!', $article->title);
         $this->assertEquals('John', $article->author->name);
@@ -40,7 +66,7 @@ class EntityHydratorTest extends TestCase
         $hydrator = new EntityHydrator(
             $document,
             [
-            'articles' => ArticleEntity::class
+            'article' => ArticleEntity::class
             ]
         );
 

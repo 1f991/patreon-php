@@ -15,6 +15,6 @@ class Campaigns extends Resource
     {
         return $this->hydrateJsonApiResponse(
             $this->client->get('current_user/campaigns')
-        );
+        )->first();
     }
 }
