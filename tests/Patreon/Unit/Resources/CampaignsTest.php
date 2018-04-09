@@ -12,8 +12,8 @@ class CampaignsTest extends TestCase
     {
         $client = $this->createClientMockForResource('campaign');
 
-        $user = (new Campaigns($client))->getMyCampaign();
+        $campaign = (new Campaigns($client))->getMyCampaign();
 
-        $this->assertInstanceOf(Campaign::class, $user);
+        $this->assertInstanceOf(Campaign::class, $campaign);
     }
 }
