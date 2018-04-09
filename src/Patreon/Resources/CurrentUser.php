@@ -2,7 +2,7 @@
 
 namespace Squid\Patreon\Resources;
 
-use Squid\Patreon\Entities\Entity;
+use Squid\Patreon\Entities\User;
 
 class CurrentUser extends Resource
 {
@@ -11,7 +11,7 @@ class CurrentUser extends Resource
      *
      * @return \Squid\Patreon\Entities\User
      */
-    public function get(): Entity
+    public function get(): User
     {
         return $this->hydrateJsonApiResponse(
             $this->client->get('current_user')
