@@ -5,6 +5,7 @@ namespace Squid\Patreon;
 use Http\Discovery\HttpClientDiscovery;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Resources\CurrentUser;
+use Squid\Patreon\Resources\Resource;
 
 class Patreon
 {
@@ -27,5 +28,15 @@ class Patreon
     {
         $this->client = $client ?: new Client;
         $this->client->setAccessToken($accessToken);
+    }
+
+    /**
+     * Get the Current User Resource.
+     *
+     * @return \Squid\Patreon\Resources\Resource
+     */
+    public function me(): Resource
+    {
+        return new CurrentUser($this->client);
     }
 }
