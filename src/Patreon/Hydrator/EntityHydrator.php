@@ -76,7 +76,7 @@ class EntityHydrator
 
         foreach ($resource->relationships() as $name => $relationship) {
             foreach ($relationship->resourceLinks() as $link) {
-                $parent = $this->attachRelatedEntity(
+                $this->attachRelatedEntity(
                     $parent,
                     $link['type'],
                     $link['id'],
@@ -99,11 +99,11 @@ class EntityHydrator
      * @return \Squid\Patreon\Entities\Entity
      */
     protected function attachRelatedEntity(
-        Entity $parent,
+        Entity &$parent,
         string $type,
         string $id,
         Relationship $relationship
-    ): ?Entity {
+    ): void {
         $entity = $this->getEntityFromCollection($type, $id);
 
         if ($entity === null && $this->document->hasIncludedResource($type, $id)) {
@@ -113,7 +113,7 @@ class EntityHydrator
         }
 
         if ($entity === null) {
-            return null;
+            return;
         }
 
         if ($relationship->isToOneRelationship()) {
@@ -121,8 +121,6 @@ class EntityHydrator
         } else {
             $parent->{$relationship->name()}[] = $entity;
         }
-
-        return $parent;
     }
 
     /**
