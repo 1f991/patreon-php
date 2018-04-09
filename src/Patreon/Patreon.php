@@ -4,6 +4,7 @@ namespace Squid\Patreon;
 
 use Http\Discovery\HttpClientDiscovery;
 use Squid\Patreon\Api\Client;
+use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Resources\CurrentUser;
 use Squid\Patreon\Resources\Resource;
 
@@ -38,5 +39,15 @@ class Patreon
     public function me(): Resource
     {
         return new CurrentUser($this->client);
+    }
+
+    /**
+     * Get the Campaigns Resource.
+     *
+     * @return \Squid\Patreon\Resources\Campaigns
+     */
+    public function campaigns(): Campaigns
+    {
+        return new Campaigns($this->client);
     }
 }
