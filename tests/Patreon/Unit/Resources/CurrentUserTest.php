@@ -18,11 +18,7 @@ class CurrentUserTest extends TestCase
         $document = $this->createMock(JsonApiResponse::class);
         $document->expects($this->once())
             ->method('document')
-            ->willReturn(
-                Document::createFromArray(
-                    json_decode($this->fixture('1/current_user.json'), true)
-                )
-            );
+            ->willReturn(Document::createFromArray(['data' => ['type' => 'user']]));
 
         $client = $this->createMock(Client::class);
         $client->expects($this->once())
