@@ -15,6 +15,6 @@ class CurrentUser extends Resource
     {
         return $this->hydrateJsonApiResponse(
             $this->client->get('current_user')
-        );
+        )->first();
     }
 }

@@ -17,6 +17,24 @@
                }
             }
          }
+      },
+      {
+         "type":"article",
+         "id":"2",
+         "attributes":{
+            "title":"Another article title.",
+            "body":"Hello World!",
+            "created":"2015-06-22T14:56:29.000Z",
+            "updated":"2015-07-22T14:56:28.000Z"
+         },
+         "relationships":{
+            "author":{
+               "data":{
+                  "id":"43",
+                  "type":"people"
+               }
+            }
+         }
       }
    ],
    "included":[
@@ -24,9 +42,14 @@
          "type":"people",
          "id":"42",
          "attributes":{
-            "name":"John",
-            "age":80,
-            "gender":"male"
+            "name":"John"
+         }
+      },
+      {
+         "type":"people",
+         "id":"43",
+         "attributes":{
+            "name":"Jane"
          }
       }
    ]

@@ -4,11 +4,11 @@ namespace Squid\Patreon\Resources;
 
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Campaign;
-use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Entities\Goal;
 use Squid\Patreon\Entities\Reward;
 use Squid\Patreon\Entities\User;
 use Squid\Patreon\Hydrator\EntityHydrator;
+use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 
 abstract class Resource
@@ -40,9 +40,9 @@ abstract class Resource
      *
      * @param \WoohooLabs\Yang\JsonApi\Response\JsonApiResponse $response Response
      *
-     * @return \Squid\Patreon\Entities\Entity
+     * @return \Tightenco\Collect\Support\Collection
      */
-    protected function hydrateJsonApiResponse(JsonApiResponse $response): Entity
+    protected function hydrateJsonApiResponse(JsonApiResponse $response): Collection
     {
         $hydrator = new EntityHydrator($response->document(), self::ENTITY_MAP);
 
