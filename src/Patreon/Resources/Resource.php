@@ -3,7 +3,10 @@
 namespace Squid\Patreon\Resources;
 
 use Squid\Patreon\Api\Client;
+use Squid\Patreon\Entities\Campaign;
 use Squid\Patreon\Entities\Entity;
+use Squid\Patreon\Entities\Goal;
+use Squid\Patreon\Entities\Reward;
 use Squid\Patreon\Entities\User;
 use Squid\Patreon\Hydrator\EntityHydrator;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
@@ -17,6 +20,9 @@ abstract class Resource
     */
     const ENTITY_MAP = [
         'user' => User::class,
+        'campaign' => Campaign::class,
+        'reward' => Reward::class,
+        'goal' => Goal::class,
     ];
 
     /**
