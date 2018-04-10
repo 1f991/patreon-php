@@ -36,7 +36,7 @@ class Pledges extends Resource
             $page = $this->client->get("campaigns/{$campaign}/pledges?" . $filter);
 
             $pledges = $pledges->merge(
-                $this->hydrateJsonApiResponse($page)
+                $this->hydrateDocument($page->document())
             );
 
             if (! $next = $page->document()->links()->link('next')) {
@@ -80,8 +80,10 @@ class Pledges extends Resource
             ]
         );
 
-        return $this->hydrateJsonApiResponse(
-            $this->client->get("campaigns/{$campaign}/pledges?" . $parameters)
+        $result = $this->client->get("campaigns/{$campaign}/pledges?{$parameters}");
+
+        return $this->hydrateDocument(
+            $result->document()
         );
     }
 }

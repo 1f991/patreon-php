@@ -13,8 +13,8 @@ class CurrentUser extends Resource
      */
     public function get(): User
     {
-        return $this->hydrateJsonApiResponse(
-            $this->client->get('current_user')
+        return $this->hydrateDocument(
+            $this->client->get('current_user')->document()
         )->first();
     }
 }
