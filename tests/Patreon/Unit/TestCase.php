@@ -43,6 +43,15 @@ class TestCase extends PHPUnit_TestCase
         return $client;
     }
 
+    /**
+     * Returns a JSON Api Response Mock that has a Document containing
+     * x resources of type.
+     *
+     * @param string  $type   Resource type
+     * @param integer $amount Amount of resources to include in the document
+     *
+     * @return WoohooLabs\Yang\JsonApi\Schema\Document
+     */
     protected function createJsonApiMockWithDocumentForResource(
         string $type,
         int $amount = 1
