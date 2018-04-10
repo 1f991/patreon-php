@@ -36,9 +36,9 @@ class Patreon
     /**
      * Get the Current User Resource.
      *
-     * @return \Squid\Patreon\Resources\Resource
+     * @return \Squid\Patreon\Resources\CurrentUser
      */
-    public function me(): Resource
+    public function me(): CurrentUser
     {
         return new CurrentUser($this->client);
     }
