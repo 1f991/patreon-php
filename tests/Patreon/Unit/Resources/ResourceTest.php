@@ -15,7 +15,7 @@ class ResourceTest extends TestCase
 {
     public function testResourceThrowsExceptionWhenApiReturnsError(): void
     {
-        $error = Document::createFromArray(
+        $document = Document::createFromArray(
             [
             'errors' => [
                 ['code_name' => '', 'detail' => 'example'],
@@ -24,7 +24,7 @@ class ResourceTest extends TestCase
         );
 
         $response = $this->createMock(JsonApiResponse::class);
-        $response->method('document')->willReturn($error);
+        $response->method('document')->willReturn($document);
 
         $client = $this->createMock(Client::class);
 
