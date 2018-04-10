@@ -8,6 +8,7 @@ use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Resources\CurrentUser;
 use Squid\Patreon\Resources\Pledges;
 use Squid\Patreon\Resources\Resource;
+use Squid\Patreon\Resources\Webhook;
 
 class Patreon
 {
@@ -60,5 +61,15 @@ class Patreon
     public function pledges(): Pledges
     {
         return new Pledges($this->client);
+    }
+
+    /**
+     * Get the Webhook Resource.
+     *
+     * @return \Squid\Patreon\Resources\Webhook
+     */
+    public function webhook(): Webhook
+    {
+        return new Webhook($this->client);
     }
 }

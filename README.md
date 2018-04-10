@@ -30,3 +30,17 @@ $pledges->each(function ($pledge) {
     echo "{$pledge->patron->full_name} pledges {$pledge->amount_cents} cents.\n";
 });
 ```
+
+## Accept inbound webhook
+
+```php
+$patreon = new Patreon($accessToken);
+
+$pledge = $patreon->webhook()->accept(
+    file_get_contents('php://input'),
+    $_SERVER['HTTP_X_PATREON_SIGNATURE'],
+    $secret
+);
+
+echo $pledge->patron->full_name;
+```
