@@ -13,8 +13,8 @@ class Campaigns extends Resource
      */
     public function getMyCampaign(): Campaign
     {
-        return $this->hydrateJsonApiResponse(
-            $this->client->get('current_user/campaigns')
+        return $this->hydrateDocument(
+            $this->client->get('current_user/campaigns')->document()
         )->first();
     }
 }

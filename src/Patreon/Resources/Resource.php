@@ -12,7 +12,7 @@ use Squid\Patreon\Entities\Reward;
 use Squid\Patreon\Entities\User;
 use Squid\Patreon\Hydrator\EntityHydrator;
 use Tightenco\Collect\Support\Collection;
-use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
+use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 abstract class Resource
 {
@@ -41,21 +41,21 @@ abstract class Resource
     }
 
     /**
-     * Hydrate a JSON API Response
+     * Hydrate a Document.
      *
-     * @param \WoohooLabs\Yang\JsonApi\Response\JsonApiResponse $response Response
+     * @param \WoohooLabs\Yang\JsonApi\Schema\Document $document Document to hydrate
      *
      * @return \Tightenco\Collect\Support\Collection
      */
-    protected function hydrateJsonApiResponse(JsonApiResponse $response): Collection
+    protected function hydrateDocument(Document $document): Collection
     {
-        if ($response->document()->hasErrors()) {
-            $error = $response->document()->error(0);
+        if ($document->hasErrors()) {
+            $error = $document->error(0);
 
             throw new Exception("{$error->title()} {$error->detail()}");
         }
 
-        $hydrator = new EntityHydrator($response->document(), self::ENTITY_MAP);
+        $hydrator = new EntityHydrator($document, self::ENTITY_MAP);
 
         return $hydrator->hydrate();
     }

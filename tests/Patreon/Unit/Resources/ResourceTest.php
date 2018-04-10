@@ -38,6 +38,6 @@ class ResourceExample extends Resource
 {
     public function get(JsonApiResponse $response): void
     {
-        $this->hydrateJsonApiResponse($response);
+        $this->hydrateDocument($response->document());
     }
 }
