@@ -2,6 +2,7 @@
 
 namespace Squid\Patreon\Resources;
 
+use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Address;
 use Squid\Patreon\Entities\Campaign;
@@ -48,6 +49,12 @@ abstract class Resource
      */
     protected function hydrateJsonApiResponse(JsonApiResponse $response): Collection
     {
+        if ($response->document()->hasErrors()) {
+            $error = $response->document()->error(0);
+
+            throw new Exception("{$error->title()} {$error->detail()}");
+        }
+
         $hydrator = new EntityHydrator($response->document(), self::ENTITY_MAP);
 
         return $hydrator->hydrate();
