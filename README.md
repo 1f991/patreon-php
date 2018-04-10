@@ -9,10 +9,24 @@ A PHP library for interacting with the Patreon API.
 
 # Examples
 
-## Retrieving the current user's information
+## Retrieving the Current User's information
 
 ```php
 $patreon = new Patreon($accessToken);
 $user = $patreon->me()->get();
 echo "Hello {$user->full_name}";
+```
+
+## Retrieving all Pledges for the Current User's Campaign
+
+```php
+$patreon = new Patreon($accessToken);
+
+$pledges = $patreon->pledges()->getCampaignPledges(
+    $patreon->campaigns()->getMyCampaign()->id
+);
+
+$pledges->each(function ($pledge) {
+    echo "{$pledge->patron->full_name} pledges {$pledge->amount_cents} cents.\n";
+});
 ```
