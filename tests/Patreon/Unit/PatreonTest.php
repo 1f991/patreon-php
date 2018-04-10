@@ -4,6 +4,9 @@ namespace Squid\Patreon\Tests\Unit\Api;
 
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Patreon;
+use Squid\Patreon\Resources\Campaigns;
+use Squid\Patreon\Resources\CurrentUser;
+use Squid\Patreon\Resources\Pledges;
 use Squid\Patreon\Tests\Unit\TestCase;
 
 class PatreonTest extends TestCase
@@ -16,5 +19,15 @@ class PatreonTest extends TestCase
             ->with('access-token');
 
         new Patreon('access-token', $client);
+    }
+
+    public function testClientReturnsResources(): void
+    {
+        $client = $this->createMock(Client::class);
+        $patreon = new Patreon('access-token', $client);
+
+        $this->assertInstanceOf(CurrentUser::class, $patreon->me());
+        $this->assertInstanceOf(Campaigns::class, $patreon->campaigns());
+        $this->assertInstanceOf(Pledges::class, $patreon->pledges());
     }
 }

@@ -6,6 +6,7 @@ use Http\Discovery\HttpClientDiscovery;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Resources\CurrentUser;
+use Squid\Patreon\Resources\Pledges;
 use Squid\Patreon\Resources\Resource;
 
 class Patreon
