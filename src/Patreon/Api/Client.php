@@ -82,7 +82,8 @@ class Client
             self::API_ENDPOINT . $path,
             [
                 'Authorization' => 'Bearer ' . $this->accessToken,
-                'Accept'        => 'application/json'
+                'Accept'        => 'application/json',
+                'User-Agent'    => '1f991/patreon-php'
             ]
         );
     }
