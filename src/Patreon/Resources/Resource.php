@@ -3,6 +3,7 @@
 namespace Squid\Patreon\Resources;
 
 use Squid\Patreon\Api\Client;
+use Squid\Patreon\Entities\Address;
 use Squid\Patreon\Entities\Campaign;
 use Squid\Patreon\Entities\Goal;
 use Squid\Patreon\Entities\Pledge;
@@ -25,6 +26,7 @@ abstract class Resource
         'reward' => Reward::class,
         'goal' => Goal::class,
         'pledge' => Pledge::class,
+        'address' => Address::class,
     ];
 
     /**
