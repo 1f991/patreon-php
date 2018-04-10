@@ -78,6 +78,9 @@ class EntityHydrator
             $parent->{$attribute} = $resource->attribute($attribute);
         }
 
+        $parent->setId($resource->id());
+        $parent->setType($resource->type());
+
         $this->saveEntityToCollection($parent);
 
         foreach ($resource->relationships() as $name => $relationship) {
