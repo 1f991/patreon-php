@@ -50,4 +50,14 @@ class Patreon
     {
         return new Campaigns($this->client);
     }
+
+    /**
+     * Get the Pledges Resource.
+     *
+     * @return \Squid\Patreon\Resources\Pledges
+     */
+    public function pledges(): Pledges
+    {
+        return new Pledges($this->client);
+    }
 }

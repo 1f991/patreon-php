@@ -29,12 +29,11 @@ class TestCase extends PHPUnit_TestCase
      *
      * @return Squid\Patreon\Api\Client
      */
-    protected function createClientMockForResource(string $type): Client
-    {
-        $document = $this->createMock(JsonApiResponse::class);
-        $document->expects($this->once())
-            ->method('document')
-            ->willReturn(Document::createFromArray(['data' => ['type' => $type]]));
+    protected function createClientMockForResource(
+        string $type,
+        int $amount = 1
+    ): Client {
+        $document = $this->createJsonApiMockWithDocumentForResource($type, $amount);
 
         $client = $this->createMock(Client::class);
         $client->expects($this->once())
@@ -42,5 +41,22 @@ class TestCase extends PHPUnit_TestCase
             ->willReturn($document);
 
         return $client;
+    }
+
+    protected function createJsonApiMockWithDocumentForResource(
+        string $type,
+        int $amount = 1
+    ): JsonApiResponse {
+        $data = [];
+
+        foreach (range(1, $amount) as $i) {
+            $data[] = ['type' => $type, 'id' => (string) $i];
+        }
+
+        $document = $this->createMock(JsonApiResponse::class);
+        $document->method('document')
+            ->willReturn(Document::createFromArray(['data' => $data]));
+
+        return $document;
     }
 }
