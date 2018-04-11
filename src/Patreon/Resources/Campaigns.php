@@ -14,7 +14,7 @@ class Campaigns extends Resource
     public function getMyCampaign(): Campaign
     {
         return $this->hydrateDocument(
-            $this->client->get('current_user/campaigns')->document()
+            $this->client->get('oauth2/api/current_user/campaigns')->document()
         )->first();
     }
 
@@ -26,7 +26,7 @@ class Campaigns extends Resource
     public function getMyCampaignWithPledges(): Campaign
     {
         $campaign = $this->hydrateDocument(
-            $this->client->get('current_user/campaigns')->document()
+            $this->client->get('oauth2/api/current_user/campaigns')->document()
         )->first();
 
         return $this->attachPledges($campaign);
