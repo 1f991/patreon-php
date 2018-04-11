@@ -16,7 +16,7 @@ class Client
     *
     * @var string
     */
-    const API_ENDPOINT = 'https://api.patreon.com/oauth2/api/';
+    const API_ENDPOINT = 'https://api.patreon.com/';
 
     /**
      * Access token to be included in the requests to the Patreon API.
