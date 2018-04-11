@@ -29,12 +29,71 @@ class Reward extends Entity
     public $created_at;
 
     /**
-     * Description of the reward.
+     * Description of the reward, rendered as HTML.
      * Example: "Access to my Patron only streams."
      *
      * @var string
      */
     public $description;
+
+    /**
+    * Discord Roles granted when the patron has Discord attached to their Patreon
+    * account.
+    *
+    * @var array
+    */
+    public $discord_role_ids;
+
+    /**
+     * Timestamp of the last edit to the reward, ISO 8601 combined date and time
+     * in UTC.
+     * Example: "2017-12-01T16:33:48+00:00"
+     *
+     * @var string
+     */
+    public $edited_at;
+
+    /**
+    * Unknown.
+    *
+    * @var string
+    */
+    public $image_url;
+
+    /**
+    * Number of Pledges with this Reward.
+    * Note: all pledges, active and inactive, are included in this count.
+    *
+    * @var integer
+    */
+    public $patron_count;
+
+    /**
+    * Number of posts with this Reward selected as the lowest reward tier that
+    * can access the post.
+    * Note: Patrons can access posts from their Reward tier and any lower Reward
+    * tier so to calculate the total number of posts the Patron can access you
+    * would need to include the post_count for this reward and each lower Reward.
+    *
+    * @var integer
+    */
+    public $post_count;
+
+    /**
+    * Is this Reward visible on the campaign?
+    *
+    * @var boolean
+    */
+    public $published;
+
+    /**
+     * Timestamp of when the reward was published, ISO 8601 combined date and time
+     * in UTC.
+     * Example: "2017-12-01T16:33:48+00:00"
+     *
+     * @var string
+     */
+    public $published_at;
 
     /**
      * The number of remaining rewards available if there is a user_limit.
@@ -49,6 +108,22 @@ class Reward extends Entity
      * @var boolean
      */
     public $requires_shipping;
+
+    /**
+    * Title of the Reward.
+    * Example: "Exclusive Live Chat"
+    *
+    */
+    public $title;
+
+    /**
+     * Timestamp of when the reward was unpublished, ISO 8601 combined date and time
+     * in UTC.
+     * Example: "2017-12-01T16:33:48+00:00"
+     *
+     * @var string
+     */
+    public $unpublished_at;
 
     /**
      * Relative URL for selecting this reward when becoming a patron.
