@@ -31,6 +31,13 @@ abstract class Resource
     ];
 
     /**
+     * Patreon Client used for retrieving data.
+     *
+     * @var \Squid\Patreon\Api\Client
+     */
+    protected $client;
+
+    /**
      * Constructs a new Resource.
      *
      * @param \Squid\Patreon\Api\Client $client Patreon API Client
@@ -50,9 +57,9 @@ abstract class Resource
     protected function hydrateDocument(Document $document): Collection
     {
         if ($document->hasErrors()) {
-            $error = $document->error(0);
-
-            throw new Exception("{$error->title()} {$error->detail()}");
+            throw new Exception(
+                "{$document->error(0)->title()} {$document->error(0)->detail()}"
+            );
         }
 
         $hydrator = new EntityHydrator($document, self::ENTITY_MAP);

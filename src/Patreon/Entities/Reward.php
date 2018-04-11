@@ -37,11 +37,11 @@ class Reward extends Entity
     public $description;
 
     /**
-    * Discord Roles granted when the patron has Discord attached to their Patreon
-    * account.
-    *
-    * @var array
-    */
+     * Discord Roles granted when the patron has Discord attached to their Patreon
+     * account.
+     *
+     * @var array
+     */
     public $discord_role_ids;
 
     /**
@@ -54,36 +54,36 @@ class Reward extends Entity
     public $edited_at;
 
     /**
-    * Unknown.
-    *
-    * @var string
-    */
+     * Unknown.
+     *
+     * @var string
+     */
     public $image_url;
 
     /**
-    * Number of Pledges with this Reward.
-    * Note: all pledges, active and inactive, are included in this count.
-    *
-    * @var integer
-    */
+     * Number of Pledges with this Reward.
+     * Note: all pledges, active and inactive, are included in this count.
+     *
+     * @var integer
+     */
     public $patron_count;
 
     /**
-    * Number of posts with this Reward selected as the lowest reward tier that
-    * can access the post.
-    * Note: Patrons can access posts from their Reward tier and any lower Reward
-    * tier so to calculate the total number of posts the Patron can access you
-    * would need to include the post_count for this reward and each lower Reward.
-    *
-    * @var integer
-    */
+     * Number of posts with this Reward selected as the lowest reward tier that
+     * can access the post.
+     * Note: Patrons can access posts from their Reward tier and any lower Reward
+     * tier so to calculate the total number of posts the Patron can access you
+     * would need to include the post_count for this reward and each lower Reward.
+     *
+     * @var integer
+     */
     public $post_count;
 
     /**
-    * Is this Reward visible on the campaign?
-    *
-    * @var boolean
-    */
+     * Is this Reward visible on the campaign?
+     *
+     * @var boolean
+     */
     public $published;
 
     /**
@@ -110,10 +110,9 @@ class Reward extends Entity
     public $requires_shipping;
 
     /**
-    * Title of the Reward.
-    * Example: "Exclusive Live Chat"
-    *
-    */
+     * Title of the Reward.
+     * Example: "Exclusive Live Chat"
+     */
     public $title;
 
     /**
