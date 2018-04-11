@@ -73,4 +73,40 @@ class Pledge extends Entity
      * @var integer
      */
     public $total_historical_amount_cents;
+
+    /**
+     * An active pledge is not paused and is not currently declined.
+     * Note: a pledge can be active even if the patron hasn't been charged yet
+     * if the campaign does not charge upfront.
+     *
+     * @return bool
+     */
+    public function isPledgeActive(): bool
+    {
+        return $this->declined_since === null && $this->is_paused === false;
+    }
+
+    /**
+     * Was the latest attempt to charge the patrons payment method declined?
+     * Note: Patreon will retry payment methods and encourage the user to fix
+     * the issue by adding a new payment method. When payment has repeatedly
+     * failed for more than (undefined period of time) the pledge will be deleted.
+     * Source: https://www.patreondevelopers.com/t/131/3
+     *
+     * @return bool
+     */
+    public function isPaymentDeclined(): bool
+    {
+        return $this->declined_since !== null;
+    }
+
+    /**
+     * Has the patron ever made a successful payment?
+     *
+     * @return bool
+     */
+    public function hasMadeAPayment(): bool
+    {
+        return $this->total_historical_amount_cents > 0;
+    }
 }
