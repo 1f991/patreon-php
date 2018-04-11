@@ -66,4 +66,38 @@ class Reward extends Entity
      * @var integer
      */
     public $user_limit;
+
+    /**
+     * Is this Reward available for Patrons to select?
+     *
+     * @return bool
+     */
+    public function isAvailableToChoose(): bool
+    {
+        return ! $this->isSystemReward() && $this->hasRemainingLimit();
+    }
+
+    /**
+     * Does the Reward have spaces left, allowing it to be picked by a patron.
+     *
+     * @return bool
+     */
+    public function hasRemainingLimit(): bool
+    {
+        return $this->remaining !== 0;
+    }
+
+    /**
+     * Is this Reward a Reward used by the Patreon system, and not configured by
+     * the campaign creator?
+     * Note: Rewards ID -1 "Everyone" and 0 "Patrons Only" appear to be used by
+     * the system for permissions to access posts. You should exclude system
+     * rewards when listing rewards.
+     *
+     * @return bool
+     */
+    public function isSystemReward(): bool
+    {
+        return (int) $this->id < 1;
+    }
 }
