@@ -50,4 +50,27 @@ class Goal extends Entity
      * @var string
      */
     public $title;
+
+    /**
+     * Has the Goal been completed at some point in the past?
+     * Note: A Goal is completed once, if the completed percentage drops below 100
+     * it will remain completed, if you need to test if a goal is currently
+     * complete then use `isComplete()`.
+     *
+     * @return bool
+     */
+    public function hasBeenCompleted(): bool
+    {
+        return $this->reached_at !== null;
+    }
+
+    /**
+     * Is the Goal currently complete?
+     *
+     * @return bool
+     */
+    public function isComplete(): bool
+    {
+        return $this->reached_at !== null && $this->completed_percentage === 100;
+    }
 }
