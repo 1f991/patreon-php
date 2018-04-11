@@ -90,7 +90,7 @@ class Pledge extends Entity
      * Was the latest attempt to charge the patrons payment method declined?
      * Note: Patreon will retry payment methods and encourage the user to fix
      * the issue by adding a new payment method. When payment has repeatedly
-     * failed over an undefined period of time the pledge will be deleted.
+     * failed for more than (undefined period of time) the pledge will be deleted.
      * Source: https://www.patreondevelopers.com/t/131/3
      *
      * @return bool
@@ -107,6 +107,6 @@ class Pledge extends Entity
      */
     public function hasMadeAPayment(): bool
     {
-        return $this->$total_historical_amount_cents > 0;
+        return $this->total_historical_amount_cents > 0;
     }
 }
