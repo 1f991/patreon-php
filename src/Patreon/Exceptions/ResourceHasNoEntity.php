@@ -7,7 +7,7 @@ use LogicException;
 class ResourceHasNoEntity extends LogicException
 {
     /**
-     * Provides an erorr for when a Resource does not have an associated Entity.
+     * Provides an error for when a Resource does not have an associated Entity.
      *
      * @param string $name Name of the Resource.
      *

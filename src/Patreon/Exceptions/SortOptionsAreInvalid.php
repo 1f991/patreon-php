@@ -7,7 +7,7 @@ use LogicException;
 class SortOptionsAreInvalid extends LogicException
 {
     /**
-     * Provides an erorr for when a sort option is invalid.
+     * Provides an error for when sort options are invalid.
      *
      * @param array $invalid List of invalid options provided.
      * @param array $valid   List of valid options that can be provided.
