@@ -13,7 +13,7 @@ the underlying Patreon API behind an interface of easy to use methods.
 * PHP >=7.2
 * [Composer](https://getcomposer.org/)
 * An [HTTPlug compatible client](http://docs.php-http.org/en/latest/clients.html)
-  such as Guzzle
+  such as [`php-http/guzzle6-adapter`](https://packagist.org/packages/php-http/guzzle6-adapter)
 
 # Installation
 
