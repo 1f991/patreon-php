@@ -2,8 +2,8 @@
 
 namespace Squid\Patreon\Hydrator;
 
-use UnexpectedValueException;
 use Squid\Patreon\Entities\Entity;
+use Squid\Patreon\Exceptions\ResourceHasNoEntity;
 use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
@@ -137,14 +137,14 @@ class EntityHydrator
      *
      * @param string $type Type of Entity to create
      *
+     * @throws \Squid\Patreon\Exceptions\ResourceHasNoEntity
+     *
      * @return \Squid\Patreon\Entities\Entity
      */
     protected function newEntityOfType(string $type): Entity
     {
         if (! array_key_exists($type, $this->resourceEntityMap)) {
-            throw new UnexpectedValueException(
-                "Missing Entity class for {$type} resources."
-            );
+            throw ResourceHasNoEntity::forResource($type);
         }
 
         return new $this->resourceEntityMap[$type];

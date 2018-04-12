@@ -3,8 +3,8 @@
 namespace Squid\Patreon\Resources;
 
 use Squid\Patreon\Entities\Pledge;
+use Squid\Patreon\Exceptions\SortOptionsAreInvalid;
 use Tightenco\Collect\Support\Collection;
-use UnexpectedValueException;
 
 class Pledges extends Resource
 {
@@ -68,10 +68,8 @@ class Pledges extends Resource
         array $sort = [],
         string $cursor = null
     ): Collection {
-        if ($attributes = array_diff($sort, self::SORT_OPTIONS)) {
-            throw new UnexpectedValueException(
-                "Invalid sort options: " . implode(', ', $attributes)
-            );
+        if ($invalid = array_diff($sort, self::SORT_OPTIONS)) {
+            throw SortOptionsAreInvalid::options($invalid, self::SORT_OPTIONS);
         }
 
         $parameters = http_build_query(

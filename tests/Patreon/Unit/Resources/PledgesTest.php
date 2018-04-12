@@ -4,10 +4,10 @@ namespace Squid\Patreon\Tests\Unit\Resources;
 
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Pledge;
+use Squid\Patreon\Exceptions\SortOptionsAreInvalid;
 use Squid\Patreon\Resources\Pledges;
 use Squid\Patreon\Tests\Unit\TestCase;
 use Tightenco\Collect\Support\Collection;
-use UnexpectedValueException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 
@@ -33,7 +33,7 @@ class PledgesTest extends TestCase
     {
         $client = $this->createMock(Client::class);
 
-        $this->expectException(UnexpectedValueException::class);
+        $this->expectException(SortOptionsAreInvalid::class);
 
         $resource = new Pledges($client);
         $pledges = $resource->getPageOfCampaignPledges(1, 25, ['invalid-option']);

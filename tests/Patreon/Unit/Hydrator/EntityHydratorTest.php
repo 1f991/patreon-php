@@ -2,12 +2,12 @@
 
 namespace Squid\Patreon\Tests\Unit\Hydrator;
 
-use Squid\Patreon\Tests\Unit\TestCase;
 use Squid\Patreon\Entities\Entity;
+use Squid\Patreon\Exceptions\ResourceHasNoEntity;
+use Squid\Patreon\Tests\Unit\TestCase;
 use Squid\Patreon\Hydrator\EntityHydrator;
 use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
-use UnexpectedValueException;
 
 class EntityHydratorTest extends TestCase
 {
@@ -70,7 +70,7 @@ class EntityHydratorTest extends TestCase
             ]
         );
 
-        $this->expectException(UnexpectedValueException::class);
+        $this->expectException(ResourceHasNoEntity::class);
         $hydrator->hydrate($document);
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Squid\Patreon\Resources;
 
-use Exception;
 use Squid\Patreon\Entities\Entity;
+use Squid\Patreon\Exceptions\SignatureVerificationFailed;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class Webhook extends Resource
 {
     /**
-     * Accept an incoming Webhook, validate the signature and return an entity.
+     * Accept an incoming Webhook, verify the signature and return an entity.
      *
      * @param string $body      Request body (JSON)
      * @param string $secret    Secret used to generate the signature
@@ -22,7 +22,7 @@ class Webhook extends Resource
         string $secret,
         string $signature
     ): Entity {
-        $this->validateSignature($body, $secret, $signature);
+        $this->verifySignature($body, $secret, $signature);
 
         return $this->hydrateDocument(
             Document::createFromArray(json_decode($body, true))
@@ -30,25 +30,27 @@ class Webhook extends Resource
     }
 
     /**
-     * Validate a webhook signature.
+     * Verify a webhook signature.
      *
      * @param string $body      Request body (JSON)
      * @param string $secret    Secret used to generate the signature
      * @param string $signature Signature of the request
      *
-     * @throws Exception
+     * @throws \Squid\Patreon\Exceptions\SignatureVerificationFailed
      *
      * @return bool
      */
-    public function validateSignature(
+    public function verifySignature(
         string $body,
         string $secret,
         string $signature
     ): bool {
-        if (hash_hmac('md5', $body, $secret) === $signature) {
+        $expected = hash_hmac('md5', $body, $secret);
+
+        if ($expected === $signature) {
             return true;
         }
 
-        throw new Exception('Signature validation failed.');
+        throw SignatureVerificationFailed::withSignature($expected, $signature);
     }
 }
