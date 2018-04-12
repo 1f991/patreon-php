@@ -2,33 +2,33 @@
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
-use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Pledge;
+use Squid\Patreon\Exceptions\SignatureVerificationFailed;
 use Squid\Patreon\Resources\Webhook;
 use Squid\Patreon\Tests\Unit\TestCase;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class WebhookTest extends TestCase
 {
-    public function testWebhookThrowsExceptionWhenSignatureValidationFails(): void
+    public function testWebhookThrowsExceptionWhenSignatureVerificationFails(): void
     {
         $client = $this->createMock(Client::class);
 
-        $this->expectException(Exception::class);
+        $this->expectException(SignatureVerificationFailed::class);
 
-        (new Webhook($client))->validateSignature(
+        (new Webhook($client))->verifySignature(
             'Hello World!',
             'invalid-secret',
             'invalid-signature'
         );
     }
 
-    public function testWebhookSignatureValidatePassesWithValidSignature(): void
+    public function testWebhookSignatureVerificationPassesWithValidSignature(): void
     {
         $client = $this->createMock(Client::class);
 
-        $signature = (new Webhook($client))->validateSignature(
+        $signature = (new Webhook($client))->verifySignature(
             'Hello World!',
             'secret-key',
             '7a42ad6672deb0bd44a439d2e786def0'
