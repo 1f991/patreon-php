@@ -20,6 +20,13 @@ class Patreon
     protected $client;
 
     /**
+     * Should requests be made to the authenticated endpoint?
+     *
+     * @var boolean
+     */
+    protected $authenticated = true;
+
+    /**
      * Create a new Patreon instance.
      *
      * @param string $accessToken A Patreon API oauth2 access token
@@ -40,7 +47,7 @@ class Patreon
      */
     public function me(): CurrentUser
     {
-        return new CurrentUser($this->client);
+        return $this->newResource(CurrentUser::class);
     }
 
     /**
@@ -50,7 +57,7 @@ class Patreon
      */
     public function campaigns(): Campaigns
     {
-        return new Campaigns($this->client);
+        return $this->newResource(Campaigns::class);
     }
 
     /**
@@ -60,7 +67,7 @@ class Patreon
      */
     public function pledges(): Pledges
     {
-        return new Pledges($this->client);
+        return $this->newResource(Pledges::class);
     }
 
     /**
@@ -70,6 +77,29 @@ class Patreon
      */
     public function webhook(): Webhook
     {
-        return new Webhook($this->client);
+        return $this->newResource(Webhook::class);
+    }
+
+    /**
+     * Creates a new Resource object.
+     *
+     * @param string $resource Resource to create
+     *
+     * @return \Squid\Patreon\Resources\Resource
+     */
+    protected function newResource(string $resource): Resource
+    {
+        return new $resource($this->client, $this->authenticated);
+    }
+
+    /**
+     * Set the client status to unauthenticated so that all requests made are to
+     * the unauthenticated endpoint.
+     *
+     * @return void
+     */
+    public function useUnauthenticatedResources(): void
+    {
+        $this->authenticated = false;
     }
 }

@@ -13,9 +13,9 @@ class Campaigns extends Resource
      */
     public function getMyCampaign(): Campaign
     {
-        return $this->hydrateDocument(
-            $this->client->get('oauth2/api/current_user/campaigns')->document()
-        )->first();
+        $this->onlyAvailableAuthenticated();
+
+        return $this->getHydratedEntity('current_user/campaigns');
     }
 
     /**
@@ -25,9 +25,9 @@ class Campaigns extends Resource
      */
     public function getMyCampaignWithPledges(): Campaign
     {
-        $campaign = $this->hydrateDocument(
-            $this->client->get('oauth2/api/current_user/campaigns')->document()
-        )->first();
+        $this->onlyAvailableAuthenticated();
+
+        $campaign = $this->getHydratedEntity('current_user/campaigns');
 
         return $this->attachPledges($campaign);
     }
@@ -41,9 +41,7 @@ class Campaigns extends Resource
      */
     public function getCampaign(int $id): Campaign
     {
-        return $this->hydrateDocument(
-            $this->client->get("campaigns/{$id}")->document()
-        )->first();
+        return $this->getHydratedEntity("campaigns/{$id}");
     }
 
     /**
@@ -55,9 +53,7 @@ class Campaigns extends Resource
      */
     public function getCampaignWithPledges(int $id): Campaign
     {
-        $campaign = $this->hydrateDocument(
-            $this->client->get("campaigns/{$id}")->document()
-        )->first();
+        $campaign = $this->getHydratedEntity("campaigns/{$id}");
 
         return $this->attachPledges($campaign);
     }
@@ -71,7 +67,8 @@ class Campaigns extends Resource
      */
     protected function attachPledges($campaign): Campaign
     {
-        $pledges = (new Pledges($this->client))->getCampaignPledges($campaign->id);
+        $resource = (new Pledges($this->client, $this->authenticated));
+        $pledges = $resource->getCampaignPledges($campaign->id);
 
         $campaign->pledges = $pledges;
 

@@ -13,8 +13,8 @@ class CurrentUser extends Resource
      */
     public function get(): User
     {
-        return $this->hydrateDocument(
-            $this->client->get('oauth2/api/current_user')->document()
-        )->first();
+        $this->onlyAvailableAuthenticated();
+
+        return $this->getHydratedEntity('current_user');
     }
 }

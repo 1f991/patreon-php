@@ -54,12 +54,15 @@ class Client
     /**
      * Executes a GET request to the Patreon API.
      *
-     * @param string $path API request path
+     * @param string  $path           API request path
+     * @param boolean $authentication Make request to authenticated endpoint?
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get(string $path): ResponseInterface
+    public function get(string $path, bool $authentication = true): ResponseInterface
     {
+        $path = ($authentication ? 'oauth2/api/' : null) . $path;
+
         return $this->jsonApi->sendRequest(
             $this->makeRequest('GET', $path)
         );

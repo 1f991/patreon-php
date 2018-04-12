@@ -30,10 +30,12 @@ class Pledges extends Resource
     public function getCampaignPledges(int $campaign): Collection
     {
         $pledges = new Collection;
-        $filter = '';
 
         while (true) {
-            $page = $this->client->get("campaigns/{$campaign}/pledges?" . $filter);
+            $page = $this->client->get(
+                "campaigns/{$campaign}/pledges?" . ($filter ?? null),
+                $this->authenticated
+            );
 
             $pledges = $pledges->merge(
                 $this->hydrateDocument($page->document())

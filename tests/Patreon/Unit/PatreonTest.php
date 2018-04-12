@@ -30,4 +30,12 @@ class PatreonTest extends TestCase
         $this->assertInstanceOf(Campaigns::class, $patreon->campaigns());
         $this->assertInstanceOf(Pledges::class, $patreon->pledges());
     }
+
+    public function testResourceIsCreatedWithoutAuthentication(): void
+    {
+        $patreon = new Patreon('access-token', $this->createMock(Client::class));
+        $patreon->useUnauthenticatedResources();
+
+        $this->assertFalse($patreon->campaigns()->isAuthenticated());
+    }
 }

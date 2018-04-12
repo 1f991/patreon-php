@@ -6,6 +6,7 @@ use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Address;
 use Squid\Patreon\Entities\Campaign;
+use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Entities\Goal;
 use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Entities\Reward;
@@ -30,6 +31,8 @@ abstract class Resource
         'address' => Address::class,
     ];
 
+    protected $authenticated = true;
+
     /**
      * Patreon Client used for retrieving data.
      *
@@ -40,11 +43,13 @@ abstract class Resource
     /**
      * Constructs a new Resource.
      *
-     * @param \Squid\Patreon\Api\Client $client Patreon API Client
+     * @param \Squid\Patreon\Api\Client $client        Patreon API Client
+     * @param boolean                   $authenticated Make request to authenticated?
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, bool $authenticated = true)
     {
         $this->client = $client;
+        $this->authenticated = $authenticated;
     }
 
     /**
@@ -65,5 +70,43 @@ abstract class Resource
         $hydrator = new EntityHydrator($document, self::ENTITY_MAP);
 
         return $hydrator->hydrate();
+    }
+
+    /**
+     * Get the first hydrated Entity from the GET Request response Document.
+     *
+     * @param string $path Path to make the request to.
+     *
+     * @return \Squid\Patreon\Entities\Entity
+     */
+    public function getHydratedEntity(string $path): Entity
+    {
+        $document = $this->client->get($path, $this->authenticated)->document();
+
+        return $this->hydrateDocument($document)->first();
+    }
+
+    /**
+     * Throw an error if the resource requires authentication and the user has
+     * disabled it for the requests.
+     *
+     * @throws Exception
+     * @return void
+     */
+    protected function onlyAvailableAuthenticated(): void
+    {
+        if (! $this->authenticated) {
+            throw new Exception('Resource only available when authenticated.');
+        }
+    }
+
+    /**
+     * Are requests made to the authenticated endpoint for this resource?
+     *
+     * @return boolean
+     */
+    public function isAuthenticated(): bool
+    {
+        return $this->authenticated;
     }
 }
