@@ -54,8 +54,8 @@ class Client
     /**
      * Executes a GET request to the Patreon API.
      *
-     * @param string  $path           API request path
-     * @param boolean $authentication Make request to authenticated endpoint?
+     * @param string $path           API request path
+     * @param bool   $authentication Make request to authenticated endpoint?
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

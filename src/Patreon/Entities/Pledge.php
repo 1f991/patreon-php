@@ -34,7 +34,7 @@ class Pledge extends Entity
     /**
      * Does the patron have a shipping address associated with this pledge?
      *
-     * @var boolean
+     * @var bool
      */
     public $has_shipping_address;
 
@@ -43,7 +43,7 @@ class Pledge extends Entity
      * Notes: A pledge can only be paused if the campaign is per-month, a
      * per-post campaign cannot have any paused pledges.
      *
-     * @var boolean
+     * @var bool
      */
     public $is_paused;
 
@@ -51,7 +51,7 @@ class Pledge extends Entity
      * Legacy / unused.
      * Source: https://www.patreondevelopers.com/t/131/3
      *
-     * @var boolean
+     * @var bool
      */
     public $patron_pays_fees;
 

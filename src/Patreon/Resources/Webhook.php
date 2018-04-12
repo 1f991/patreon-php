@@ -38,7 +38,7 @@ class Webhook extends Resource
      *
      * @throws Exception
      *
-     * @return boolean
+     * @return bool
      */
     public function validateSignature(
         string $body,

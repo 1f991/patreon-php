@@ -38,14 +38,14 @@ class Campaign extends Entity
     /**
      * Unknown.
      *
-     * @var boolean
+     * @var bool
      */
     public $display_patron_goals;
 
     /**
      * Whether or not the campaigns earnings are visible.
      *
-     * @var boolean
+     * @var bool
      */
     public $earnings_visibility;
 
@@ -69,7 +69,7 @@ class Campaign extends Entity
      * Does the campaign charge immediately when a new pledge is created
      * instead of waiting until the next billing cycle?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_charge_upfront;
 
@@ -78,7 +78,7 @@ class Campaign extends Entity
      * Maybe: a legacy version of is_charge_upfront; or is_charge_upfront is
      * the legacy field?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_charged_immediately;
 
@@ -87,28 +87,28 @@ class Campaign extends Entity
      * Maybe: a legacy version of is_charge_upfront; or is_charge_upfront is
      * the legacy field?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_first_month_upfront;
 
     /**
      * Does the campaign bill every month, instead of per creation?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_monthly;
 
     /**
      * Does the campaign have adult content?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_nsfw;
 
     /**
      * Unknown.
      *
-     * @var boolean
+     * @var bool
      */
     public $is_plural;
 

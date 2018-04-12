@@ -44,7 +44,7 @@ abstract class Resource
      * Constructs a new Resource.
      *
      * @param \Squid\Patreon\Api\Client $client        Patreon API Client
-     * @param boolean                   $authenticated Make request to authenticated?
+     * @param bool                      $authenticated Make request to authenticated?
      */
     public function __construct(Client $client, bool $authenticated = true)
     {
@@ -103,7 +103,7 @@ abstract class Resource
     /**
      * Are requests made to the authenticated endpoint for this resource?
      *
-     * @return boolean
+     * @return bool
      */
     public function isAuthenticated(): bool
     {
