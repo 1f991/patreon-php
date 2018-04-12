@@ -1,5 +1,7 @@
 # Patreon PHP
 
+Hello World!
+
 A PHP library for interacting with the Patreon API.
 
 # Documentation
