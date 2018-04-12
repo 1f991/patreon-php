@@ -9,12 +9,25 @@ use Squid\Patreon\Api\Client;
 class ClientTest extends TestCase
 {
 
-    public function testClientMakesRequestToEndpoint()
+    public function testClientMakesRequestToAuthenticatedEndpoint()
     {
         $http = new MockHttpClient;
 
         $client = new Client($http);
         $client->get('example');
+
+        $this->assertEquals(
+            Client::API_ENDPOINT . 'oauth2/api/example',
+            (string) $http->getRequests()[0]->getUri()
+        );
+    }
+
+    public function testClientMakesRequestToUnauthenticatedEndpoint()
+    {
+        $http = new MockHttpClient;
+
+        $client = new Client($http);
+        $client->get('example', false);
 
         $this->assertEquals(
             Client::API_ENDPOINT . 'example',

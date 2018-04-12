@@ -2,6 +2,7 @@
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
+use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Campaign;
 use Squid\Patreon\Resources\Campaigns;
@@ -54,5 +55,23 @@ class CampaignsTest extends TestCase
         $campaign = (new Campaigns($client))->getCampaignWithPledges(1);
 
         $this->assertCount(10, $campaign->pledges);
+    }
+
+    public function testMyCampaignThrowsExceptionWithoutAuthentication(): void
+    {
+        $client = $this->createMock(Client::class);
+
+        $this->expectException(Exception::class);
+
+        (new Campaigns($client, false))->getMyCampaign();
+    }
+
+    public function testMyCampaignWithPledgesThrowsExceptionNotAuthenticated(): void
+    {
+        $client = $this->createMock(Client::class);
+
+        $this->expectException(Exception::class);
+
+        (new Campaigns($client, false))->getMyCampaignWithPledges();
     }
 }
