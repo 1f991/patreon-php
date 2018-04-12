@@ -22,7 +22,7 @@ class Patreon
     /**
      * Should requests be made to the authenticated endpoint?
      *
-     * @var boolean
+     * @var bool
      */
     protected $authenticated = true;
 

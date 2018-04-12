@@ -79,7 +79,7 @@ class User extends Entity
     /**
      * Does the user have a password? False if they signed up using Facebook.
      *
-     * @var boolean
+     * @var bool
      */
     public $has_password;
 
@@ -94,28 +94,28 @@ class User extends Entity
     /**
      * Is the account deleted?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_deleted;
 
     /**
      * Is the users email address verified?
      *
-     * @var boolean
+     * @var bool
      */
     public $is_emailed_verified;
 
     /**
      * Unknown.
      *
-     * @var boolean
+     * @var bool
      */
     public $is_nuked;
 
     /**
      * Unknown.
      *
-     * @var boolean
+     * @var bool
      */
     public $is_suspended;
 

@@ -82,7 +82,7 @@ class Reward extends Entity
     /**
      * Is this Reward visible on the campaign?
      *
-     * @var boolean
+     * @var bool
      */
     public $published;
 
@@ -105,7 +105,7 @@ class Reward extends Entity
     /**
      * Does the reward require a shipping address?
      *
-     * @var boolean
+     * @var bool
      */
     public $requires_shipping;
 
