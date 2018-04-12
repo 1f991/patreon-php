@@ -13,7 +13,7 @@ class Campaigns extends Resource
      */
     public function getMyCampaign(): Campaign
     {
-        $this->onlyAvailableAuthenticated();
+        $this->onlyAvailableAuthenticated('getMyCampaign');
 
         return $this->getHydratedEntity('current_user/campaigns');
     }
@@ -25,7 +25,7 @@ class Campaigns extends Resource
      */
     public function getMyCampaignWithPledges(): Campaign
     {
-        $this->onlyAvailableAuthenticated();
+        $this->onlyAvailableAuthenticated('getMyCampaignWithPledges');
 
         $campaign = $this->getHydratedEntity('current_user/campaigns');
 

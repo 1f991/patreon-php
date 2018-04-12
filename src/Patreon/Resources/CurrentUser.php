@@ -13,7 +13,7 @@ class CurrentUser extends Resource
      */
     public function get(): User
     {
-        $this->onlyAvailableAuthenticated();
+        $this->onlyAvailableAuthenticated('get');
 
         return $this->getHydratedEntity('current_user');
     }

@@ -5,6 +5,7 @@ namespace Squid\Patreon\Tests\Unit\Resources;
 use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\User;
+use Squid\Patreon\Exceptions\ResourceRequiresAuthentication;
 use Squid\Patreon\Resources\CurrentUser;
 use Squid\Patreon\Tests\Unit\TestCase;
 
@@ -23,7 +24,7 @@ class CurrentUserTest extends TestCase
     {
         $client = $this->createMock(Client::class);
 
-        $this->expectException(Exception::class);
+        $this->expectException(ResourceRequiresAuthentication::class);
 
         (new CurrentUser($client, false))->get();
     }

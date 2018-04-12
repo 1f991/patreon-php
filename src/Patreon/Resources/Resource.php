@@ -12,6 +12,7 @@ use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Entities\Reward;
 use Squid\Patreon\Entities\User;
 use Squid\Patreon\Exceptions\PatreonReturnedError;
+use Squid\Patreon\Exceptions\ResourceRequiresAuthentication;
 use Squid\Patreon\Hydrator\EntityHydrator;
 use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
@@ -92,13 +93,19 @@ abstract class Resource
      * Throw an error if the resource requires authentication and the user has
      * disabled it for the requests.
      *
-     * @throws Exception
+     * @param string $method Method that is only available when authenticated.
+     *
+     * @throws \Squid\Patreon\Exceptions\ResourceRequiresAuthentication
+     *
      * @return void
      */
-    protected function onlyAvailableAuthenticated(): void
+    protected function onlyAvailableAuthenticated(string $method): void
     {
         if (! $this->authenticated) {
-            throw new Exception('Resource only available when authenticated.');
+            throw ResourceRequiresAuthentication::forMethod(
+                get_class($this),
+                $method
+            );
         }
     }
 

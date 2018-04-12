@@ -2,9 +2,9 @@
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
-use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Campaign;
+use Squid\Patreon\Exceptions\ResourceRequiresAuthentication;
 use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Tests\Unit\TestCase;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
@@ -61,7 +61,7 @@ class CampaignsTest extends TestCase
     {
         $client = $this->createMock(Client::class);
 
-        $this->expectException(Exception::class);
+        $this->expectException(ResourceRequiresAuthentication::class);
 
         (new Campaigns($client, false))->getMyCampaign();
     }
@@ -70,7 +70,7 @@ class CampaignsTest extends TestCase
     {
         $client = $this->createMock(Client::class);
 
-        $this->expectException(Exception::class);
+        $this->expectException(ResourceRequiresAuthentication::class);
 
         (new Campaigns($client, false))->getMyCampaignWithPledges();
     }
