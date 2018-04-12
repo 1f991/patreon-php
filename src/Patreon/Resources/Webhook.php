@@ -36,7 +36,7 @@ class Webhook extends Resource
      * @param string $secret    Secret used to generate the signature
      * @param string $signature Signature of the request
      *
-     * @throws Exception
+     * @throws \Squid\Patreon\Exceptions\SignatureVerificationFailed
      *
      * @return bool
      */

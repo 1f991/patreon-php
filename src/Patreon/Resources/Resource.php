@@ -2,7 +2,6 @@
 
 namespace Squid\Patreon\Resources;
 
-use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Address;
 use Squid\Patreon\Entities\Campaign;
