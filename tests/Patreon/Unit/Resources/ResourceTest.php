@@ -2,10 +2,9 @@
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
-use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\User;
-use Squid\Patreon\Exceptions\UnauthorizedException;
+use Squid\Patreon\Exceptions\PatreonReturnedError;
 use Squid\Patreon\Resources\Resource;
 use Squid\Patreon\Tests\Unit\TestCase;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
@@ -28,7 +27,7 @@ class ResourceTest extends TestCase
 
         $client = $this->createMock(Client::class);
 
-        $this->expectException(Exception::class);
+        $this->expectException(PatreonReturnedError::class);
 
         $user = (new ResourceExample($client))->get($response);
     }

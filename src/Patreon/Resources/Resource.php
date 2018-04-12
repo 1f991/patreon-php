@@ -11,6 +11,7 @@ use Squid\Patreon\Entities\Goal;
 use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Entities\Reward;
 use Squid\Patreon\Entities\User;
+use Squid\Patreon\Exceptions\PatreonReturnedError;
 use Squid\Patreon\Hydrator\EntityHydrator;
 use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
@@ -62,8 +63,9 @@ abstract class Resource
     protected function hydrateDocument(Document $document): Collection
     {
         if ($document->hasErrors()) {
-            throw new Exception(
-                "{$document->error(0)->title()} {$document->error(0)->detail()}"
+            throw PatreonReturnedError::error(
+                $document->error(0)->title(),
+                $document->error(0)->detail()
             );
         }
 
