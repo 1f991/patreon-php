@@ -1,6 +1,6 @@
 {
     "name": "squid/patreon",
-    "version": "0.1.0",
+    "version": "1.0.0-alpha1",
     "keywords": ["Patreon"],
     "description": "PHP library for interacting with the Patreon API",
     "type": "library",
@@ -35,6 +35,9 @@
         "psr-4": {
             "Squid\\Patreon\\Tests\\": "tests/Patreon"
         }
+    },
+    "suggest": {
+        "php-http/guzzle6-adapter": "Guzzle HTTP Client"
     },
     "scripts" : {
         "style": ["@style-src", "@style-tests"],
