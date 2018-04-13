@@ -128,7 +128,7 @@ class EntityHydrator
         if ($relationship->isToOneRelationship()) {
             $parent->{$relationship->name()} = $entity;
         } else {
-            $parent->{$relationship->name()}[] = $entity;
+            $parent->{$relationship->name()}->push($entity);
         }
     }
 

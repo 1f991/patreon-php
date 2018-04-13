@@ -32,6 +32,8 @@ class UserTest extends TestCase
             'url',
             'vanity',
             'youtube',
+            // Relations
+            'pledges',
         ];
 
         $this->assertTrue($this->validateEntitySchema(new User, $schema));
