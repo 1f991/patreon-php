@@ -1,6 +1,3 @@
-> :warning: This library is currently pre-release, explore with caution. Release
-(including full documentation) is expected in the coming days.
-
 # Patreon PHP
 
 A PHP library for interacting with the
