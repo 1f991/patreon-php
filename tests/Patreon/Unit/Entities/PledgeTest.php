@@ -3,6 +3,7 @@
 namespace Squid\Patreon\Tests\Unit\Entities;
 
 use Squid\Patreon\Entities\Pledge;
+use Squid\Patreon\Entities\Reward;
 
 class PledgeTest extends TestCase
 {
@@ -17,12 +18,18 @@ class PledgeTest extends TestCase
             'patron_pays_fees',
             'pledge_cap_cents',
             'total_historical_amount_cents',
+            // Relations
+            'address',
+            'card',
+            'creator',
+            'patron',
+            'reward',
         ];
 
         $this->assertTrue($this->validateEntitySchema(new Pledge, $schema));
     }
 
-    public function testIsPledgeActiveReturnsExpectedResults(): void
+    public function testIsActiveReturnsExpectedResults(): void
     {
         $active = new Pledge;
         $active->is_paused = false;
@@ -36,9 +43,9 @@ class PledgeTest extends TestCase
         $paused->is_paused = true;
         $paused->declined_since = null;
 
-        $this->assertTrue($active->isPledgeActive());
-        $this->assertFalse($declined->isPledgeActive());
-        $this->assertFalse($paused->isPledgeActive());
+        $this->assertTrue($active->isActive());
+        $this->assertFalse($declined->isActive());
+        $this->assertFalse($paused->isActive());
     }
 
     public function testIsPaymentDeclinedReturnsExpectedResults(): void
@@ -63,5 +70,16 @@ class PledgeTest extends TestCase
 
         $this->assertTrue($hasPaid->hasMadeAPayment());
         $this->assertFalse($noPayment->hasMadeAPayment());
+    }
+
+    public function testHasRewardReturnsExpectedResults(): void
+    {
+        $hasReward = new Pledge;
+        $hasReward->reward = new Reward;
+
+        $noReward = new Pledge;
+
+        $this->assertTrue($hasReward->hasReward());
+        $this->assertFalse($noReward->hasReward());
     }
 }

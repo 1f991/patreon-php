@@ -75,6 +75,10 @@ class EntityHydrator
         $parent = $this->newEntityOfType($resource->type());
 
         foreach (get_object_vars($parent) as $attribute => $default) {
+            if (is_a($default, Collection::class)) {
+                continue;
+            }
+
             $parent->{$attribute} = $resource->attribute($attribute);
         }
 
@@ -128,7 +132,7 @@ class EntityHydrator
         if ($relationship->isToOneRelationship()) {
             $parent->{$relationship->name()} = $entity;
         } else {
-            $parent->{$relationship->name()}[] = $entity;
+            $parent->{$relationship->name()}->push($entity);
         }
     }
 
