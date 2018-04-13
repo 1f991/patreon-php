@@ -1,5 +1,8 @@
 # Patreon PHP
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/977675cf6ba796a90148/maintainability)](https://codeclimate.com/repos/5acf9847b5ae817f56002ce7/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/977675cf6ba796a90148/test_coverage)](https://codeclimate.com/repos/5acf9847b5ae817f56002ce7/test_coverage)
+
 A PHP library for interacting with the
 [Patreon Platform](https://www.patreon.com/portal), designed to provide the
 easiest path for integrating Patreon into your application with a simple
