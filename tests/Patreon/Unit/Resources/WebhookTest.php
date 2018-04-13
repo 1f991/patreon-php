@@ -7,6 +7,7 @@ use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Exceptions\SignatureVerificationFailed;
 use Squid\Patreon\Resources\Webhook;
 use Squid\Patreon\Tests\Unit\TestCase;
+use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class WebhookTest extends TestCase
@@ -47,12 +48,13 @@ class WebhookTest extends TestCase
             ]
         ];
 
-        $pledge = (new Webhook($client))->accept(
+        $pledges = (new Webhook($client))->accept(
             json_encode($document),
             'secret-key',
             'e8385c1684ed540fcc8d2771dee616ee'
         );
 
-        $this->assertInstanceOf(Pledge::class, $pledge);
+        $this->assertInstanceOf(Collection::class, $pledges);
+        $this->assertCount(1, $pledges);
     }
 }
