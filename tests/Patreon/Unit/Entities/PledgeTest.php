@@ -17,6 +17,12 @@ class PledgeTest extends TestCase
             'patron_pays_fees',
             'pledge_cap_cents',
             'total_historical_amount_cents',
+            // Relations
+            'address',
+            'card',
+            'creator',
+            'patron',
+            'reward',
         ];
 
         $this->assertTrue($this->validateEntitySchema(new Pledge, $schema));

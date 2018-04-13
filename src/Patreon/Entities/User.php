@@ -13,6 +13,13 @@ class User extends Entity
     public $about;
 
     /**
+     * Campaign that the User is the creator of.
+     *
+     * @var \Squid\Patreon\Entities\Campaign
+     */
+    public $campaign;
+
+    /**
      * Timestamp of the account creation, ISO 8601 combined date and time in UTC.
      * Example: 2017-12-01T16:33:48+00:00
      *

@@ -28,6 +28,13 @@ class Campaign extends Entity
     public $creation_name;
 
     /**
+     * Campaign owner.
+     *
+     * @var \Squid\Patreon\Entities\User
+     */
+    public $creator;
+
+    /**
      * ID of the Discord server that roles are granted in.
      * Example: "100000000000000000"
      *

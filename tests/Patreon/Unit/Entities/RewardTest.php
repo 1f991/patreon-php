@@ -26,6 +26,8 @@ class RewardTest extends TestCase
             'unpublished_at',
             'url',
             'user_limit',
+            // Relations
+            'campaign',
         ];
 
         $this->assertTrue($this->validateEntitySchema(new Reward, $schema));
