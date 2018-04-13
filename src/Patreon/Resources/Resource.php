@@ -5,6 +5,7 @@ namespace Squid\Patreon\Resources;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Address;
 use Squid\Patreon\Entities\Campaign;
+use Squid\Patreon\Entities\Card;
 use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Entities\Goal;
 use Squid\Patreon\Entities\Pledge;
@@ -30,8 +31,14 @@ abstract class Resource
         'goal' => Goal::class,
         'pledge' => Pledge::class,
         'address' => Address::class,
+        'card' => Card::class,
     ];
 
+    /**
+     * Should requests be made to the authenticated endpoint?
+     *
+     * @var bool
+     */
     protected $authenticated = true;
 
     /**
