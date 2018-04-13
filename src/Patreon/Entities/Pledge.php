@@ -116,9 +116,9 @@ class Pledge extends Entity
      *
      * @return bool
      */
-    public function isPledgeActive(): bool
+    public function isActive(): bool
     {
-        return $this->declined_since === null && $this->is_paused === false;
+        return $this->declined_since === null && $this->is_paused !== true;
     }
 
     /**
@@ -143,5 +143,15 @@ class Pledge extends Entity
     public function hasMadeAPayment(): bool
     {
         return $this->total_historical_amount_cents > 0;
+    }
+
+    /**
+     * Has the Patron chosen a Reward to receive in return for their Pledge?
+     *
+     * @return bool
+     */
+    public function hasReward(): bool
+    {
+        return (bool) $this->reward;
     }
 }
