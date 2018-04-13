@@ -13,6 +13,13 @@ class User extends Entity
     public $about;
 
     /**
+     * Campaign that the User is the creator of.
+     *
+     * @var \Squid\Patreon\Entities\Campaign
+     */
+    public $campaign;
+
+    /**
      * Timestamp of the account creation, ISO 8601 combined date and time in UTC.
      * Example: 2017-12-01T16:33:48+00:00
      *
@@ -186,4 +193,33 @@ class User extends Entity
      * @var string
      */
     public $youtube;
+
+    /**
+     * Relations that should be initialized as empty Collections.
+     *
+     * @var array
+     */
+    protected $relations = [
+        'pledges',
+    ];
+
+    /**
+    * Does the User have an active Pledge to the Campaign that it's
+    *
+    * @return bool
+    */
+    public function hasActivePledge(): bool
+    {
+        return $this->pledges->count() > 0 && $this->pledges->first()->isActive();
+    }
+
+    /**
+    * Is the User, in the current context, a Campaign Creator and not a Patron?
+    *
+    * @return bool
+    */
+    public function isCreator(): bool
+    {
+        return (bool) $this->campaign;
+    }
 }

@@ -28,6 +28,13 @@ class Campaign extends Entity
     public $creation_name;
 
     /**
+     * Campaign owner.
+     *
+     * @var \Squid\Patreon\Entities\User
+     */
+    public $creator;
+
+    /**
      * ID of the Discord server that roles are granted in.
      * Example: "100000000000000000"
      *
@@ -212,4 +219,15 @@ class Campaign extends Entity
      * @var string
      */
     public $thanks_video_url;
+
+    /**
+     * Relations that should be initialized as empty Collections.
+     *
+     * @var array
+     */
+    protected $relations = [
+        'goals',
+        'pledges',
+        'rewards',
+    ];
 }

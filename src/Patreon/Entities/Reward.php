@@ -21,6 +21,13 @@ class Reward extends Entity
     public $amount_cents;
 
     /**
+     * Campaign that the Reward belongs to.
+     *
+     * @var \Squid\Patreon\Entities\Campaign
+     */
+    public $campaign;
+
+    /**
      * Timestamp of the reward creation, ISO 8601 combined date and time in UTC.
      * Example: "2017-12-01T16:33:48+00:00"
      *

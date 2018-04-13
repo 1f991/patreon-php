@@ -2,7 +2,6 @@
 
 namespace Squid\Patreon;
 
-use Http\Discovery\HttpClientDiscovery;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Resources\CurrentUser;
