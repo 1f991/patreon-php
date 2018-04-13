@@ -8,11 +8,7 @@
 
 ## Current User
 
-Access using the `me()` method on `Patreon`, e.g:
-
-```php
-$patreon->me();
-```
+Access using the `me()` method on `Patreon`, e.g: `$patreon->me();`.
 
 * `get()` Returns a `User` Entity. Depending on context, this will either be a
 Campaign Creator (when accessed using a `Creators Access Token`) or a User who
