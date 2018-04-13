@@ -202,4 +202,24 @@ class User extends Entity
     protected $relations = [
         'pledges',
     ];
+
+    /**
+    * Does the User have an active Pledge to the Campaign that it's
+    *
+    * @return bool
+    */
+    public function hasActivePledge(): bool
+    {
+        return $this->pledges->count() > 0 && $this->pledges->first()->isActive();
+    }
+
+    /**
+    * Is the User, in the current context, a Campaign Creator and not a Patron?
+    *
+    * @return bool
+    */
+    public function isCreator(): bool
+    {
+        return (bool) $this->campaign;
+    }
 }

@@ -2,7 +2,10 @@
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
+use Squid\Patreon\Entities\Campaign;
+use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Entities\User;
+use Tightenco\Collect\Support\Collection;
 
 class UserTest extends TestCase
 {
@@ -38,5 +41,37 @@ class UserTest extends TestCase
         ];
 
         $this->assertTrue($this->validateEntitySchema(new User, $schema));
+    }
+
+    public function testHasActivePledgeReturnsExpectedResults(): void
+    {
+        $activePledge = new Pledge;
+        $activePledge->is_paused = false;
+
+        $declinedPledge = new Pledge;
+        $declinedPledge->declined_since = '2017-12-01T16:33:48+00:00';
+
+        $activeUser = new User;
+        $activeUser->pledges = new Collection([$activePledge]);
+
+        $declinedUser = new User;
+        $declinedUser->pledges = new Collection([$declinedPledge]);
+
+        $noPledgeUser = new User;
+
+        $this->assertTrue($activeUser->hasActivePledge());
+        $this->assertFalse($declinedUser->hasActivePledge());
+        $this->assertFalse($noPledgeUser->hasActivePledge());
+    }
+
+    public function testIsCreatorReturnsExpectedResults(): void
+    {
+        $creator = new User;
+        $creator->campaign = new Campaign;
+
+        $patron = new User;
+
+        $this->assertTrue($creator->isCreator());
+        $this->assertFalse($patron->isCreator());
     }
 }
