@@ -75,6 +75,10 @@ class EntityHydrator
         $parent = $this->newEntityOfType($resource->type());
 
         foreach (get_object_vars($parent) as $attribute => $default) {
+            if (is_a($default, Collection::class)) {
+                continue;
+            }
+
             $parent->{$attribute} = $resource->attribute($attribute);
         }
 
