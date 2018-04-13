@@ -51,38 +51,38 @@ the body and returns a [`Collection`](/docs/05-architecture.md#collections) of [
 
 ## Address
 
-7 Properties — see [Entities\Address](/src/Entities/Address.php)
+* 7 Properties — see [Entities\Address](/src/Entities/Address.php)
 
 ## Campaign
 
-27 Properties — see [Entities\Campaign](/src/Entities/Campaign.php)
-1 Relation — `creator`
-3 Collections — `goals`, `pledges` and `rewards`
+* 27 Properties — see [Entities\Campaign](/src/Entities/Campaign.php)
+* 1 Relation — `creator`
+* 3 Collections — `goals`, `pledges` and `rewards`
 
 ## Card
 
-8 Properties — see [Entities\Card](/src/Entities/Card.php)
+* 8 Properties — see [Entities\Card](/src/Entities/Card.php)
 
 ## Goal
 
-6 Properties — see [Entities\Goal](/src/Entities/Goal.php)
-2 Helpers — `hasBeenCompleted()` and `isCompleted()`
+* 6 Properties — see [Entities\Goal](/src/Entities/Goal.php)
+* 2 Helpers — `hasBeenCompleted()` and `isCompleted()`
 
 ## Pledge
 
-9 Properties — see [Entities\Pledge](/src/Entities/Pledge.php)
-5 Relations — `address`, `card`, `creator`, `patron`, `reward`
-4 Helpers — `isActive()`, `isPaymentDeclined()`, `hasMadeAPayment()`, `hasReward()`
+* 9 Properties — see [Entities\Pledge](/src/Entities/Pledge.php)
+* 5 Relations — `address`, `card`, `creator`, `patron`, `reward`
+* 4 Helpers — `isActive()`, `isPaymentDeclined()`, `hasMadeAPayment()`, `hasReward()`
 
 ## Reward
 
-17 Properties — see [Entities\Reward](/src/Entities/Reward.php)
-1 Relation — `campaign`
-3 Helpers — `isAvailableToChoose()`, `hasRemainingLimit()`, `isSystemReward()`
+* 17 Properties — see [Entities\Reward](/src/Entities/Reward.php)
+* 1 Relation — `campaign`
+* 3 Helpers — `isAvailableToChoose()`, `hasRemainingLimit()`, `isSystemReward()`
 
 ## User
 
-23 Properties — see [Entities\User](/src/Entities/User.php)
-1 Relation — `campaign`
-1 Collection — `pledges`
-2 Helpers — `hasActivePledge()`, `isCreator()`
+* 23 Properties — see [Entities\User](/src/Entities/User.php)
+* 1 Relation — `campaign`
+* 1 Collection — `pledges`
+* 2 Helpers — `hasActivePledge()`, `isCreator()`
