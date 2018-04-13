@@ -212,4 +212,15 @@ class Campaign extends Entity
      * @var string
      */
     public $thanks_video_url;
+
+    /**
+     * Relations that should be initialized as empty Collections.
+     *
+     * @var array
+     */
+    protected $relations = [
+        'goals',
+        'pledges',
+        'rewards',
+    ];
 }

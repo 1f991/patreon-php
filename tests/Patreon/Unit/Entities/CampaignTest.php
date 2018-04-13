@@ -36,6 +36,10 @@ class CampaignTest extends TestCase
             'thanks_embed',
             'thanks_msg',
             'thanks_video_url',
+            // Relations
+            'goals',
+            'pledges',
+            'rewards',
         ];
 
         $this->assertTrue($this->validateEntitySchema(new Campaign, $schema));

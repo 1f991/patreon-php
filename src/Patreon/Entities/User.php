@@ -186,4 +186,13 @@ class User extends Entity
      * @var string
      */
     public $youtube;
+
+    /**
+     * Relations that should be initialized as empty Collections.
+     *
+     * @var array
+     */
+    protected $relations = [
+        'pledges',
+    ];
 }
