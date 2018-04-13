@@ -7,7 +7,7 @@
 # Resources, Entities and Collections
 
 This library is designed to be easy to work with and easy to understand if you
-wish to learn how it works under the good. Take a look at the
+wish to learn how it works under the hood. Take a look at the
 [src/Patreon](/src/Patreon) directory to see the Entities and Resources that
 make up the library, and check out [tests/Patreon](/tests/patreon) to see
 examples of how the various methods can be used.
@@ -15,31 +15,32 @@ examples of how the various methods can be used.
 ## Entities
 
 Entities are objects with properties that are populated from Patreon responses.
-Each Entity has defined properties which you can depend on existing.
-Additionally, Entities expose helper methods that allow your application not to
-concern itself with making determinations about Entity states, e.g: `$reward->isAvailableToChoose()` and `$pledge->hasMadeAPayment()`.
+Each Entity has defined properties which you can depend on existing (with a
+`null` value). Additionally, Entities expose helper methods that allow your
+application not to concern itself with making determinations about Entity
+states, e.g: `$reward->isAvailableToChoose()` and `$pledge->hasMadeAPayment()`.
 
 You can browse the properties of each Entity via their class files:
 
-* [Address](src/Patreon/Entities/Address.php)
-* [Campaign](src/Patreon/Entities/Campaign.php)
-* [Goal](src/Patreon/Entities/Goal.php)
-* [Pledge](src/Patreon/Entities/Pledge.php)
-* [Reward](src/Patreon/Entities/Reward.php)
-* [User](src/Patreon/Entities/User.php)
+* [Address](/src/Patreon/Entities/Address.php)
+* [Campaign](/src/Patreon/Entities/Campaign.php)
+* [Goal](/src/Patreon/Entities/Goal.php)
+* [Pledge](/src/Patreon/Entities/Pledge.php)
+* [Reward](/src/Patreon/Entities/Reward.php)
+* [User](/src/Patreon/Entities/User.php)
 
 ## Resources
 
 Resources represent Patreon API endpoints. Each Resource exposes methods for
 fetching data from these endpoints. Each Resource can be accessed through the
-`Patreon` client, e.g: `$patreon->campaigns()->getMyCampaign()`.
+`Patreon` client, e.g: `$patreon->resource()->method()`.
 
-- `campaigns()` provides `getMyCampaign`, `getMyCampaignWithPledges`,
+- `campaigns` provides `getMyCampaign`, `getMyCampaignWithPledges`,
   `getCampaign` and `getCampaignWithPledges`
-- `me()` provides `get`
-- `pledges()` provides `getCampaignPledges` and `getPageOfCampaignPledges`
+- `me` provides `get`
+- `pledges` provides `getCampaignPledges` and `getPageOfCampaignPledges`
 
-Additionally, the `Webhook` resource provides an `accept` method which will
+Additionally, the `webhook` resource provides an `accept` method which will
 verify the signature of a Webhook received from Patreon and return the Pledge
 Entity.
 
@@ -47,9 +48,9 @@ Entity.
 
 When there is more than one Entity a
 [Collection](https://laravel.com/docs/5.6/collections) is given, Collections
-"[...] provide a fluent, convenient wrapper for working with arrays of data". This
-makes it very easy to work with groups of Entities and extract, transform or
-manage their properties. For example:
+"[...] provide a fluent, convenient wrapper for working with arrays of data".
+This makes it very easy to work with groups of Entities and extract, transform
+or manage their properties. For example:
 
 ```php
 $patreon = new Patreon('access_token');
@@ -64,6 +65,9 @@ $campaign->pledges->each(function ($pledge) {
 $emails = $campaign->pledges->map(function ($pledge) {
     return $pledge->patron->email;
 });
+
+// get all Pledges of at least $50
+$pledges = $campaign->pledges->where('amount_cents', '>=', 5000);
 ```
 
 As a general pointer, when working this library you should never need to use
@@ -71,5 +75,5 @@ As a general pointer, when working this library you should never need to use
 
 # Next Steps
 
-* Contribute?
-* Get help?
+* Contribute!
+* Get help!
