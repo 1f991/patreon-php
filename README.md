@@ -33,7 +33,7 @@ or the [React HTTP Adapter](https://packagist.org/packages/php-http/react-adapte
 # How To Use
 
 After you've installed the package you're ready to instantiate a client with
-your access token.
+your access token and then request data from resources.
 
 ```php
 use Squid\Patreon\Patreon;

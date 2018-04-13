@@ -1,3 +1,9 @@
+1. Getting Started
+2. [Obtaining OAuth Tokens For Patrons](02-oauth.md)
+3. [Patreon Integration Examples](03-examples.md)
+4. [Method Documentation](04-documentation.md)
+5. [Library Architecture](05-architecture.md)
+
 # Getting Started
 
 You will need a valid Patreon Access Token to use the Patreon PHP client.
@@ -187,10 +193,5 @@ You can learn more about Patreon Webhooks in the [Platform Documentation — "We
 ## Next Steps
 
 Hopefully you're now familiar with the way that the library works and the
-possibilities available.
-
-1. Getting Started
-2. [Obtaining OAuth Tokens For Patrons](docs/02-oauth.md)
-3. [Patreon Integration Examples](docs/03-examples.md)
-3. [Method Documentation](docs/04-documentation.md)
-4. [Library Architecture](docs/05-architecture.md)
+possibilities available, [check out some examples](03-examples.md) to see how
+you could achieve common tasks.

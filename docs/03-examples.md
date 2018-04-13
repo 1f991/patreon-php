@@ -1,3 +1,9 @@
+1. [Getting Started](01-getting-started.md)
+2. [Obtaining OAuth Tokens For Patrons](02-oauth.md)
+3. Patreon Integration Examples
+4. [Method Documentation](04-documentation.md)
+5. [Library Architecture](05-architecture.md)
+
 # Examples
 
 A number of example integrations are available which you can find below.
@@ -87,3 +93,9 @@ if ($_SERVER['HTTP_X_PATREON_EVENT'] === 'pledges:delete') {
     });
 }
 ```
+
+# Next Steps
+
+* Start developing!
+* Get help?
+* Learn about the architecture

@@ -1,3 +1,9 @@
+1. [Getting Started](01-getting-started.md)
+2. [Obtaining OAuth Tokens For Patrons](02-oauth.md)
+3. [Patreon Integration Examples](03-examples.md)
+4. [Method Documentation](04-documentation.md)
+5. Library Architecture
+
 # Resources, Entities and Collections
 
 This library is designed to be easy to work with and easy to understand if you
@@ -61,3 +67,8 @@ $emails = $campaign->pledges->map(function ($pledge) {
 
 As a general pointer, when working this library you should never need to use
 `while` or `foreach` loops.
+
+# Next Steps
+
+* Contribute?
+* Get help?
