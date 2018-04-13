@@ -5,11 +5,25 @@ namespace Squid\Patreon\Entities;
 class Pledge extends Entity
 {
     /**
+     * Address associated with the Pledge if Reward `requires_shipping`.
+     *
+     * @var \Squid\Patreon\Entities\Address
+     */
+    public $address;
+
+    /**
      * Amount paid by the patron when billed.
      *
      * @var integer
      */
     public $amount_cents;
+
+    /**
+     * Card associated with the Pledge for payment.
+     *
+     * @var \Squid\Patreon\Entities\Card
+     */
+    public $card;
 
     /**
      * Timestamp of the pledge creation, ISO 8601 combined date and time in UTC.
@@ -18,6 +32,13 @@ class Pledge extends Entity
      * @var string
      */
     public $created_at;
+
+    /**
+     * Creator (Campaign owner) that the Pledge is to.
+     *
+     * @var \Squid\Patreon\Entities\User
+     */
+    public $creator;
 
     /**
      * Timestamp of the most recent failed payment, ISO 8601 combined date and
@@ -48,6 +69,13 @@ class Pledge extends Entity
     public $is_paused;
 
     /**
+     * Patron that created the Pledge.
+     *
+     * @var \Squid\Patreon\Entities\User
+     */
+    public $patron;
+
+    /**
      * Legacy / unused.
      * Source: https://www.patreondevelopers.com/t/131/3
      *
@@ -63,6 +91,13 @@ class Pledge extends Entity
      * @var integer
      */
     public $pledge_cap_cents;
+
+    /**
+     * Reward chosen by the Patron if they chose an option.
+     *
+     * @var \Squid\Patreon\Entities\Reward
+     */
+    public $reward;
 
     /**
      * Total amount that the patron has been billed through the life of the pledge.

@@ -37,6 +37,7 @@ class CampaignTest extends TestCase
             'thanks_msg',
             'thanks_video_url',
             // Relations
+            'creator',
             'goals',
             'pledges',
             'rewards',
