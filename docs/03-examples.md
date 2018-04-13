@@ -27,7 +27,7 @@ $patreon = new Patreon('access_token');
 
 $campaign = $patreon->campaigns()->getMyCampaignWithPledges();
 
-$pledges = $campaign->pledges->each(function ($pledge) {
+$campaign->pledges->each(function ($pledge) {
     echo '<div style="display: inline-block; padding: 10px;">
             <img src="' . $pledge->patron->thumb_url . '">
           </div>';
@@ -50,10 +50,12 @@ $patreon = new Patreon('access_token');
 $campaign = $patreon->campaigns()->getMyCampaignWithPledges();
 
 $mvps = $campaign->pledges->filter(function ($pledge) {
-    return $pledge->total_historical_amount_cents > 2000;
-})->map(function ($list, $pledge) {
+    return $pledge->total_historical_amount_cents >= 0;
+})->map(function ($pledge) {
     return $pledge->patron->email;
 })->implode(', ');
+
+echo $mvps;
 ```
 
 The variable `$mvps` is equal to a string containing the email address of
@@ -97,5 +99,5 @@ if ($_SERVER['HTTP_X_PATREON_EVENT'] === 'pledges:delete') {
 # Next Steps
 
 * Start developing!
-* Get help?
-* Learn about the architecture
+* [Get Help](/#Getting Help)
+* [Read the documentation](/docs/04-documentation.md)
