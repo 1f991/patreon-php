@@ -20,19 +20,34 @@ Campaign Creator (when accessed using a `Creators Access Token`) or a User who
 
 ## Campaigns
 
-* `getMyCampaign()` Returns the `Campaign` Entity belonging to the Creator
-Access Token owner.
-* `getMyCampaignWithPledges()` Returns the `Campaign` Entity belonging to the
-Creator Access Token owner with the `pledges` property populated with all of the
-Campaign's Pledges.
-* `getCampaign(int $id)` Returns a `Campaign` Entity by ID.
-* `getCampaignWithPledges(int $id)` Returns a `Campaign` Entity by ID  with the
-`pledges` property populated with all of the Campaign's Pledges.
+* `getMyCampaign()` Returns the [`Campaign`](#campaign) Entity belonging to the
+Creator Access Token owner.
+* `getMyCampaignWithPledges()` Returns the [`Campaign`](#campaign) Entity
+belonging to the Creator Access Token owner with the [`Pledges`](#pledges)
+property populated with all of the Campaign's Pledges.
+* `getCampaign(int $id)` Returns a [`Campaign`](#campaign) Entity by ID.
+* `getCampaignWithPledges(int $id)` Returns a [`Campaign`](#campaign) Entity by
+ID  with the [`Pledges`](#pledges) property populated with all of the Campaign's
+Pledges.
 
-* Pledges
+## Pledges
 
-* Webhook
+## Webhook
 
 # Entities
+
+## Address
+
+## Campaign
+
+## Card
+
+## Goal
+
+## Pledge
+
+## Reward
+
+## User
 
 # Exceptions
