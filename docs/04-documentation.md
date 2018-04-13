@@ -8,13 +8,15 @@
 
 ## Current User
 
-Access using the `me()` method on `Patreon`, e.g: `$patreon->me();`.
+Access using the `me()` method on `Patreon`, e.g: `$patreon->me()->get()`
 
 * `get()` Returns a `User` Entity. Depending on context, this will either be a
 Campaign Creator (when accessed using a `Creators Access Token`) or a User who
 *could* be a Patron of the OAuth Client Creator's Campaign.
 
 ## Campaigns
+
+Access using the `campaigns()` method on `Patreon`, e.g: `$patreon->campaigns()->getMyCampaign()`
 
 * `getMyCampaign()` Returns the [`Campaign`](#campaign) Entity belonging to the
 Creator Access Token owner.
