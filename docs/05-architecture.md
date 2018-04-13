@@ -7,9 +7,9 @@
 # Resources, Entities and Collections
 
 This library is designed to be easy to work with and easy to understand if you
-wish to learn how it works under the good. Take a look at the [src](src)
+wish to learn how it works under the good. Take a look at the [src](/src)
 directory to see the Entities and Resources that make up the library, and check
-out the [tests](tests) to see examples of how the various methods can be used.
+out the [tests](/tests) to see examples of how the various methods can be used.
 
 ## Entities
 

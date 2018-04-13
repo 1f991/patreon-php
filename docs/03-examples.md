@@ -37,8 +37,8 @@ $pledges = $campaign->pledges->each(function ($pledge) {
 ## Most Valuable Patrons
 
 Scenario: You're a Campaign Creator and you'd like to generate a comma separated
-list of Email Addresses for each of your active Patrons who has contributed over
-$20 to the Campaign.
+list of Email Addresses for each active Patron who has contributed over $20
+during the lifetime of their Pledge to the Campaign.
 
 ```php
 require_once 'vendor/autoload.php';
@@ -71,7 +71,7 @@ TODO: ...
 ## Delete Users When Pledge Is Cancelled
 
 Scenario: You have a website which allows people to create an account when they
-are a patron to your Patreon Campaign, and you need to delete an account if
+are a patron of your Patreon Campaign, and you need to delete the account if
 their Pledge is cancelled.
 
 ```php
