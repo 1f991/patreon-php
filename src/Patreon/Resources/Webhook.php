@@ -2,31 +2,32 @@
 
 namespace Squid\Patreon\Resources;
 
-use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Exceptions\SignatureVerificationFailed;
+use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class Webhook extends Resource
 {
     /**
-     * Accept an incoming Webhook, verify the signature and return an entity.
+     * Accept an incoming Webhook, verify the signature and return a Collection
+     * of Entities.
      *
      * @param string $body      Request body (JSON)
      * @param string $secret    Secret used to generate the signature
      * @param string $signature Signature of the request
      *
-     * @return Squid\Patreon\Entities\Entity
+     * @return \Tightenco\Collect\Support\Collection
      */
     public function accept(
         string $body,
         string $secret,
         string $signature
-    ): Entity {
+    ): Collection {
         $this->verifySignature($body, $secret, $signature);
 
         return $this->hydrateDocument(
             Document::createFromArray(json_decode($body, true))
-        )->first();
+        );
     }
 
     /**
