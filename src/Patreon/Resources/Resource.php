@@ -25,13 +25,13 @@ abstract class Resource
     * @var array
     */
     const ENTITY_MAP = [
-        'user' => User::class,
+        'address' => Address::class,
         'campaign' => Campaign::class,
-        'reward' => Reward::class,
+        'card' => Card::class,
         'goal' => Goal::class,
         'pledge' => Pledge::class,
-        'address' => Address::class,
-        'card' => Card::class,
+        'reward' => Reward::class,
+        'user' => User::class,
     ];
 
     /**

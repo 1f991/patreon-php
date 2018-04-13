@@ -2,7 +2,6 @@
 
 namespace Squid\Patreon\Resources;
 
-use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Exceptions\SortOptionsAreInvalid;
 use Tightenco\Collect\Support\Collection;
 
