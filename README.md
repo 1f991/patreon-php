@@ -74,9 +74,9 @@ includes:
 Alternatively, smaller self-contained examples of specific implementations are
 available in the documentation for this project:
 
-- [Display Patron's pictures](#display-patrons)
-- [Create a list of your Most Valuable Patrons Email Addresses](#most-valuable-patrons)
-- [Delete a User's account when their Pledge is cancelled](#delete-users-when-pledge-is-cancelled)
+- [Display Patron's pictures](/docs/03-examples.md#display-patrons)
+- [Create a list of your Most Valuable Patrons Email Addresses](/docs/03-examples.md#most-valuable-patrons)
+- [Delete a User's account when their Pledge is cancelled](/docs/03-examples.md#delete-users-when-pledge-is-cancelled)
 
 # Getting Help
 

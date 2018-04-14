@@ -94,5 +94,4 @@ if ($_SERVER['HTTP_X_PATREON_EVENT'] === 'pledges:delete') {
 # Next Steps
 
 * Start developing!
-* [Get Help](/#Getting Help)
 * [Read the documentation](/docs/04-documentation.md)
