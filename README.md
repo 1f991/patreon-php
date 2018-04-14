@@ -1,10 +1,10 @@
 # Patreon PHP
 
-[![Latest Stable Version](https://poser.pugx.org/squid/patreon/v/stable)](https://packagist.org/packages/squid/patreon)
-[![License](https://poser.pugx.org/squid/patreon/license)](https://packagist.org/packages/squid/patreon)
-[![CircleCI](https://img.shields.io/circleci/project/github/1f991/patreon-php/master.svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/e1a7ae0afedbdfbcf94b/maintainability)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/e1a7ae0afedbdfbcf94b/test_coverage)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
+[![Packagist](https://img.shields.io/packagist/v/squid/patreon.svg)](https://packagist.org/packages/squid/patreon)
+![license](https://img.shields.io/github/license/1f991/patreon-php.svg)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/1f991/patreon-php/master.svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
+[![Code Climate](https://img.shields.io/codeclimate/coverage-letter/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
 
 A PHP library for interacting with the
 [Patreon Platform](https://www.patreon.com/portal), designed to provide the
