@@ -1,6 +1,6 @@
 {
     "name": "squid/patreon",
-    "version": "1.0.0-alpha1",
+    "version": "1.0.0",
     "keywords": ["Patreon"],
     "description": "PHP library for interacting with the Patreon API",
     "type": "library",
