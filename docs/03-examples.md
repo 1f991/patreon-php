@@ -10,8 +10,10 @@ A number of example integrations are available which you can find below.
 
 - [Display Patron's pictures](#display-patrons)
 - [Create a list of your Most Valuable Patrons Email Addresses](#most-valuable-patrons)
-- Check if a Patreon user visiting your website is a Patron of your Campaign
 - [Delete a User's account when their Pledge is cancelled](#delete-users-when-pledge-is-cancelled)
+
+Additionally, there is a full project example available at [1f991/patreon-php-example](https://github.com/1f991/patreon-php-example) which
+you may download and use.
 
 ## Display Patrons
 
@@ -62,13 +64,6 @@ The variable `$mvps` is equal to a string containing the email address of
 each Patron with a lifetime value of more than $20, e.g:
 
 > jane@example.com, jack@example.com, john@example.com, joe@example.com
-
-## Authorize Website Access For Patrons
-
-Scenario: You have a section of your website that only people who have an active
-pledge which is for more than $5 per month are able to access.
-
-TODO: ...
 
 ## Delete Users When Pledge Is Cancelled
 
