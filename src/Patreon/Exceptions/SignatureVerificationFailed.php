@@ -9,14 +9,13 @@ class SignatureVerificationFailed extends RuntimeException
     /**
      * Provides an error for when the signature provided does not verify.
      *
-     * @param string $expected Signature expected for the payload.
-     * @param string $actual   Signature given for the payload.
+     * @param string $actual Signature given for the payload.
      *
      * @return \Squid\Patreon\Exceptions\PatreonReturnedError
      */
-    public static function withSignature(string $expected, string $actual): self
+    public static function withSignature(string $actual): self
     {
-        $message = "Expected {$expected} but received {$actual}.";
+        $message = "Received {$actual} as signature but it did not verify.";
 
         return new static($message);
     }
