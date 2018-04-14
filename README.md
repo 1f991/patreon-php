@@ -1,7 +1,7 @@
 # Patreon PHP
 
 [![Packagist](https://img.shields.io/packagist/v/squid/patreon.svg)](https://packagist.org/packages/squid/patreon)
-![license](https://img.shields.io/github/license/1f991/patreon-php.svg)
+[![license](https://img.shields.io/github/license/1f991/patreon-php.svg)](/LICENSE)
 [![CircleCI branch](https://img.shields.io/circleci/project/github/1f991/patreon-php/master.svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
 [![Code Climate](https://img.shields.io/codeclimate/maintainability/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
 [![Code Climate](https://img.shields.io/codeclimate/coverage-letter/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
