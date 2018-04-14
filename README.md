@@ -65,9 +65,17 @@ how to achieve the most common integrations.
 
 ## Examples
 
+A full example project that you can download and use is available at [1f991/patreon-php-example](https://github.com/1f991/patreon-php-example) which
+includes:
+
+* Display a list of Patrons
+* Instantly add/delete/update patrons using Webhooks
+
+Alternatively, smaller self-contained examples of specific implementations are
+available in the documentation for this project:
+
 - [Display Patron's pictures](#display-patrons)
 - [Create a list of your Most Valuable Patrons Email Addresses](#most-valuable-patrons)
-- Check if a Patreon user visiting your website is a Patron of your Campaign
 - [Delete a User's account when their Pledge is cancelled](#delete-users-when-pledge-is-cancelled)
 
 # Getting Help
