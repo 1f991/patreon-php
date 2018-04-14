@@ -1,7 +1,10 @@
 # Patreon PHP
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/977675cf6ba796a90148/maintainability)](https://codeclimate.com/repos/5acf9847b5ae817f56002ce7/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/977675cf6ba796a90148/test_coverage)](https://codeclimate.com/repos/5acf9847b5ae817f56002ce7/test_coverage)
+[![Packagist](https://img.shields.io/packagist/v/squid/patreon.svg)](https://packagist.org/packages/squid/patreon)
+[![license](https://img.shields.io/github/license/1f991/patreon-php.svg)](/LICENSE)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/1f991/patreon-php/master.svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
+[![Code Climate](https://img.shields.io/codeclimate/coverage-letter/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
 
 A PHP library for interacting with the
 [Patreon Platform](https://www.patreon.com/portal), designed to provide the
