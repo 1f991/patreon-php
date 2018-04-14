@@ -11,7 +11,7 @@ class SignatureVerificationFailed extends RuntimeException
      *
      * @param string $actual Signature given for the payload.
      *
-     * @return \Squid\Patreon\Exceptions\PatreonReturnedError
+     * @return \Squid\Patreon\Exceptions\SignatureVerificationFailed
      */
     public static function withSignature(string $actual): self
     {
