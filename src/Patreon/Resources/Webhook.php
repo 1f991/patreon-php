@@ -52,6 +52,6 @@ class Webhook extends Resource
             return true;
         }
 
-        throw SignatureVerificationFailed::withSignature($expected, $signature);
+        throw SignatureVerificationFailed::withSignature($signature);
     }
 }
