@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/squid/patreon/v/stable)](https://packagist.org/packages/squid/patreon)
 [![License](https://poser.pugx.org/squid/patreon/license)](https://packagist.org/packages/squid/patreon)
-[![CircleCI](https://circleci.com/gh/1f991/patreon-php/tree/master.svg?style=svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
+[![CircleCI](https://img.shields.io/circleci/project/github/1f991/patreon-php/master.svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e1a7ae0afedbdfbcf94b/maintainability)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e1a7ae0afedbdfbcf94b/test_coverage)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
 
