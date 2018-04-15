@@ -3,8 +3,8 @@
 [![Packagist](https://img.shields.io/packagist/v/squid/patreon.svg)](https://packagist.org/packages/squid/patreon)
 [![license](https://img.shields.io/github/license/1f991/patreon-php.svg)](/LICENSE)
 [![CircleCI branch](https://img.shields.io/circleci/project/github/1f991/patreon-php/master.svg)](https://circleci.com/gh/1f991/patreon-php/tree/master)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
-[![Code Climate](https://img.shields.io/codeclimate/coverage-letter/1f991/patreon-php.svg)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e1a7ae0afedbdfbcf94b/maintainability)](https://codeclimate.com/github/1f991/patreon-php/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e1a7ae0afedbdfbcf94b/test_coverage)](https://codeclimate.com/github/1f991/patreon-php/test_coverage)
 
 A PHP library for interacting with the
 [Patreon Platform](https://www.patreon.com/portal), designed to provide the
@@ -95,6 +95,12 @@ of others, including...
 - [HTTPlug](https://github.com/php-http/httplug), the HTTP client abstraction for PHP
 - [Collect](https://github.com/tightenco/collect), a split of
   [Laravel Collections](https://laravel.com/docs/5.6/collections)
+
+# Security Vulnerabilities
+
+Please reach out to Samuel Ryan via email (<sryan@1f991.com>) to report any
+security concerns you may have discovered with this library. Acknowledgement
+will be provided within 24 hours.
 
 # License
 

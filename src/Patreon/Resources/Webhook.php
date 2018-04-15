@@ -48,7 +48,7 @@ class Webhook extends Resource
     ): bool {
         $expected = hash_hmac('md5', $body, $secret);
 
-        if ($expected === $signature) {
+        if (hash_equals($expected, $signature)) {
             return true;
         }
 
