@@ -96,6 +96,12 @@ of others, including...
 - [Collect](https://github.com/tightenco/collect), a split of
   [Laravel Collections](https://laravel.com/docs/5.6/collections)
 
+# Security Vulnerabilities
+
+Please reach out to Samuel Ryan via email (<sryan@1f991.com>) to report any
+security concerns you may have discovered with this library. Acknowledgement
+will be provided within 24 hours.
+
 # License
 
 Patreon PHP is open-sourced software licensed under the [MIT license](https://choosealicense.com/licenses/mit/).
