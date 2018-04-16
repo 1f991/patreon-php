@@ -125,7 +125,7 @@ class EntityHydrator
             );
         }
 
-        if ($entity === null) {
+        if ($entity === null || ! $entity->shouldAttach()) {
             return;
         }
 

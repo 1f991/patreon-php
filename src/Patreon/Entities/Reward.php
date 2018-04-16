@@ -181,4 +181,16 @@ class Reward extends Entity
     {
         return (int) $this->id < 1;
     }
+
+    /**
+     * A system Reward should not be attached to a Campaign during hydration
+     * because they are not creator-configured rewards, they're rewards used
+     * internally by Patreon (that probably should not be exposed via the API).
+     *
+     * @return bool
+     */
+    public function shouldAttach(): bool
+    {
+        return $this->isSystemReward();
+    }
 }

@@ -72,4 +72,14 @@ abstract class Entity
     {
         $this->id = (int) $id;
     }
+
+    /**
+     * Should this Entity be attached to relations?
+     *
+     * @return bool
+     */
+    public function shouldAttach(): bool
+    {
+        return true;
+    }
 }
