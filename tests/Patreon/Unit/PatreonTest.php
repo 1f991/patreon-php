@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Squid\Patreon\Tests\Unit\Api;
+namespace Squid\Patreon\Tests\Unit;
 
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Patreon;
