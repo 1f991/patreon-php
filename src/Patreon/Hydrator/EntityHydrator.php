@@ -131,7 +131,7 @@ class EntityHydrator
     }
 
     /**
-     * Get an Entity; collection takes priority, fallback to the document.
+     * Get an Entity: collection takes priority, fallback to the document.
      *
      * @param string  $type Type of Resource
      * @param integer $id   ID of Resource
