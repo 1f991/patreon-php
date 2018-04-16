@@ -3,10 +3,11 @@
 namespace Squid\Patreon;
 
 use Http\Client\HttpClient;
-use Squid\Patreon\Exceptions\OAuthReturnedError;
-use Squid\Patreon\Exceptions\OAuthScopesAreInvalid;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use Psr\Http\Message\RequestInterface;
+use Squid\Patreon\Exceptions\OAuthReturnedError;
+use Squid\Patreon\Exceptions\OAuthScopesAreInvalid;
 
 class OAuth
 {
@@ -121,18 +122,10 @@ class OAuth
             ]
         );
 
-        $request = MessageFactoryDiscovery::find()->createRequest(
-            'POST',
-            'https://api.patreon.com/oauth2/token',
-            [
-                'Content-Type'  => 'application/x-www-form-urlencoded',
-                'Accept'        => 'application/json',
-                'User-Agent'    => '1f991/patreon-php'
-            ],
-            http_build_query($parameters)
+        $response = $this->httpClient->sendRequest(
+            $this->createTokenRequest($parameters)
         );
 
-        $response = $this->httpClient->sendRequest($request);
         $result = json_decode((string) $response->getBody());
 
         if ($result->error ?? false) {
@@ -146,5 +139,26 @@ class OAuth
             'scope' => $result->scope,
             'token_type' => $result->token_type
         ];
+    }
+
+    /**
+     * Creates a Token Request.
+     *
+     * @param array $parameters Token request parameters.
+     *
+     * @return \Psr\Http\Message\RequestInterface
+     */
+    protected function createTokenRequest($parameters): RequestInterface
+    {
+        return MessageFactoryDiscovery::find()->createRequest(
+            'POST',
+            'https://api.patreon.com/oauth2/token',
+            [
+                'Content-Type'  => 'application/x-www-form-urlencoded',
+                'Accept'        => 'application/json',
+                'User-Agent'    => '1f991/patreon-php'
+            ],
+            http_build_query($parameters)
+        );
     }
 }
