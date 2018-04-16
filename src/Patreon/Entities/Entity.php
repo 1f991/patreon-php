@@ -7,6 +7,13 @@ use Tightenco\Collect\Support\Collection;
 abstract class Entity
 {
     /**
+    * Base URL for absolute Patreon URLs.
+    *
+    * @var string
+    */
+
+    const PATREON_URL = 'https://patreon.com';
+    /**
      * The type of resource.
      *
      * @var string

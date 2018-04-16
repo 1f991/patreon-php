@@ -154,4 +154,15 @@ class Pledge extends Entity
     {
         return (bool) $this->reward;
     }
+
+    /**
+     * Total amount spent by the user who created this pledge, formatted as
+     * currency.
+     *
+     * @return string
+     */
+    public function totalSpent(): string
+    {
+        return number_format($this->total_historical_amount_cents / 100, 2);
+    }
 }

@@ -92,4 +92,15 @@ class RewardTest extends TestCase
         $this->assertTrue($systemReward->isSystemReward());
         $this->assertFalse($campaignReward->isSystemReward());
     }
+
+    public function testGetPledgeUrlReturnsCorrectValue(): void
+    {
+        $reward = new Reward;
+        $reward->url = '/bePatron?c=1&rid=1';
+
+        $this->assertEquals(
+            'https://patreon.com/bePatron?c=1&rid=1',
+            $reward->getPledgeUrl()
+        );
+    }
 }

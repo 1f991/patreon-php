@@ -2,6 +2,8 @@
 
 namespace Squid\Patreon\Entities;
 
+use Tightenco\Collect\Support\Collection;
+
 class Campaign extends Entity
 {
     /**
@@ -230,4 +232,28 @@ class Campaign extends Entity
         'pledges',
         'rewards',
     ];
+
+    /**
+     * Get an absolute URL to the pledge page for this Campaign.
+     *
+     * @return string
+     */
+    public function getPledgeUrl(): string
+    {
+        return self::PATREON_URL . $this->pledge_url;
+    }
+
+    /**
+     * Get a collection of the Rewards that are available to choose.
+     *
+     * @return \Tightenco\Collect\Support\Collection
+     */
+    public function getAvailableRewards(): Collection
+    {
+        return $this->rewards->filter(
+            function ($reward) {
+                return $reward->isAvailableToChoose();
+            }
+        );
+    }
 }
