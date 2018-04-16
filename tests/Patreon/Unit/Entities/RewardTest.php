@@ -103,4 +103,14 @@ class RewardTest extends TestCase
             $reward->getPledgeUrl()
         );
     }
+
+    public function testSystemRewardIsNotAttached(): void
+    {
+        $systemReward = new Reward;
+        $realReward = new Reward;
+        $realReward->id = 1;
+
+        $this->assertFalse($systemReward->shouldAttach());
+        $this->assertTrue($realReward->shouldAttach());
+    }
 }
