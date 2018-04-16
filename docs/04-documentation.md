@@ -58,6 +58,7 @@ the body and returns a [`Collection`](/docs/05-architecture.md#collections) of [
 * 27 Properties — see [Entities\Campaign](/src/Patreon/Entities/Campaign.php)
 * 1 Relation — `creator`
 * 3 Collections — `goals`, `pledges` and `rewards`
+* 2 helpers — `getAvailableRewards()`, `getPledgeUrl()`
 
 ## Card
 
@@ -73,16 +74,19 @@ the body and returns a [`Collection`](/docs/05-architecture.md#collections) of [
 * 9 Properties — see [Entities\Pledge](/src/Patreon/Entities/Pledge.php)
 * 5 Relations — `address`, `card`, `creator`, `patron`, `reward`
 * 4 Helpers — `isActive()`, `isPaymentDeclined()`, `hasMadeAPayment()`, `hasReward()`
+  `getTotalSpent()`
 
 ## Reward
 
 * 17 Properties — see [Entities\Reward](/src/Patreon/Entities/Reward.php)
 * 1 Relation — `campaign`
 * 3 Helpers — `isAvailableToChoose()`, `hasRemainingLimit()`, `isSystemReward()`
+  `getPledgeUrl()`, `getPrice()`
 
 ## User
 
 * 23 Properties — see [Entities\User](/src/Patreon/Entities/User.php)
 * 1 Relation — `campaign`
 * 1 Collection — `pledges`
-* 2 Helpers — `hasActivePledge()`, `isCreator()`
+* 2 Helpers — `hasActivePledge()`, `isCreator()`, `hasInactivePledge()`,
+  `getPledge()`
