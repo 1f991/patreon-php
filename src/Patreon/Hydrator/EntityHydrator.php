@@ -117,15 +117,9 @@ class EntityHydrator
         string $id,
         Relationship $relationship
     ): void {
-        $entity = $this->getEntityFromCollection($type, $id);
+        $entity = $this->getEntity($type, $id);
 
-        if ($entity === null && $this->document->hasIncludedResource($type, $id)) {
-            $entity = $this->hydrateResource(
-                $this->document->resource($type, $id)
-            );
-        }
-
-        if ($entity === null) {
+        if ($entity === null || ! $entity->shouldAttach()) {
             return;
         }
 
@@ -134,6 +128,27 @@ class EntityHydrator
         } else {
             $parent->{$relationship->name()}->push($entity);
         }
+    }
+
+    /**
+     * Get an Entity: collection takes priority, fallback to the document.
+     *
+     * @param string  $type Type of Resource
+     * @param integer $id   ID of Resource
+     *
+     * @return \Squid\Patreon\Entities\Entity|null
+     */
+    protected function getEntity(string $type, string $id): ?Entity
+    {
+        $entity = $this->getEntityFromCollection($type, $id);
+
+        if ($entity === null && $this->document->hasIncludedResource($type, $id)) {
+            $entity = $this->hydrateResource(
+                $this->document->resource($type, $id)
+            );
+        }
+
+        return $entity;
     }
 
     /**

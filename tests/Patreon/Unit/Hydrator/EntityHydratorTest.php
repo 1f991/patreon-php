@@ -57,7 +57,7 @@ class EntityHydratorTest extends TestCase
         $this->assertEquals('John', $article->author->name);
     }
 
-    public function testExceptionIsThrownWhenEntityDoesNotExistForResourceType()
+    public function testExceptionIsThrownWhenEntityDoesNotExistForResource(): void
     {
         $document = Document::createFromArray(
             json_decode($this->fixture('jsonapi/article.json'), true)
@@ -73,6 +73,25 @@ class EntityHydratorTest extends TestCase
         $this->expectException(ResourceHasNoEntity::class);
         $hydrator->hydrate($document);
     }
+
+    public function testEntityIsNotAttachedWhenShouldAttachReturnsFalse(): void
+    {
+        $document = Document::createFromArray(
+            json_decode($this->fixture('jsonapi/article.json'), true)
+        );
+
+        $hydrator = new EntityHydrator(
+            $document,
+            [
+            'article' => ArticleEntity::class,
+            'people' => UnattacheableEntity::class
+            ]
+        );
+
+        $article = $hydrator->hydrate($document)->first();
+
+        $this->assertFalse(property_exists($article, 'author'));
+    }
 }
 
 class ArticleEntity extends Entity
@@ -83,4 +102,12 @@ class ArticleEntity extends Entity
 class PersonEntity extends Entity
 {
     public $name;
+}
+
+class UnattacheableEntity extends Entity
+{
+    public function shouldAttach(): bool
+    {
+        return false;
+    }
 }
