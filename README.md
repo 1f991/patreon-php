@@ -70,6 +70,10 @@ includes:
 
 * Display a list of Patrons
 * Instantly add/delete/update patrons using Webhooks
+* Allow Patrons to log in with OAuth
+
+A demo of the example project can be found live at [patreon.1f991.com](https://patreon.1f991.com)
+where you can create a pledge and log in to see it in action.
 
 Alternatively, smaller self-contained examples of specific implementations are
 available in the documentation for this project:
