@@ -203,4 +203,15 @@ class Reward extends Entity
     {
         return self::PATREON_URL . $this->url;
     }
+
+    /**
+     * Minimum pledge amount to be eligible for this reward, formatted as
+     * currency.
+     *
+     * @return string
+     */
+    public function getPrice(): string
+    {
+        return number_format($this->amount_cents / 100, 2);
+    }
 }

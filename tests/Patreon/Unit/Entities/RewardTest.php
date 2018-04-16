@@ -113,4 +113,12 @@ class RewardTest extends TestCase
         $this->assertFalse($systemReward->shouldAttach());
         $this->assertTrue($realReward->shouldAttach());
     }
+
+    public function testGetPrice(): void
+    {
+        $reward = new Reward;
+        $reward->amount_cents = 1298;
+
+        $this->assertEquals('12.98', $reward->getPrice());
+    }
 }
