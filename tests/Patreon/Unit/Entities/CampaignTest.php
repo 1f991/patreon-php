@@ -3,6 +3,8 @@
 namespace Squid\Patreon\Tests\Unit\Entities;
 
 use Squid\Patreon\Entities\Campaign;
+use Squid\Patreon\Entities\Reward;
+use Tightenco\Collect\Support\Collection;
 
 class CampaignTest extends TestCase
 {
@@ -55,5 +57,24 @@ class CampaignTest extends TestCase
             'https://patreon.com/bePatron?c=1',
             $campaign->getPledgeUrl()
         );
+    }
+
+    public function testGetAvailableRewardsProvidesRewards(): void
+    {
+        $availableReward = new Reward;
+        $availableReward->id = 1;
+        $unavailableReward = new Reward;
+        $unavailableReward->remaining = 0;
+
+        $campaign = new Campaign;
+        $campaign->rewards = new Collection(
+            [
+            $availableReward,
+            $unavailableReward,
+            $availableReward,
+            ]
+        );
+
+        $this->assertCount(2, $campaign->getAvailableRewards());
     }
 }
