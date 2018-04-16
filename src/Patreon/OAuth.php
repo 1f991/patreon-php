@@ -3,6 +3,7 @@
 namespace Squid\Patreon;
 
 use Http\Client\HttpClient;
+use Squid\Patreon\Exceptions\OAuthReturnedError;
 use Squid\Patreon\Exceptions\OAuthScopesAreInvalid;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
@@ -115,8 +116,8 @@ class OAuth
         $parameters = array_merge(
             $parameters,
             [
-            'clientId' => $this->clientId,
-            'clientSecret' => $this->clientSecret,
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
             ]
         );
 
@@ -126,13 +127,24 @@ class OAuth
             [
                 'Content-Type'  => 'application/x-www-form-urlencoded',
                 'Accept'        => 'application/json',
-                'User-Agent'    => '1f991/patreon-php',
-                'form_params'   => $parameters,
-            ]
+                'User-Agent'    => '1f991/patreon-php'
+            ],
+            http_build_query($parameters)
         );
 
         $response = $this->httpClient->sendRequest($request);
+        $result = json_decode((string) $response->getBody());
 
-        return json_decode((string) $response->getBody(), true);
+        if ($result->error ?? false) {
+            throw OAuthReturnedError::error($result->error);
+        }
+
+        return [
+            'access_token' => $result->access_token,
+            'refresh_token' => $result->refresh_token,
+            'expires_in' => $result->expires_in,
+            'scope' => $result->scope,
+            'token_type' => $result->token_type
+        ];
     }
 }

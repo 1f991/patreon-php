@@ -4,12 +4,24 @@ namespace Squid\Patreon\Tests\Unit;
 
 use Http\Mock\Client as MockHttpClient;
 use Psr\Http\Message\ResponseInterface;
+use Squid\Patreon\Exceptions\OAuthReturnedError;
 use Squid\Patreon\Exceptions\OAuthScopesAreInvalid;
 use Squid\Patreon\OAuth;
 use Squid\Patreon\Tests\Unit\TestCase;
 
 class OAuthTest extends TestCase
 {
+    public function setUp(): void
+    {
+        $this->validResponse = json_encode([
+            'access_token' => '123',
+            'refresh_token' => '456',
+            'expires_in' => '86400',
+            'scope' => 'users',
+            'token_type' => 'Bearer',
+        ]);
+    }
+
     public function testGetAuthorizationUrlReturnsExpectedUrl(): void
     {
         $http = new MockHttpClient;
@@ -34,6 +46,24 @@ class OAuthTest extends TestCase
         $oauth->getAuthorizationUrl(['invalid-scope']);
     }
 
+    public function testExceptionIsThrownWhenOAuthErrorIsReturned(): void
+    {
+        $http = new MockHttpClient;
+
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects($this->once())
+            ->method('getBody')
+            ->willReturn('{"error": "An error occured."}');
+
+        $http->addResponse($response);
+
+        $oauth = new OAuth('id', 'secret', 'redirect', $http);
+
+        $this->expectException(OAuthReturnedError::class);
+
+        $tokens = $oauth->getAccessToken('code');
+    }
+
     public function testGetAccessTokenMakesApiRequest(): void
     {
         $http = new MockHttpClient;
@@ -41,7 +71,7 @@ class OAuthTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects($this->once())
             ->method('getBody')
-            ->willReturn('{"access_token": "123", "refresh_token": "456"}');
+            ->willReturn($this->validResponse);
 
         $http->addResponse($response);
 
@@ -60,7 +90,7 @@ class OAuthTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects($this->once())
             ->method('getBody')
-            ->willReturn('{"access_token": "123", "refresh_token": "456"}');
+            ->willReturn($this->validResponse);
 
         $http->addResponse($response);
 
