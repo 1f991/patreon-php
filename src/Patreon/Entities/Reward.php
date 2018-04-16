@@ -191,7 +191,7 @@ class Reward extends Entity
      */
     public function shouldAttach(): bool
     {
-        return $this->isSystemReward();
+        return ! $this->isSystemReward();
     }
 
     /**
