@@ -204,13 +204,35 @@ class User extends Entity
     ];
 
     /**
-     * Does the User have an active Pledge to the Campaign that it's
+     * Does the User have an active Pledge to the Campaign owned by the creator
+     * of the Patreon Platform Client.
      *
      * @return bool
      */
     public function hasActivePledge(): bool
     {
         return $this->pledges->count() > 0 && $this->pledges->first()->isActive();
+    }
+
+    /**
+     * Does the User have an inactive Pledge to the Campaign owned by the creator
+     * of the Patreon Platform Client.
+     *
+     * @return bool
+     */
+    public function hasInactivePledge(): bool
+    {
+        return $this->pledges->count() > 0 && ! $this->pledges->first()->isActive();
+    }
+
+    /**
+     * Get the user's Pledge.
+     *
+     * @return \Squid\Patreon\Entities\Pledge
+     */
+    public function getPledge(): ?Pledge
+    {
+        return $this->pledges->first();
     }
 
     /**

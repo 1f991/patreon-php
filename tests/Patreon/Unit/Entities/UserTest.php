@@ -74,4 +74,19 @@ class UserTest extends TestCase
         $this->assertTrue($creator->isCreator());
         $this->assertFalse($patron->isCreator());
     }
+
+    public function testGetPledgeReturnsPledge(): void
+    {
+        $patron = new User;
+        $patron->pledges = new Collection(
+            [
+            new Pledge
+            ]
+        );
+
+        $user = new User;
+
+        $this->assertInstanceOf(Pledge::class, $patron->getPledge());
+        $this->assertNull($user->getPledge());
+    }
 }
