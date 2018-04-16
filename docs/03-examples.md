@@ -51,13 +51,11 @@ $patreon = new Patreon('access_token');
 
 $campaign = $patreon->campaigns()->getMyCampaignWithPledges();
 
-$mvps = $campaign->pledges->filter(function ($pledge) {
-    return $pledge->total_historical_amount_cents >= 0;
+echo $campaign->pledges->filter(function ($pledge) {
+    return $pledge->total_historical_amount_cents >= 2000;
 })->map(function ($pledge) {
     return $pledge->patron->email;
 })->implode(', ');
-
-echo $mvps;
 ```
 
 The variable `$mvps` is equal to a string containing the email address of
