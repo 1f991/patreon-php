@@ -161,7 +161,7 @@ class Pledge extends Entity
      *
      * @return string
      */
-    public function totalSpent(): string
+    public function getTotalSpent(): string
     {
         return number_format($this->total_historical_amount_cents / 100, 2);
     }

@@ -83,11 +83,14 @@ class PledgeTest extends TestCase
         $this->assertFalse($noReward->hasReward());
     }
 
-    public function testTotalSpentReturnsCurrencyFormattedAmount(): void
+    public function testGetTotalSpentReturnsCurrencyFormattedAmount(): void
     {
         $pledge = new Pledge;
         $pledge->total_historical_amount_cents = 1649;
 
-        $this->assertEquals('16.49', $pledge->totalSpent());
+        $nothingSpent = new Pledge;
+
+        $this->assertEquals('16.49', $pledge->getTotalSpent());
+        $this->assertEquals('0.00', $nothingSpent->getTotalSpent());
     }
 }
