@@ -45,4 +45,15 @@ class CampaignTest extends TestCase
 
         $this->assertTrue($this->validateEntitySchema(new Campaign, $schema));
     }
+
+    public function testGetPledgeUrlReturnsCorrectValue(): void
+    {
+        $campaign = new Campaign;
+        $campaign->pledge_url = '/bePatron?c=1';
+
+        $this->assertEquals(
+            'https://patreon.com/bePatron?c=1',
+            $campaign->getPledgeUrl()
+        );
+    }
 }

@@ -230,4 +230,14 @@ class Campaign extends Entity
         'pledges',
         'rewards',
     ];
+
+    /**
+     * Get an absolute URL to the pledge page for this Campaign.
+     *
+     * @return string
+     */
+    public function getPledgeUrl(): string
+    {
+        return self::PATREON_URL . $this->pledge_url;
+    }
 }

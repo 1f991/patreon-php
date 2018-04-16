@@ -193,4 +193,14 @@ class Reward extends Entity
     {
         return $this->isSystemReward();
     }
+
+    /**
+     * Get an absolute URL to the pledge page for this Reward.
+     *
+     * @return string
+     */
+    public function getPledgeUrl(): string
+    {
+        return self::PATREON_URL . $this->url;
+    }
 }
