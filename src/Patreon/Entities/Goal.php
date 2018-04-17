@@ -5,6 +5,13 @@ namespace Squid\Patreon\Entities;
 class Goal extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'goal';
+
+    /**
      * Amount in cents at which this goal is achieved.
      *
      * @var integer

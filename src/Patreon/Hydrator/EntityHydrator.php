@@ -83,7 +83,6 @@ class EntityHydrator
         }
 
         $parent->setId($resource->id());
-        $parent->setType($resource->type());
 
         $this->saveEntityToCollection($parent);
 

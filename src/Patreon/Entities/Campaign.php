@@ -7,6 +7,13 @@ use Tightenco\Collect\Support\Collection;
 class Campaign extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'campaign';
+
+    /**
      * Timestamp of the campaign creation, ISO 8601 combined date and time in UTC.
      * Example: "2017-12-01T16:33:48+00:00"
      *

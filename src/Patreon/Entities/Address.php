@@ -5,6 +5,13 @@ namespace Squid\Patreon\Entities;
 class Address extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'address';
+
+    /**
      * Name of the person to deliver to at this address.
      * Example: John Doe
      *

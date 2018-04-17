@@ -5,6 +5,13 @@ namespace Squid\Patreon\Entities;
 class Reward extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'reward';
+
+    /**
      * Amount in cents required to be eligible for this reward.
      * Notes: This is legacy, do not use this. Use `amount_cents`.
      * Source: https://www.patreondevelopers.com/t/f/197/2
