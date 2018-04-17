@@ -124,4 +124,33 @@ abstract class Resource
     {
         return $this->authenticated;
     }
+
+    /**
+     * Build a URL including the Entity's fields as we need to request each field
+     * explicitly.
+     *
+     * @param string $path       Path of the endpoint
+     * @param string $entity     Entity class
+     * @param array  $parameters Any additional parameters to include in the URL
+     *
+     * @return string
+     */
+    protected function buildUrl(
+        string $path,
+        string $entity,
+        array $parameters = []
+    ): string {
+        $entity = new $entity;
+
+        $attributes = implode(array_keys(get_object_vars($entity)), ',');
+
+        $parameters = array_merge(
+            $parameters,
+            [
+            "fields[{$entity->getType()}]" => $attributes
+            ]
+        );
+
+        return $path . '?' . http_build_query($parameters);
+    }
 }

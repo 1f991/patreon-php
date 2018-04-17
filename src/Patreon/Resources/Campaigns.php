@@ -15,7 +15,9 @@ class Campaigns extends Resource
     {
         $this->onlyAvailableAuthenticated('getMyCampaign');
 
-        return $this->getHydratedEntity('current_user/campaigns');
+        return $this->getHydratedEntity(
+            $this->buildUrl('current_user/campaigns', Campaign::class)
+        );
     }
 
     /**
@@ -27,7 +29,9 @@ class Campaigns extends Resource
     {
         $this->onlyAvailableAuthenticated('getMyCampaignWithPledges');
 
-        $campaign = $this->getHydratedEntity('current_user/campaigns');
+        $campaign = $this->getHydratedEntity(
+            $this->buildUrl('current_user/campaigns', Campaign::class)
+        );
 
         return $this->attachPledges($campaign);
     }
@@ -41,7 +45,9 @@ class Campaigns extends Resource
      */
     public function getCampaign(int $id): Campaign
     {
-        return $this->getHydratedEntity("campaigns/{$id}");
+        return $this->getHydratedEntity(
+            $this->buildUrl("campaigns/{$id}", Campaign::class)
+        );
     }
 
     /**
@@ -53,7 +59,9 @@ class Campaigns extends Resource
      */
     public function getCampaignWithPledges(int $id): Campaign
     {
-        $campaign = $this->getHydratedEntity("campaigns/{$id}");
+        $campaign = $this->getHydratedEntity(
+            $this->buildUrl("campaigns/{$id}", Campaign::class)
+        );
 
         return $this->attachPledges($campaign);
     }
