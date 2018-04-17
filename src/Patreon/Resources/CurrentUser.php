@@ -15,6 +15,8 @@ class CurrentUser extends Resource
     {
         $this->onlyAvailableAuthenticated('get');
 
-        return $this->getHydratedEntity('current_user');
+        return $this->getHydratedEntity(
+            $this->buildUrl('current_user', User::class)
+        );
     }
 }

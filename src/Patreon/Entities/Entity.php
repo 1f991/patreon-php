@@ -13,6 +13,7 @@ abstract class Entity
     */
 
     const PATREON_URL = 'https://patreon.com';
+
     /**
      * The type of resource.
      *
@@ -57,18 +58,6 @@ abstract class Entity
     }
 
     /**
-     * Set the Entity Resource type.
-     *
-     * @param string $type Type of Resource
-     *
-     * @return void
-     */
-    public function setType(string $type): void
-    {
-        $this->type = $type;
-    }
-
-    /**
      * Set the Entity ID.
      *
      * @param string $id ID of the Entity.
@@ -78,6 +67,16 @@ abstract class Entity
     public function setId(string $id): void
     {
         $this->id = (int) $id;
+    }
+
+    /**
+     * Get the Entity Resource Type.
+     *
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     /**

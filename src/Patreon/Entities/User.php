@@ -5,6 +5,13 @@ namespace Squid\Patreon\Entities;
 class User extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'user';
+
+    /**
      * "About Me" text.
      * Example: "Hello World!"
      *

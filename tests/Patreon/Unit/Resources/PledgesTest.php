@@ -47,6 +47,9 @@ class PledgesTest extends TestCase
         $path .= '?page%5Bcount%5D=25&sort=-updated';
         $path .= '&page%5Bcursor%5D=2017-12-02T15%3A21%3A20.121892%2B00%3A00';
 
+        $attributes = implode(array_keys(get_object_vars(new Pledge)), ',');
+        $path .= '&' . http_build_query(["fields[pledge]" => $attributes]);
+
         $client = $this->createMock(Client::class);
         $client->expects($this->once())
             ->method('get')

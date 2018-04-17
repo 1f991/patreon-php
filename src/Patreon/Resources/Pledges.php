@@ -2,6 +2,7 @@
 
 namespace Squid\Patreon\Resources;
 
+use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Exceptions\SortOptionsAreInvalid;
 use Tightenco\Collect\Support\Collection;
 
@@ -30,9 +31,11 @@ class Pledges extends Resource
     {
         $pledges = new Collection;
 
+        $url = $this->buildUrl("campaigns/{$campaign}/pledges", Pledge::class);
+
         while (true) {
             $page = $this->client->get(
-                "campaigns/{$campaign}/pledges?" . ($filter ?? null),
+                $url . '&' . ($filter ?? null),
                 $this->authenticated
             );
 
@@ -71,7 +74,9 @@ class Pledges extends Resource
             throw SortOptionsAreInvalid::options($invalid, self::SORT_OPTIONS);
         }
 
-        $parameters = http_build_query(
+        $url = $this->buildUrl(
+            "campaigns/{$campaign}/pledges",
+            Pledge::class,
             [
             'page[count]' => $count,
             'sort' => implode(',', $sort) ?: null,
@@ -79,7 +84,7 @@ class Pledges extends Resource
             ]
         );
 
-        $result = $this->client->get("campaigns/{$campaign}/pledges?{$parameters}");
+        $result = $this->client->get($url);
 
         return $this->hydrateDocument(
             $result->document()

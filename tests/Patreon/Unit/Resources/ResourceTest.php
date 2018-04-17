@@ -3,6 +3,7 @@
 namespace Squid\Patreon\Tests\Unit\Resources;
 
 use Squid\Patreon\Api\Client;
+use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Entities\User;
 use Squid\Patreon\Exceptions\PatreonReturnedError;
 use Squid\Patreon\Resources\Resource;
@@ -29,14 +30,44 @@ class ResourceTest extends TestCase
 
         $this->expectException(PatreonReturnedError::class);
 
-        $user = (new ResourceExample($client))->get($response);
+        (new ExampleResource($client))->get($response);
+    }
+
+    public function testBuildUrlReturnsCorrectUrl(): void
+    {
+        $client = $this->createMock(Client::class);
+        $resource = (new ExampleResource($client));
+
+        $this->assertEquals(
+            'example?fields%5Bentity%5D=a%2Cb%2Cc%2Cd%2Cid',
+            $resource->url()
+        );
+
+        $this->assertEquals(
+            'example?x=5&fields%5Bentity%5D=a%2Cb%2Cc%2Cd%2Cid',
+            $resource->url(['x' => 5])
+        );
     }
 }
 
-class ResourceExample extends Resource
+class ExampleResource extends Resource
 {
     public function get(JsonApiResponse $response): void
     {
         $this->hydrateDocument($response->document());
     }
+
+    public function url($parameters = []): string
+    {
+        return $this->buildUrl('example', ExampleEntity::class, $parameters);
+    }
+}
+
+class ExampleEntity extends Entity
+{
+    protected $type = 'entity';
+    public $a;
+    public $b;
+    public $c;
+    public $d;
 }

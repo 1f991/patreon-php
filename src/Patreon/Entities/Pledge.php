@@ -5,6 +5,13 @@ namespace Squid\Patreon\Entities;
 class Pledge extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'pledge';
+
+    /**
      * Address associated with the Pledge if Reward `requires_shipping`.
      *
      * @var \Squid\Patreon\Entities\Address

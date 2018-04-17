@@ -5,6 +5,13 @@ namespace Squid\Patreon\Entities;
 class Card extends Entity
 {
     /**
+     * Resource type (from Patreon).
+     *
+     * @var string
+     */
+    protected $type = 'card';
+    
+    /**
      * Type of payment method.
      * Example: "card"
      *
