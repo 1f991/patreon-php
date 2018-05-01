@@ -38,13 +38,16 @@ abstract class Entity
     /**
      * Instantiate a new Entity with the relations as empty Collections.
      *
+     * @param string $id         ID of the Entity
+     * @param array  $properties Properties of the Entity
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $id = '', array $properties = [])
     {
-        foreach ($this->relations as $relation) {
-            $this->{$relation} = new Collection;
-        }
+        $this->createRelations();
+        $this->fillProperties($properties);
+        $this->setId($id);
     }
 
     /**
@@ -87,5 +90,35 @@ abstract class Entity
     public function shouldAttach(): bool
     {
         return true;
+    }
+
+    /**
+     * Fill properties with values from array.
+     *
+     * @param array $properties array of properties and their values.
+     *
+     * @return void
+     */
+    protected function fillProperties(array $properties)
+    {
+        foreach ($properties as $key => $value) {
+            if (! property_exists($this, $key) || isset($this->relations[$key])) {
+                continue;
+            }
+
+            $this->{$key} = $value;
+        }
+    }
+
+    /**
+     * Create relation Collections.
+     *
+     * @return void
+     */
+    protected function createRelations()
+    {
+        foreach ($this->relations as $relation) {
+            $this->{$relation} = new Collection;
+        }
     }
 }

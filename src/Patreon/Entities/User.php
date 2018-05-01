@@ -142,6 +142,13 @@ class User extends Entity
     public $last_name;
 
     /**
+     * The user's Pledge to the Campaign of the client creator.
+     *
+     * @var \Squid\Patreon\Entities\Pledge
+     */
+    public $pledge;
+
+    /**
      * Social connections and their associated data, e.g: scopes, ids.
      * Example:
      * ['discord' => [
@@ -211,6 +218,23 @@ class User extends Entity
     ];
 
     /**
+     * Populate the user's `pledge` -- the Patreon API returns the users pledge
+     * as if they could have multiple pledges, even though a user can only ever
+     * have one, so we need to extract the pledge from the pledges.
+     *
+     * @param string $id         ID of the Entity
+     * @param array  $properties Properties of the Entity
+     *
+     * @return void
+     */
+    public function __construct($id = '', array $properties = [])
+    {
+         parent::__construct($id, $properties);
+
+         $this->pledge = $this->pledges->first();
+    }
+
+    /**
      * Does the User have an active Pledge to the Campaign owned by the creator
      * of the Patreon Platform Client.
      *
@@ -218,7 +242,7 @@ class User extends Entity
      */
     public function hasActivePledge(): bool
     {
-        return $this->pledges->count() > 0 && $this->pledges->first()->isActive();
+        return $this->pledge && $this->pledge->isActive();
     }
 
     /**
@@ -229,7 +253,7 @@ class User extends Entity
      */
     public function hasInactivePledge(): bool
     {
-        return $this->pledges->count() > 0 && ! $this->pledges->first()->isActive();
+        return $this->pledge && ! $this->pledge->isActive();
     }
 
     /**
@@ -239,7 +263,7 @@ class User extends Entity
      */
     public function getPledge(): ?Pledge
     {
-        return $this->pledges->first();
+        return $this->pledge;
     }
 
     /**
