@@ -102,11 +102,7 @@ abstract class Entity
     protected function fillProperties(array $properties)
     {
         foreach ($properties as $key => $value) {
-            if (! property_exists($this, $key)) {
-                continue;
-            }
-
-            if (is_a($this->{$key}, Collection::class)) {
+            if (! property_exists($this, $key) || isset($this->relations[$key])) {
                 continue;
             }
 
