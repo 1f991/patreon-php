@@ -72,18 +72,24 @@ class EntityHydrator
      */
     protected function hydrateResource(ResourceObject $resource): Entity
     {
-        $entity = $this->newEntityOfType(
-            $resource->type(),
-            $resource->id(),
-            $resource->attributes()
-        );
+        $parent = $this->newEntityOfType($resource->type());
 
-        $this->saveEntityToCollection($entity);
+        foreach (get_object_vars($parent) as $attribute => $default) {
+            if (is_a($default, Collection::class)) {
+                continue;
+            }
+
+            $parent->{$attribute} = $resource->attribute($attribute);
+        }
+
+        $parent->setId($resource->id());
+
+        $this->saveEntityToCollection($parent);
 
         foreach ($resource->relationships() as $name => $relationship) {
             foreach ($relationship->resourceLinks() as $link) {
                 $this->attachRelatedEntity(
-                    $entity,
+                    $parent,
                     $link['type'],
                     $link['id'],
                     $relationship
@@ -91,7 +97,7 @@ class EntityHydrator
             }
         }
 
-        return $entity;
+        return $parent;
     }
 
     /**
@@ -147,24 +153,19 @@ class EntityHydrator
     /**
      * Creates a new Entity for the Resource.
      *
-     * @param string $type       Type of Entity to create
-     * @param string $id         ID of the Entity
-     * @param array  $properties Properties of the Entity
+     * @param string $type Type of Entity to create
      *
      * @throws \Squid\Patreon\Exceptions\ResourceHasNoEntity
      *
      * @return \Squid\Patreon\Entities\Entity
      */
-    protected function newEntityOfType(
-        string $type,
-        string $id,
-        array $properties
-    ): Entity {
+    protected function newEntityOfType(string $type): Entity
+    {
         if (! array_key_exists($type, $this->resourceEntityMap)) {
             throw ResourceHasNoEntity::forResource($type);
         }
 
-        return new $this->resourceEntityMap[$type]($id, $properties);
+        return new $this->resourceEntityMap[$type];
     }
 
     /**

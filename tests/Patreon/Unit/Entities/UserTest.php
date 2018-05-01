@@ -52,10 +52,10 @@ class UserTest extends TestCase
         $declinedPledge->declined_since = '2017-12-01T16:33:48+00:00';
 
         $activeUser = new User;
-        $activeUser->pledge = $activePledge;
+        $activeUser->pledges = new Collection([$activePledge]);
 
         $declinedUser = new User;
-        $declinedUser->pledge = $declinedPledge;
+        $declinedUser->pledges = new Collection([$declinedPledge]);
 
         $noPledgeUser = new User;
 
@@ -78,7 +78,12 @@ class UserTest extends TestCase
     public function testGetPledgeReturnsPledge(): void
     {
         $patron = new User;
-        $patron->pledge = new Pledge;
+        $patron->pledges = new Collection(
+            [
+            new Pledge
+            ]
+        );
+
         $user = new User;
 
         $this->assertInstanceOf(Pledge::class, $patron->getPledge());
