@@ -142,6 +142,13 @@ class User extends Entity
     public $last_name;
 
     /**
+     * The user's Pledge to the Campaign of the client creator.
+     *
+     * @var \Squid\Patreon\Entities\Pledge
+     */
+    public $pledge;
+
+    /**
      * Social connections and their associated data, e.g: scopes, ids.
      * Example:
      * ['discord' => [
@@ -218,7 +225,7 @@ class User extends Entity
      */
     public function hasActivePledge(): bool
     {
-        return $this->pledges->count() > 0 && $this->pledges->first()->isActive();
+        return $this->pledge && $this->pledge->isActive();
     }
 
     /**
@@ -229,7 +236,7 @@ class User extends Entity
      */
     public function hasInactivePledge(): bool
     {
-        return $this->pledges->count() > 0 && ! $this->pledges->first()->isActive();
+        return $this->pledge && ! $this->pledge->isActive();
     }
 
     /**
@@ -239,7 +246,7 @@ class User extends Entity
      */
     public function getPledge(): ?Pledge
     {
-        return $this->pledges->first();
+        return $this->pledge;
     }
 
     /**
@@ -250,5 +257,16 @@ class User extends Entity
     public function isCreator(): bool
     {
         return (bool) $this->campaign;
+    }
+
+    /**
+     * After the User has been assembled we need to create the `pledge` relation
+     * because Patreon returns it as a collection of pledges.
+     *
+     * @return void
+     */
+    public function postProcess()
+    {
+        $this->pledge = $this->pledges->first();
     }
 }
