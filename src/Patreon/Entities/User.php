@@ -218,23 +218,6 @@ class User extends Entity
     ];
 
     /**
-     * Populate the user's `pledge` -- the Patreon API returns the users pledge
-     * as if they could have multiple pledges, even though a user can only ever
-     * have one, so we need to extract the pledge from the pledges.
-     *
-     * @param string $id         ID of the Entity
-     * @param array  $properties Properties of the Entity
-     *
-     * @return void
-     */
-    public function __construct($id = '', array $properties = [])
-    {
-         parent::__construct($id, $properties);
-
-         $this->pledge = $this->pledges->first();
-    }
-
-    /**
      * Does the User have an active Pledge to the Campaign owned by the creator
      * of the Patreon Platform Client.
      *
@@ -274,5 +257,16 @@ class User extends Entity
     public function isCreator(): bool
     {
         return (bool) $this->campaign;
+    }
+
+    /**
+     * After the User has been assembled we need to create the `pledge` relation
+     * because Patreon returns it as a collection of pledges.
+     *
+     * @return void
+     */
+    public function postProcess()
+    {
+        $this->pledge = $this->pledges->first();
     }
 }
