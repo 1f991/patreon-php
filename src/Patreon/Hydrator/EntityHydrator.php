@@ -91,6 +91,8 @@ class EntityHydrator
             }
         }
 
+        $entity->postProcess();
+
         return $entity;
     }
 

@@ -121,4 +121,15 @@ abstract class Entity
             $this->{$relation} = new Collection;
         }
     }
+
+    /**
+     * After an Entity has been assembled with all relations, it may need to be
+     * post processed to assemble data.
+     *
+     * @return void
+     */
+    public function postProcess()
+    {
+        return;
+    }
 }
