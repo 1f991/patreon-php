@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -13,7 +15,7 @@ class Address extends Entity
 
     /**
      * Name of the person to deliver to at this address.
-     * Example: John Doe
+     * Example: John Doe.
      *
      * @var
      */
@@ -21,7 +23,7 @@ class Address extends Entity
 
     /**
      * Name of the city.
-     * Example: London
+     * Example: London.
      *
      * @var string
      */
@@ -29,7 +31,7 @@ class Address extends Entity
 
     /**
      * ISO 3166-1 Alpha-2 Code representing the country.
-     * Example: GB
+     * Example: GB.
      *
      * @var string
      */
@@ -37,7 +39,7 @@ class Address extends Entity
 
     /**
      * First line of the street address.
-     * Example: Aldgate Tower
+     * Example: Aldgate Tower.
      *
      * @var string
      */
@@ -45,7 +47,7 @@ class Address extends Entity
 
     /**
      * Second line of the street address.
-     * Example: 2 Leman Street
+     * Example: 2 Leman Street.
      *
      * @var string
      */
@@ -53,7 +55,7 @@ class Address extends Entity
 
     /**
      * Postal / Zip Code of the street address.
-     * Example: E1 8FA
+     * Example: E1 8FA.
      *
      * @var string
      */
@@ -62,7 +64,7 @@ class Address extends Entity
     /**
      * ANSI standard INCITS 38:2009 US State code if address is in the United
      * States.
-     * Example: CA
+     * Example: CA.
      *
      * @var string
      */

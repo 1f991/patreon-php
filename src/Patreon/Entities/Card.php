@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -10,10 +12,10 @@ class Card extends Entity
      * @var string
      */
     protected $type = 'card';
-    
+
     /**
      * Type of payment method.
-     * Example: "card"
+     * Example: "card".
      *
      * @var string
      */
@@ -21,7 +23,7 @@ class Card extends Entity
 
     /**
      * Timestamp of when the card was added, ISO 8601 combined date and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -30,7 +32,7 @@ class Card extends Entity
     /**
      * Timestamp of when the card is due to expire, ISO 8601 combined date and
      * time in UTC. Appears to always be the first day of the month with 0 seconds.
-     * Example: "2020-12-01T00:00:00+00:00"
+     * Example: "2020-12-01T00:00:00+00:00".
      *
      * @var string
      */
@@ -55,7 +57,7 @@ class Card extends Entity
 
     /**
      * Last 4 digits of the card.
-     * Example: 1234
+     * Example: 1234.
      *
      * @var string
      */
@@ -72,7 +74,7 @@ class Card extends Entity
      * Unknown.
      * Probably: an ID referencing the payment token for payment log auditing?
      *
-     * @var integer
+     * @var int
      */
     public $payment_token_id;
 }

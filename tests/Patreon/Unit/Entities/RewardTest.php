@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -30,25 +32,25 @@ class RewardTest extends TestCase
             'campaign',
         ];
 
-        $this->assertTrue($this->validateEntitySchema(new Reward, $schema));
+        $this->assertTrue($this->validateEntitySchema(new Reward(), $schema));
     }
 
     public function testIsAvailableToChooseReturnsExpectedResults(): void
     {
-        $limitReached = new Reward;
+        $limitReached = new Reward();
         $limitReached->id = '1';
         $limitReached->user_limit = 10;
         $limitReached->remaining = 0;
 
-        $noLimit = new Reward;
+        $noLimit = new Reward();
         $noLimit->id = '1';
         $noLimit->user_limit = null;
         $noLimit->remaining = null;
 
-        $systemReward = new Reward;
+        $systemReward = new Reward();
         $systemReward->id = '0';
 
-        $limitNotReached = new Reward;
+        $limitNotReached = new Reward();
         $limitNotReached->id = '1';
         $limitNotReached->user_limit = 10;
         $limitNotReached->remaining = 5;
@@ -61,17 +63,17 @@ class RewardTest extends TestCase
 
     public function testHasRemainingLimitReturnsExpectedResults(): void
     {
-        $limitReached = new Reward;
+        $limitReached = new Reward();
         $limitReached->id = '1';
         $limitReached->user_limit = 10;
         $limitReached->remaining = 0;
 
-        $noLimit = new Reward;
+        $noLimit = new Reward();
         $noLimit->id = '1';
         $noLimit->user_limit = null;
         $noLimit->remaining = null;
 
-        $limitNotReached = new Reward;
+        $limitNotReached = new Reward();
         $limitNotReached->id = '1';
         $limitNotReached->user_limit = 10;
         $limitNotReached->remaining = 5;
@@ -83,10 +85,10 @@ class RewardTest extends TestCase
 
     public function testIsSystemRewardReturnsExpectedResults(): void
     {
-        $systemReward = new Reward;
+        $systemReward = new Reward();
         $systemReward->id = '0';
 
-        $campaignReward = new Reward;
+        $campaignReward = new Reward();
         $campaignReward->id = '100';
 
         $this->assertTrue($systemReward->isSystemReward());
@@ -95,7 +97,7 @@ class RewardTest extends TestCase
 
     public function testGetPledgeUrlReturnsCorrectValue(): void
     {
-        $reward = new Reward;
+        $reward = new Reward();
         $reward->url = '/bePatron?c=1&rid=1';
 
         $this->assertEquals(
@@ -106,8 +108,8 @@ class RewardTest extends TestCase
 
     public function testSystemRewardIsNotAttached(): void
     {
-        $systemReward = new Reward;
-        $realReward = new Reward;
+        $systemReward = new Reward();
+        $realReward = new Reward();
         $realReward->id = 1;
 
         $this->assertFalse($systemReward->shouldAttach());
@@ -116,7 +118,7 @@ class RewardTest extends TestCase
 
     public function testGetPrice(): void
     {
-        $reward = new Reward;
+        $reward = new Reward();
         $reward->amount_cents = 1298;
 
         $this->assertEquals('12.98', $reward->getPrice());

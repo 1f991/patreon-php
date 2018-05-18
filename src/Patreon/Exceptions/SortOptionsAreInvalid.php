@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Exceptions;
 
@@ -16,8 +18,8 @@ class SortOptionsAreInvalid extends LogicException
      */
     public static function options(array $invalid, array $valid): self
     {
-        $message = "Provided options are invalid: " . implode(', ', $invalid) . ".";
-        $message .= " Valid options are: " . implode(', ', $valid);
+        $message = 'Provided options are invalid: '.implode(', ', $invalid).'.';
+        $message .= ' Valid options are: '.implode(', ', $valid);
 
         return new static($message);
     }

@@ -1,8 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
-use Exception;
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\User;
 use Squid\Patreon\Exceptions\ResourceRequiresAuthentication;

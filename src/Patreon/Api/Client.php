@@ -1,21 +1,23 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Api;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\RequestInterface;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use WoohooLabs\Yang\JsonApi\Client\JsonApiClient;
 
 class Client
 {
     /**
-    * Constant representing the Patreon API endpoint.
-    *
-    * @var string
-    */
+     * Constant representing the Patreon API endpoint.
+     *
+     * @var string
+     */
     const API_ENDPOINT = 'https://api.patreon.com/';
 
     /**
@@ -61,7 +63,7 @@ class Client
      */
     public function get(string $path, bool $authentication = true): ResponseInterface
     {
-        $path = ($authentication ? 'oauth2/api/' : null) . $path;
+        $path = ($authentication ? 'oauth2/api/' : null).$path;
 
         return $this->jsonApi->sendRequest(
             $this->makeRequest('GET', $path)
@@ -82,11 +84,11 @@ class Client
 
         return $messageFactory->createRequest(
             $method,
-            self::API_ENDPOINT . $path,
+            self::API_ENDPOINT.$path,
             [
-                'Authorization' => 'Bearer ' . $this->accessToken,
+                'Authorization' => 'Bearer '.$this->accessToken,
                 'Accept'        => 'application/json',
-                'User-Agent'    => '1f991/patreon-php'
+                'User-Agent'    => '1f991/patreon-php',
             ]
         );
     }

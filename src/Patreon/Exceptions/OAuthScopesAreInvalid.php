@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Exceptions;
 
@@ -16,8 +18,8 @@ class OAuthScopesAreInvalid extends LogicException
      */
     public static function scopes(array $invalid, array $valid): self
     {
-        $message = "Provided scopes are invalid: " . implode(', ', $invalid) . ".";
-        $message .= " Valid scopes are: " . implode(', ', $valid);
+        $message = 'Provided scopes are invalid: '.implode(', ', $invalid).'.';
+        $message .= ' Valid scopes are: '.implode(', ', $valid);
 
         return new static($message);
     }

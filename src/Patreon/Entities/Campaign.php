@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -15,7 +17,7 @@ class Campaign extends Entity
 
     /**
      * Timestamp of the campaign creation, ISO 8601 combined date and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -24,13 +26,13 @@ class Campaign extends Entity
     /**
      * Number of creations associated with the campaign.
      *
-     * @var integer
+     * @var int
      */
     public $creation_count;
 
     /**
      * Name of the creation, "x is creating..."
-     * Example: "Music"
+     * Example: "Music".
      *
      * @var string
      */
@@ -45,7 +47,7 @@ class Campaign extends Entity
 
     /**
      * ID of the Discord server that roles are granted in.
-     * Example: "100000000000000000"
+     * Example: "100000000000000000".
      *
      * @var string
      */
@@ -67,7 +69,7 @@ class Campaign extends Entity
 
     /**
      * URL of CDN hosted small version of the Campaign header image.
-     * Example: https://c10.patreonusercontent.com/[...]
+     * Example: https://c10.patreonusercontent.com/[...].
      *
      * @var string
      */
@@ -75,7 +77,7 @@ class Campaign extends Entity
 
     /**
      * URL of CDN hosted Campaign header image.
-     * Example: https://c10.patreonusercontent.com/[...]
+     * Example: https://c10.patreonusercontent.com/[...].
      *
      * @var string
      */
@@ -130,7 +132,7 @@ class Campaign extends Entity
 
     /**
      * Embed HTML for the main video.
-     * Example: <iframe src="//www.youtube.com/embed/id"></iframe>
+     * Example: <iframe src="//www.youtube.com/embed/id"></iframe>.
      *
      * @var string
      */
@@ -138,7 +140,7 @@ class Campaign extends Entity
 
     /**
      * URL for the main video.
-     * Example: https://www.youtube.com/watch?v=aDiUGnJtjeA
+     * Example: https://www.youtube.com/watch?v=aDiUGnJtjeA.
      *
      * @var string
      */
@@ -153,22 +155,22 @@ class Campaign extends Entity
 
     /**
      * Legacy field to be removed in future.
-     * Source: https://www.patreondevelopers.com/t/h/131/3
+     * Source: https://www.patreondevelopers.com/t/h/131/3.
      *
-     * @var integer
+     * @var int
      */
     public $outstanding_payment_amount_cents;
 
     /**
      * Number of active patrons.
      *
-     * @var integer
+     * @var int
      */
     public $patron_count;
 
     /**
      * Name of what the user is paying per.
-     * Examples: month, video
+     * Examples: month, video.
      *
      * @var
      */
@@ -177,13 +179,13 @@ class Campaign extends Entity
     /**
      * Sum of active pledge values in cents.
      *
-     * @var integer
+     * @var int
      */
     public $pledge_sum;
 
     /**
      * Path to the pledge page for this campaign.
-     * Example: /bePatron?c=1
+     * Example: /bePatron?c=1.
      *
      * @var string
      */
@@ -192,7 +194,7 @@ class Campaign extends Entity
     /**
      * Timestamp of when campaign was first published, ISO 8601 combined date
      * and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -207,7 +209,7 @@ class Campaign extends Entity
 
     /**
      * Embed HTML for the thanks video.
-     * Example: <iframe src="//www.youtube.com/embed/id"></iframe>
+     * Example: <iframe src="//www.youtube.com/embed/id"></iframe>.
      *
      * @var string
      */
@@ -215,7 +217,7 @@ class Campaign extends Entity
 
     /**
      * Thanks Message displayed to the patron after a pledge is created.
-     * Example: "Thank you for becoming my patron."
+     * Example: "Thank you for becoming my patron.".
      *
      * @var string
      */
@@ -223,7 +225,7 @@ class Campaign extends Entity
 
     /**
      * Video displayed along side the Thanks Message after a pledge is created.
-     * Example: https://www.youtube.com/watch?v=aDiUGnJtjeA
+     * Example: https://www.youtube.com/watch?v=aDiUGnJtjeA.
      *
      * @var string
      */
@@ -247,7 +249,7 @@ class Campaign extends Entity
      */
     public function getPledgeUrl(): string
     {
-        return self::PATREON_URL . $this->pledge_url;
+        return self::PATREON_URL.$this->pledge_url;
     }
 
     /**

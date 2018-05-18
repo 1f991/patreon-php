@@ -1,12 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit;
 
-use Http\Mock\Client as MockHttpClient;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
 use Squid\Patreon\Api\Client;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
+use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class TestCase extends PHPUnit_TestCase
 {
@@ -19,7 +20,7 @@ class TestCase extends PHPUnit_TestCase
      */
     public function fixture(string $path): string
     {
-        return file_get_contents(__DIR__ . '/../fixtures/' . $path);
+        return file_get_contents(__DIR__.'/../fixtures/'.$path);
     }
 
     /**
@@ -47,8 +48,8 @@ class TestCase extends PHPUnit_TestCase
      * Returns a JSON Api Response Mock that has a Document containing
      * x resources of type.
      *
-     * @param string  $type   Resource type
-     * @param integer $amount Amount of resources to include in the document
+     * @param string $type   Resource type
+     * @param int    $amount Amount of resources to include in the document
      *
      * @return WoohooLabs\Yang\JsonApi\Schema\Document
      */

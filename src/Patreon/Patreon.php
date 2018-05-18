@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon;
 
@@ -35,7 +37,7 @@ class Patreon
      */
     public function __construct(string $accessToken, ?Client $client = null)
     {
-        $this->client = $client ?: new Client;
+        $this->client = $client ?: new Client();
         $this->client->setAccessToken($accessToken);
     }
 

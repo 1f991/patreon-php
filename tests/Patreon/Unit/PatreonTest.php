@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit;
 
@@ -7,7 +9,6 @@ use Squid\Patreon\Patreon;
 use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Resources\CurrentUser;
 use Squid\Patreon\Resources\Pledges;
-use Squid\Patreon\Tests\Unit\TestCase;
 
 class PatreonTest extends TestCase
 {

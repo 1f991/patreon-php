@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon;
 
@@ -12,14 +14,14 @@ use Squid\Patreon\Exceptions\OAuthScopesAreInvalid;
 class OAuth
 {
     /**
-    * Valid OAuth scopes supported by Patreon.
-    *
-    * @var array
-    */
+     * Valid OAuth scopes supported by Patreon.
+     *
+     * @var array
+     */
     const OAUTH_SCOPES = [
         'users',
         'pledges-to-me',
-        'my-campaign'
+        'my-campaign',
     ];
 
     /**
@@ -61,13 +63,13 @@ class OAuth
         $query = http_build_query(
             [
             'response_type' => 'code',
-            'client_id' => $this->clientId,
-            'redirect_uri' => $this->redirectUri,
-            'scope' => implode(' ', $scope),
+            'client_id'     => $this->clientId,
+            'redirect_uri'  => $this->redirectUri,
+            'scope'         => implode(' ', $scope),
             ]
         );
 
-        return 'https://www.patreon.com/oauth2/authorize?' . $query;
+        return 'https://www.patreon.com/oauth2/authorize?'.$query;
     }
 
     /**
@@ -81,8 +83,8 @@ class OAuth
     {
         return $this->sendTokenRequest(
             [
-            'code' => $code,
-            'grant_type' => 'authorization_code',
+            'code'         => $code,
+            'grant_type'   => 'authorization_code',
             'redirect_uri' => $this->redirectUri,
             ]
         );
@@ -99,7 +101,7 @@ class OAuth
     {
         return $this->sendTokenRequest(
             [
-            'grant_type' => 'refresh_token',
+            'grant_type'    => 'refresh_token',
             'refresh_token' => $refreshToken,
             ]
         );
@@ -117,7 +119,7 @@ class OAuth
         $parameters = array_merge(
             $parameters,
             [
-            'client_id' => $this->clientId,
+            'client_id'     => $this->clientId,
             'client_secret' => $this->clientSecret,
             ]
         );
@@ -133,11 +135,11 @@ class OAuth
         }
 
         return [
-            'access_token' => $result->access_token,
+            'access_token'  => $result->access_token,
             'refresh_token' => $result->refresh_token,
-            'expires_in' => $result->expires_in,
-            'scope' => $result->scope,
-            'token_type' => $result->token_type
+            'expires_in'    => $result->expires_in,
+            'scope'         => $result->scope,
+            'token_type'    => $result->token_type,
         ];
     }
 
@@ -156,7 +158,7 @@ class OAuth
             [
                 'Content-Type'  => 'application/x-www-form-urlencoded',
                 'Accept'        => 'application/json',
-                'User-Agent'    => '1f991/patreon-php'
+                'User-Agent'    => '1f991/patreon-php',
             ],
             http_build_query($parameters)
         );

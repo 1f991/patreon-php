@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Resources;
 
@@ -39,7 +41,7 @@ class Campaigns extends Resource
     /**
      * Get a Campaign by ID.
      *
-     * @param integer $id Campaign ID
+     * @param int $id Campaign ID
      *
      * @return \Squid\Patreon\Entities\Campaign
      */
@@ -53,7 +55,7 @@ class Campaigns extends Resource
     /**
      * Get a Campaign by ID with Pledges.
      *
-     * @param integer $id Campaign ID
+     * @param int $id Campaign ID
      *
      * @return \Squid\Patreon\Entities\Campaign
      */

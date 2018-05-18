@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -7,11 +9,10 @@ use Tightenco\Collect\Support\Collection;
 abstract class Entity
 {
     /**
-    * Base URL for absolute Patreon URLs.
-    *
-    * @var string
-    */
-
+     * Base URL for absolute Patreon URLs.
+     *
+     * @var string
+     */
     const PATREON_URL = 'https://patreon.com';
 
     /**
@@ -24,7 +25,7 @@ abstract class Entity
     /**
      * The unique identifier of the entity.
      *
-     * @var integer
+     * @var int
      */
     public $id;
 
@@ -102,7 +103,7 @@ abstract class Entity
     protected function fillProperties(array $properties)
     {
         foreach ($properties as $key => $value) {
-            if (! property_exists($this, $key) || isset($this->relations[$key])) {
+            if (!property_exists($this, $key) || isset($this->relations[$key])) {
                 continue;
             }
 
@@ -118,7 +119,7 @@ abstract class Entity
     protected function createRelations()
     {
         foreach ($this->relations as $relation) {
-            $this->{$relation} = new Collection;
+            $this->{$relation} = new Collection();
         }
     }
 
@@ -130,6 +131,5 @@ abstract class Entity
      */
     public function postProcess()
     {
-        return;
     }
 }

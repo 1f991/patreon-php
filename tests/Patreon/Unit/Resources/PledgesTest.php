@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
@@ -8,8 +10,8 @@ use Squid\Patreon\Exceptions\SortOptionsAreInvalid;
 use Squid\Patreon\Resources\Pledges;
 use Squid\Patreon\Tests\Unit\TestCase;
 use Tightenco\Collect\Support\Collection;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
+use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class PledgesTest extends TestCase
 {
@@ -47,8 +49,8 @@ class PledgesTest extends TestCase
         $path .= '?page%5Bcount%5D=25&sort=-updated';
         $path .= '&page%5Bcursor%5D=2017-12-02T15%3A21%3A20.121892%2B00%3A00';
 
-        $attributes = implode(array_keys(get_object_vars(new Pledge)), ',');
-        $path .= '&' . http_build_query(["fields[pledge]" => $attributes]);
+        $attributes = implode(array_keys(get_object_vars(new Pledge())), ',');
+        $path .= '&'.http_build_query(['fields[pledge]' => $attributes]);
 
         $client = $this->createMock(Client::class);
         $client->expects($this->once())
@@ -76,8 +78,8 @@ class PledgesTest extends TestCase
                 ['type' => 'pledge', 'id' => '3'],
             ],
             'links' => [
-                'next' => 'https://example.com/pledges?page=2'
-            ]
+                'next' => 'https://example.com/pledges?page=2',
+            ],
             ]
         );
 
@@ -92,9 +94,9 @@ class PledgesTest extends TestCase
                 ['type' => 'pledge', 'id' => '5'],
             ],
             'links' => [
-                'next' => 'https://example.com/pledges?page=3',
+                'next'  => 'https://example.com/pledges?page=3',
                 'first' => 'https://example.com/pledges',
-            ]
+            ],
             ]
         );
 
@@ -110,14 +112,13 @@ class PledgesTest extends TestCase
             ],
             'links' => [
                 'first' => 'https://example.com/pledges',
-            ]
+            ],
             ]
         );
 
         $page3 = $this->createMock(JsonApiResponse::class);
         $page3->method('document')
             ->willReturn($document3);
-
 
         $client = $this->createMock(Client::class);
         $client->expects($this->exactly(3))

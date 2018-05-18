@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
@@ -8,7 +10,6 @@ use Squid\Patreon\Exceptions\SignatureVerificationFailed;
 use Squid\Patreon\Resources\Webhook;
 use Squid\Patreon\Tests\Unit\TestCase;
 use Tightenco\Collect\Support\Collection;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class WebhookTest extends TestCase
 {
@@ -45,7 +46,7 @@ class WebhookTest extends TestCase
         $document = [
             'data' => [
                 ['type' => 'pledge', 'id' => '1'],
-            ]
+            ],
         ];
 
         $pledges = (new Webhook($client))->accept(

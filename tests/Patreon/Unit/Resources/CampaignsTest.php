@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
@@ -7,7 +9,6 @@ use Squid\Patreon\Entities\Campaign;
 use Squid\Patreon\Exceptions\ResourceRequiresAuthentication;
 use Squid\Patreon\Resources\Campaigns;
 use Squid\Patreon\Tests\Unit\TestCase;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class CampaignsTest extends TestCase
 {

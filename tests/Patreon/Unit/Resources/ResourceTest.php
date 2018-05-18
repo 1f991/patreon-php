@@ -1,15 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Resources;
 
 use Squid\Patreon\Api\Client;
 use Squid\Patreon\Entities\Entity;
-use Squid\Patreon\Entities\User;
 use Squid\Patreon\Exceptions\PatreonReturnedError;
 use Squid\Patreon\Resources\Resource;
 use Squid\Patreon\Tests\Unit\TestCase;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
+use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class ResourceTest extends TestCase
 {

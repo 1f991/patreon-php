@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -14,16 +16,16 @@ class Reward extends Entity
     /**
      * Amount in cents required to be eligible for this reward.
      * Notes: This is legacy, do not use this. Use `amount_cents`.
-     * Source: https://www.patreondevelopers.com/t/f/197/2
+     * Source: https://www.patreondevelopers.com/t/f/197/2.
      *
-     * @var integer
+     * @var int
      */
     public $amount;
 
     /**
      * Amount in cents required to be eligible for this reward.
      *
-     * @var integer
+     * @var int
      */
     public $amount_cents;
 
@@ -36,7 +38,7 @@ class Reward extends Entity
 
     /**
      * Timestamp of the reward creation, ISO 8601 combined date and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -44,7 +46,7 @@ class Reward extends Entity
 
     /**
      * Description of the reward, rendered as HTML.
-     * Example: "Access to my Patron only streams."
+     * Example: "Access to my Patron only streams.".
      *
      * @var string
      */
@@ -61,7 +63,7 @@ class Reward extends Entity
     /**
      * Timestamp of the last edit to the reward, ISO 8601 combined date and time
      * in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -78,7 +80,7 @@ class Reward extends Entity
      * Number of Pledges with this Reward.
      * Note: all pledges, active and inactive, are included in this count.
      *
-     * @var integer
+     * @var int
      */
     public $patron_count;
 
@@ -89,7 +91,7 @@ class Reward extends Entity
      * tier so to calculate the total number of posts the Patron can access you
      * would need to include the post_count for this reward and each lower Reward.
      *
-     * @var integer
+     * @var int
      */
     public $post_count;
 
@@ -103,7 +105,7 @@ class Reward extends Entity
     /**
      * Timestamp of when the reward was published, ISO 8601 combined date and time
      * in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -112,7 +114,7 @@ class Reward extends Entity
     /**
      * The number of remaining rewards available if there is a user_limit.
      *
-     * @var integer
+     * @var int
      */
     public $remaining;
 
@@ -125,14 +127,14 @@ class Reward extends Entity
 
     /**
      * Title of the Reward.
-     * Example: "Exclusive Live Chat"
+     * Example: "Exclusive Live Chat".
      */
     public $title;
 
     /**
      * Timestamp of when the reward was unpublished, ISO 8601 combined date and time
      * in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -140,7 +142,7 @@ class Reward extends Entity
 
     /**
      * Relative URL for selecting this reward when becoming a patron.
-     * Example: /bePatron?c=1&rid=1
+     * Example: /bePatron?c=1&rid=1.
      *
      * @var string
      */
@@ -149,9 +151,9 @@ class Reward extends Entity
     /**
      * Maximum number of pledges that can have this reward. This includes paused
      * and declined pledges.
-     * Source: https://www.patreondevelopers.com/t/f/131/3
+     * Source: https://www.patreondevelopers.com/t/f/131/3.
      *
-     * @var integer
+     * @var int
      */
     public $user_limit;
 
@@ -162,7 +164,7 @@ class Reward extends Entity
      */
     public function isAvailableToChoose(): bool
     {
-        return ! $this->isSystemReward() && $this->hasRemainingLimit();
+        return !$this->isSystemReward() && $this->hasRemainingLimit();
     }
 
     /**
@@ -198,7 +200,7 @@ class Reward extends Entity
      */
     public function shouldAttach(): bool
     {
-        return ! $this->isSystemReward();
+        return !$this->isSystemReward();
     }
 
     /**
@@ -208,7 +210,7 @@ class Reward extends Entity
      */
     public function getPledgeUrl(): string
     {
-        return self::PATREON_URL . $this->url;
+        return self::PATREON_URL.$this->url;
     }
 
     /**

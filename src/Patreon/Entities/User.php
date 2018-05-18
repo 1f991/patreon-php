@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -13,7 +15,7 @@ class User extends Entity
 
     /**
      * "About Me" text.
-     * Example: "Hello World!"
+     * Example: "Hello World!".
      *
      * @var string
      */
@@ -28,7 +30,7 @@ class User extends Entity
 
     /**
      * Timestamp of the account creation, ISO 8601 combined date and time in UTC.
-     * Example: 2017-12-01T16:33:48+00:00
+     * Example: 2017-12-01T16:33:48+00:00.
      *
      * @var string
      */
@@ -36,7 +38,7 @@ class User extends Entity
 
     /**
      * ID of the Discord account connected for role rewards.
-     * Example: "100000000000000000"
+     * Example: "100000000000000000".
      *
      * @var string
      */
@@ -44,7 +46,7 @@ class User extends Entity
 
     /**
      * Email Address.
-     * Example: user@example.com
+     * Example: user@example.com.
      *
      * @var string
      */
@@ -52,7 +54,7 @@ class User extends Entity
 
     /**
      * Facebook profile URL.
-     * Example: "https://facebook.com/username"
+     * Example: "https://facebook.com/username".
      *
      * @var string
      */
@@ -60,7 +62,7 @@ class User extends Entity
 
     /**
      * ID of the Facebook account connected.
-     * Example: "100000000000000"
+     * Example: "100000000000000".
      *
      * @var string
      */
@@ -68,7 +70,7 @@ class User extends Entity
 
     /**
      * First Name.
-     * Example: "John"
+     * Example: "John".
      *
      * @var string
      */
@@ -76,7 +78,7 @@ class User extends Entity
 
     /**
      * Full Name ("first_name last_name")
-     * Example: "John Doe"
+     * Example: "John Doe".
      *
      * @var string
      */
@@ -86,7 +88,7 @@ class User extends Entity
      * Unknown.
      * Maybe: a legacy value representing the users gender (0 or 1)?
      *
-     * @var integer
+     * @var int
      */
     public $gender;
 
@@ -99,7 +101,7 @@ class User extends Entity
 
     /**
      * CDN URL to profile photo.
-     * Example: https://c8.patreon.com/2/400/1
+     * Example: https://c8.patreon.com/2/400/1.
      *
      * @var string
      */
@@ -135,7 +137,7 @@ class User extends Entity
 
     /**
      * Last Name.
-     * Example: "Doe"
+     * Example: "Doe".
      *
      * @var string
      */
@@ -154,7 +156,7 @@ class User extends Entity
      * ['discord' => [
      *    'scopes' => ['guilds', 'guilds.join', 'identify'],
      *    'user_id' => '100000000000000000'
-     * ]];
+     * ]];.
      *
      * @var array
      */
@@ -162,7 +164,7 @@ class User extends Entity
 
     /**
      * CDN URL to thumbnail (100 x 100) of profile photo.
-     * Example: https://c8.patreon.com/2/100/1
+     * Example: https://c8.patreon.com/2/100/1.
      *
      * @var string
      */
@@ -170,7 +172,7 @@ class User extends Entity
 
     /**
      * Twitch.tv profile URL.
-     * Example: https://twitch.tv/username
+     * Example: https://twitch.tv/username.
      *
      * @var string
      */
@@ -178,7 +180,7 @@ class User extends Entity
 
     /**
      * Twitter username.
-     * Example: username
+     * Example: username.
      *
      * @var string
      */
@@ -186,7 +188,7 @@ class User extends Entity
 
     /**
      * URL to Patreon profile.
-     * Example: https://patreon.com/username
+     * Example: https://patreon.com/username.
      *
      * @var string
      */
@@ -194,7 +196,7 @@ class User extends Entity
 
     /**
      * Unique username for profile url.
-     * Example: username
+     * Example: username.
      *
      * @var string
      */
@@ -202,7 +204,7 @@ class User extends Entity
 
     /**
      * YouTube channel URL.
-     * Example: https://youtube.com/username
+     * Example: https://youtube.com/username.
      *
      * @var string
      */
@@ -236,7 +238,7 @@ class User extends Entity
      */
     public function hasInactivePledge(): bool
     {
-        return $this->pledge && ! $this->pledge->isActive();
+        return $this->pledge && !$this->pledge->isActive();
     }
 
     /**
