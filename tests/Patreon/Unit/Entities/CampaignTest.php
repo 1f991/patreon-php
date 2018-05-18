@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -45,12 +47,12 @@ class CampaignTest extends TestCase
             'rewards',
         ];
 
-        $this->assertTrue($this->validateEntitySchema(new Campaign, $schema));
+        $this->assertTrue($this->validateEntitySchema(new Campaign(), $schema));
     }
 
     public function testGetPledgeUrlReturnsCorrectValue(): void
     {
-        $campaign = new Campaign;
+        $campaign = new Campaign();
         $campaign->pledge_url = '/bePatron?c=1';
 
         $this->assertEquals(
@@ -61,12 +63,12 @@ class CampaignTest extends TestCase
 
     public function testGetAvailableRewardsProvidesRewards(): void
     {
-        $availableReward = new Reward;
+        $availableReward = new Reward();
         $availableReward->id = 1;
-        $unavailableReward = new Reward;
+        $unavailableReward = new Reward();
         $unavailableReward->remaining = 0;
 
-        $campaign = new Campaign;
+        $campaign = new Campaign();
         $campaign->rewards = new Collection(
             [
             $availableReward,

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -14,20 +16,20 @@ class Goal extends Entity
     /**
      * Amount in cents at which this goal is achieved.
      *
-     * @var integer
+     * @var int
      */
     public $amount_cents;
 
     /**
      * Percentage of the goals target achieved.
      *
-     * @var integer
+     * @var int
      */
     public $completed_percentage;
 
     /**
      * Timestamp of the goal creation, ISO 8601 combined date and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -35,7 +37,7 @@ class Goal extends Entity
 
     /**
      * Description of the goal.
-     * Example: "I can work on creating content full time."
+     * Example: "I can work on creating content full time.".
      *
      * @var string
      */
@@ -44,7 +46,7 @@ class Goal extends Entity
     /**
      * Timestamp of the first date that the goal was reached at, ISO 8601
      * combined date and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -52,7 +54,7 @@ class Goal extends Entity
 
     /**
      * Title of the goal.
-     * Example: "Pay my rent"
+     * Example: "Pay my rent".
      *
      * @var string
      */

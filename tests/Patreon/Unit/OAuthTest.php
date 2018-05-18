@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit;
 
@@ -7,7 +9,6 @@ use Psr\Http\Message\ResponseInterface;
 use Squid\Patreon\Exceptions\OAuthReturnedError;
 use Squid\Patreon\Exceptions\OAuthScopesAreInvalid;
 use Squid\Patreon\OAuth;
-use Squid\Patreon\Tests\Unit\TestCase;
 
 class OAuthTest extends TestCase
 {
@@ -15,18 +16,18 @@ class OAuthTest extends TestCase
     {
         $this->validResponse = json_encode(
             [
-            'access_token' => '123',
+            'access_token'  => '123',
             'refresh_token' => '456',
-            'expires_in' => '86400',
-            'scope' => 'users',
-            'token_type' => 'Bearer',
+            'expires_in'    => '86400',
+            'scope'         => 'users',
+            'token_type'    => 'Bearer',
             ]
         );
     }
 
     public function testGetAuthorizationUrlReturnsExpectedUrl(): void
     {
-        $http = new MockHttpClient;
+        $http = new MockHttpClient();
 
         $oauth = new OAuth('id', 'secret', 'redirect', $http);
 
@@ -39,7 +40,7 @@ class OAuthTest extends TestCase
 
     public function testGetAuthorizationUrlThrowsExceptionForInvalidScopes(): void
     {
-        $http = new MockHttpClient;
+        $http = new MockHttpClient();
 
         $oauth = new OAuth('id', 'secret', 'uri', $http);
 
@@ -50,7 +51,7 @@ class OAuthTest extends TestCase
 
     public function testExceptionIsThrownWhenOAuthErrorIsReturned(): void
     {
-        $http = new MockHttpClient;
+        $http = new MockHttpClient();
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects($this->once())
@@ -68,7 +69,7 @@ class OAuthTest extends TestCase
 
     public function testGetAccessTokenMakesApiRequest(): void
     {
-        $http = new MockHttpClient;
+        $http = new MockHttpClient();
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects($this->once())
@@ -87,7 +88,7 @@ class OAuthTest extends TestCase
 
     public function testGetNewTokenMakesApiRequest(): void
     {
-        $http = new MockHttpClient;
+        $http = new MockHttpClient();
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects($this->once())

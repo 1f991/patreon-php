@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -18,6 +20,6 @@ class AddressTest extends TestCase
             'state',
         ];
 
-        $this->assertTrue($this->validateEntitySchema(new Address, $schema));
+        $this->assertTrue($this->validateEntitySchema(new Address(), $schema));
     }
 }

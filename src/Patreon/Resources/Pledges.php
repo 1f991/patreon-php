@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Resources;
 
@@ -9,33 +11,33 @@ use Tightenco\Collect\Support\Collection;
 class Pledges extends Resource
 {
     /**
-    * Valid sort options (dash prefix means descending order).
-    *
-    * @var array
-    */
+     * Valid sort options (dash prefix means descending order).
+     *
+     * @var array
+     */
     const SORT_OPTIONS = [
         'created',
         '-created',
         'updated',
-        '-updated'
+        '-updated',
     ];
 
     /**
      * Get all of the Pledges for a Campaign.
      *
-     * @param integer $campaign Campaign ID
+     * @param int $campaign Campaign ID
      *
      * @return \Tightenco\Collect\Support\Collection
      */
     public function getCampaignPledges(int $campaign): Collection
     {
-        $pledges = new Collection;
+        $pledges = new Collection();
 
         $url = $this->buildUrl("campaigns/{$campaign}/pledges", Pledge::class);
 
         while (true) {
             $page = $this->client->get(
-                $url . '&' . ($filter ?? null),
+                $url.'&'.($filter ?? null),
                 $this->authenticated
             );
 
@@ -43,7 +45,7 @@ class Pledges extends Resource
                 $this->hydrateDocument($page->document())
             );
 
-            if (! $next = $page->document()->links()->link('next')) {
+            if (!$next = $page->document()->links()->link('next')) {
                 break;
             }
 
@@ -55,7 +57,7 @@ class Pledges extends Resource
 
     /**
      * Get a page of Pledges for a Campaign. Learn more about pagination in the
-     * Patreon API documentation: https://docs.patreon.com/#pagination-and-sorting
+     * Patreon API documentation: https://docs.patreon.com/#pagination-and-sorting.
      *
      * @param int    $campaign Campaign ID
      * @param int    $count    Amount of results
@@ -78,9 +80,9 @@ class Pledges extends Resource
             "campaigns/{$campaign}/pledges",
             Pledge::class,
             [
-            'page[count]' => $count,
-            'sort' => implode(',', $sort) ?: null,
-            'page[cursor]' => $cursor
+            'page[count]'  => $count,
+            'sort'         => implode(',', $sort) ?: null,
+            'page[cursor]' => $cursor,
             ]
         );
 

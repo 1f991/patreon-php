@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Hydrator;
 
 use Squid\Patreon\Entities\Entity;
 use Squid\Patreon\Exceptions\ResourceHasNoEntity;
-use Squid\Patreon\Tests\Unit\TestCase;
 use Squid\Patreon\Hydrator\EntityHydrator;
+use Squid\Patreon\Tests\Unit\TestCase;
 use Tightenco\Collect\Support\Collection;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
@@ -21,7 +23,7 @@ class EntityHydratorTest extends TestCase
             $document,
             [
             'article' => ArticleEntity::class,
-            'people' => PersonEntity::class
+            'people'  => PersonEntity::class,
             ]
         );
 
@@ -47,7 +49,7 @@ class EntityHydratorTest extends TestCase
             $document,
             [
             'article' => ArticleEntity::class,
-            'people' => PersonEntity::class
+            'people'  => PersonEntity::class,
             ]
         );
 
@@ -66,7 +68,7 @@ class EntityHydratorTest extends TestCase
         $hydrator = new EntityHydrator(
             $document,
             [
-            'article' => ArticleEntity::class
+            'article' => ArticleEntity::class,
             ]
         );
 
@@ -84,7 +86,7 @@ class EntityHydratorTest extends TestCase
             $document,
             [
             'article' => ArticleEntity::class,
-            'people' => UnattacheableEntity::class
+            'people'  => UnattacheableEntity::class,
             ]
         );
 

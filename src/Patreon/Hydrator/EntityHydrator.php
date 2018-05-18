@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Hydrator;
 
@@ -54,7 +56,7 @@ class EntityHydrator
      */
     public function hydrate(): Collection
     {
-        $entities = new Collection;
+        $entities = new Collection();
 
         foreach ($this->document->primaryResources() as $resource) {
             $entities->push($this->hydrateResource($resource));
@@ -114,7 +116,7 @@ class EntityHydrator
     ): void {
         $entity = $this->getEntity($type, $id);
 
-        if ($entity === null || ! $entity->shouldAttach()) {
+        if ($entity === null || !$entity->shouldAttach()) {
             return;
         }
 
@@ -128,8 +130,8 @@ class EntityHydrator
     /**
      * Get an Entity: collection takes priority, fallback to the document.
      *
-     * @param string  $type Type of Resource
-     * @param integer $id   ID of Resource
+     * @param string $type Type of Resource
+     * @param int    $id   ID of Resource
      *
      * @return \Squid\Patreon\Entities\Entity|null
      */
@@ -162,7 +164,7 @@ class EntityHydrator
         string $id,
         array $properties
     ): Entity {
-        if (! array_key_exists($type, $this->resourceEntityMap)) {
+        if (!array_key_exists($type, $this->resourceEntityMap)) {
             throw ResourceHasNoEntity::forResource($type);
         }
 
@@ -172,8 +174,8 @@ class EntityHydrator
     /**
      * Gets Entity by key from the Resource collection.
      *
-     * @param string  $type Type of Resource
-     * @param integer $id   ID of Resource
+     * @param string $type Type of Resource
+     * @param int    $id   ID of Resource
      *
      * @return \Squid\Patreon\Entities\Entity|null
      */

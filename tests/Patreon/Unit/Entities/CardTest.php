@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -19,6 +21,6 @@ class CardTest extends TestCase
             'payment_token_id',
         ];
 
-        $this->assertTrue($this->validateEntitySchema(new Card, $schema));
+        $this->assertTrue($this->validateEntitySchema(new Card(), $schema));
     }
 }

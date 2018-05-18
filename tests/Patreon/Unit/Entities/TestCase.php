@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -16,8 +18,9 @@ abstract class TestCase extends App_TestCase
     public function validateEntitySchema($entity, $schema)
     {
         foreach ($schema as $field) {
-            if (! property_exists($entity, $field)) {
+            if (!property_exists($entity, $field)) {
                 $name = get_class($entity);
+
                 throw new DomainException("{$name} is missing field {$field}.");
             }
         }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Entities;
 
@@ -21,7 +23,7 @@ class Pledge extends Entity
     /**
      * Amount paid by the patron when billed.
      *
-     * @var integer
+     * @var int
      */
     public $amount_cents;
 
@@ -34,7 +36,7 @@ class Pledge extends Entity
 
     /**
      * Timestamp of the pledge creation, ISO 8601 combined date and time in UTC.
-     * Example: "2017-12-01T16:33:48+00:00"
+     * Example: "2017-12-01T16:33:48+00:00".
      *
      * @var string
      */
@@ -53,7 +55,7 @@ class Pledge extends Entity
      * Notes: "only ever treat this as a boolean value (is it null, or is it
      * not null, since while the date is useful to us internally for retry
      * purposes, it’s not super useful outside)"
-     * Source: https://www.patreondevelopers.com/t/125/8
+     * Source: https://www.patreondevelopers.com/t/125/8.
      *
      * @var string
      */
@@ -84,7 +86,7 @@ class Pledge extends Entity
 
     /**
      * Legacy / unused.
-     * Source: https://www.patreondevelopers.com/t/131/3
+     * Source: https://www.patreondevelopers.com/t/131/3.
      *
      * @var bool
      */
@@ -93,9 +95,9 @@ class Pledge extends Entity
     /**
      * Maximum amount the patron can be charged per-month on per-creation
      * campaigns.
-     * Source: https://patreon.zendesk.com/hc/en-us/articles/115002984506
+     * Source: https://patreon.zendesk.com/hc/en-us/articles/115002984506.
      *
-     * @var integer
+     * @var int
      */
     public $pledge_cap_cents;
 
@@ -110,9 +112,9 @@ class Pledge extends Entity
      * Total amount that the patron has been billed through the life of the pledge.
      * Notes: this value will be greater than 0 once the patron has been
      * successfully billed.
-     * Source: https://www.patreondevelopers.com/t/125/8
+     * Source: https://www.patreondevelopers.com/t/125/8.
      *
-     * @var integer
+     * @var int
      */
     public $total_historical_amount_cents;
 
@@ -133,7 +135,7 @@ class Pledge extends Entity
      * Note: Patreon will retry payment methods and encourage the user to fix
      * the issue by adding a new payment method. When payment has repeatedly
      * failed for more than (undefined period of time) the pledge will be deleted.
-     * Source: https://www.patreondevelopers.com/t/131/3
+     * Source: https://www.patreondevelopers.com/t/131/3.
      *
      * @return bool
      */

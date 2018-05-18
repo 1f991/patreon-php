@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -9,7 +11,7 @@ class EntityTest extends TestCase
 {
     public function testEntityRelationsAreInstantiatedAsCollections()
     {
-        $entity = new ExampleEntity;
+        $entity = new ExampleEntity();
 
         $this->assertInstanceOf(Collection::class, $entity->pledges);
     }
@@ -19,6 +21,6 @@ class ExampleEntity extends Entity
 {
     protected $relations = [
         'pledges',
-        'rewards'
+        'rewards',
     ];
 }

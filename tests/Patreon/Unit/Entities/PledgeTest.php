@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
@@ -26,20 +28,20 @@ class PledgeTest extends TestCase
             'reward',
         ];
 
-        $this->assertTrue($this->validateEntitySchema(new Pledge, $schema));
+        $this->assertTrue($this->validateEntitySchema(new Pledge(), $schema));
     }
 
     public function testIsActiveReturnsExpectedResults(): void
     {
-        $active = new Pledge;
+        $active = new Pledge();
         $active->is_paused = false;
         $active->declined_since = null;
 
-        $declined = new Pledge;
+        $declined = new Pledge();
         $declined->is_paused = false;
         $declined->declined_since = '2018-02-21T16:33:33.974297+00:00';
 
-        $paused = new Pledge;
+        $paused = new Pledge();
         $paused->is_paused = true;
         $paused->declined_since = null;
 
@@ -50,10 +52,10 @@ class PledgeTest extends TestCase
 
     public function testIsPaymentDeclinedReturnsExpectedResults(): void
     {
-        $active = new Pledge;
+        $active = new Pledge();
         $active->declined_since = null;
 
-        $declined = new Pledge;
+        $declined = new Pledge();
         $declined->declined_since = '2018-02-21T16:33:33.974297+00:00';
 
         $this->assertTrue($declined->isPaymentDeclined());
@@ -62,10 +64,10 @@ class PledgeTest extends TestCase
 
     public function testHasMadeAPaymentReturnsExpectedResults(): void
     {
-        $hasPaid = new Pledge;
+        $hasPaid = new Pledge();
         $hasPaid->total_historical_amount_cents = 100;
 
-        $noPayment = new Pledge;
+        $noPayment = new Pledge();
         $noPayment->total_historical_amount_cents = null;
 
         $this->assertTrue($hasPaid->hasMadeAPayment());
@@ -74,10 +76,10 @@ class PledgeTest extends TestCase
 
     public function testHasRewardReturnsExpectedResults(): void
     {
-        $hasReward = new Pledge;
-        $hasReward->reward = new Reward;
+        $hasReward = new Pledge();
+        $hasReward->reward = new Reward();
 
-        $noReward = new Pledge;
+        $noReward = new Pledge();
 
         $this->assertTrue($hasReward->hasReward());
         $this->assertFalse($noReward->hasReward());
@@ -85,10 +87,10 @@ class PledgeTest extends TestCase
 
     public function testGetTotalSpentReturnsCurrencyFormattedAmount(): void
     {
-        $pledge = new Pledge;
+        $pledge = new Pledge();
         $pledge->total_historical_amount_cents = 1649;
 
-        $nothingSpent = new Pledge;
+        $nothingSpent = new Pledge();
 
         $this->assertEquals('16.49', $pledge->getTotalSpent());
         $this->assertEquals('0.00', $nothingSpent->getTotalSpent());

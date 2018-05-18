@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Resources;
 
@@ -20,18 +22,18 @@ use WoohooLabs\Yang\JsonApi\Schema\Document;
 abstract class Resource
 {
     /**
-    * Map Resources to Entities.
-    *
-    * @var array
-    */
+     * Map Resources to Entities.
+     *
+     * @var array
+     */
     const ENTITY_MAP = [
-        'address' => Address::class,
+        'address'  => Address::class,
         'campaign' => Campaign::class,
-        'card' => Card::class,
-        'goal' => Goal::class,
-        'pledge' => Pledge::class,
-        'reward' => Reward::class,
-        'user' => User::class,
+        'card'     => Card::class,
+        'goal'     => Goal::class,
+        'pledge'   => Pledge::class,
+        'reward'   => Reward::class,
+        'user'     => User::class,
     ];
 
     /**
@@ -107,7 +109,7 @@ abstract class Resource
      */
     protected function onlyAvailableAuthenticated(string $method): void
     {
-        if (! $this->authenticated) {
+        if (!$this->authenticated) {
             throw ResourceRequiresAuthentication::forMethod(
                 get_class($this),
                 $method
@@ -140,17 +142,17 @@ abstract class Resource
         string $entity,
         array $parameters = []
     ): string {
-        $entity = new $entity;
+        $entity = new $entity();
 
         $attributes = implode(array_keys(get_object_vars($entity)), ',');
 
         $parameters = array_merge(
             $parameters,
             [
-            "fields[{$entity->getType()}]" => $attributes
+            "fields[{$entity->getType()}]" => $attributes,
             ]
         );
 
-        return $path . '?' . http_build_query($parameters);
+        return $path.'?'.http_build_query($parameters);
     }
 }

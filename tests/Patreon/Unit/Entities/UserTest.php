@@ -1,11 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Squid\Patreon\Tests\Unit\Entities;
 
 use Squid\Patreon\Entities\Campaign;
 use Squid\Patreon\Entities\Pledge;
 use Squid\Patreon\Entities\User;
-use Tightenco\Collect\Support\Collection;
 
 class UserTest extends TestCase
 {
@@ -40,24 +41,24 @@ class UserTest extends TestCase
             'campaign',
         ];
 
-        $this->assertTrue($this->validateEntitySchema(new User, $schema));
+        $this->assertTrue($this->validateEntitySchema(new User(), $schema));
     }
 
     public function testHasActivePledgeReturnsExpectedResults(): void
     {
-        $activePledge = new Pledge;
+        $activePledge = new Pledge();
         $activePledge->is_paused = false;
 
-        $declinedPledge = new Pledge;
+        $declinedPledge = new Pledge();
         $declinedPledge->declined_since = '2017-12-01T16:33:48+00:00';
 
-        $activeUser = new User;
+        $activeUser = new User();
         $activeUser->pledge = $activePledge;
 
-        $declinedUser = new User;
+        $declinedUser = new User();
         $declinedUser->pledge = $declinedPledge;
 
-        $noPledgeUser = new User;
+        $noPledgeUser = new User();
 
         $this->assertTrue($activeUser->hasActivePledge());
         $this->assertFalse($declinedUser->hasActivePledge());
@@ -66,10 +67,10 @@ class UserTest extends TestCase
 
     public function testIsCreatorReturnsExpectedResults(): void
     {
-        $creator = new User;
-        $creator->campaign = new Campaign;
+        $creator = new User();
+        $creator->campaign = new Campaign();
 
-        $patron = new User;
+        $patron = new User();
 
         $this->assertTrue($creator->isCreator());
         $this->assertFalse($patron->isCreator());
@@ -77,9 +78,9 @@ class UserTest extends TestCase
 
     public function testGetPledgeReturnsPledge(): void
     {
-        $patron = new User;
-        $patron->pledge = new Pledge;
-        $user = new User;
+        $patron = new User();
+        $patron->pledge = new Pledge();
+        $user = new User();
 
         $this->assertInstanceOf(Pledge::class, $patron->getPledge());
         $this->assertNull($user->getPledge());
